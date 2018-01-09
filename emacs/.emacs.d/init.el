@@ -151,6 +151,13 @@
 ;; Allow users to provide an optional "init-local" containing personal settings
 ;;----------------------------------------------------------------------------
 (require 'init-local nil t)
+(require 'init-rspec-mode)
+(require 'init-feature-mode)
+(require 'init-yasnippet)
+(require 'init-ispell)
+(require 'init-fonts-preferences)
+(require 'init-movement-preferences)
+(require 'init-reveal-in-osx-finder)
 
 
 ;;----------------------------------------------------------------------------
