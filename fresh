@@ -134,7 +134,7 @@ brew "qt@5.5" if MacOS::Xcode.installed?
 brew "libyaml" # should come after openssl
 brew "coreutils"
 brew "yarn"
-cask "gpg-suite"
+brew cask install "gpg-suite"
 
 # Databases
 brew "postgres", restart_service: :changed
@@ -184,6 +184,8 @@ gem update --system
 gem_install_or_update "bundler"
 number_of_cores=$(sysctl -n hw.ncpu)
 bundle config --global jobs $((number_of_cores - 1))
+
+gem_install_or_update "awesome_print"
 
 fancy_echo "Installing latest Node..."
 bash "$HOME/.asdf/plugins/nodejs/bin/import-release-team-keyring"
