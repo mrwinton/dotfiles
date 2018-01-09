@@ -8,12 +8,18 @@ Featuring:
  - _goods_ setup for "emacs", "zsh", and "git"
  - a dash of fancy and fun
 
+```sh
+ git clone <REPO> ~/.dotfiles
+```
+
 #### fresh
 ----------
 
 To setup a _fresh_ mac:
 
 ```sh
+cd ~/.dotfiles
+
 sh fresh 2>&1 | tee ~/fresh.log
 ```
 
@@ -80,3 +86,11 @@ Databases:
 
 #### goods
 ----------
+
+Once you've got all _fresh_ it's time to configure the _goods_.
+
+```sh
+cd ~/.dotfiles
+
+sh goods
+```
