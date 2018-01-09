@@ -12,10 +12,6 @@ alias ll="ls -l"
 alias ln="ln -v"
 alias ls="ls -h"
 alias mkdir="mkdir -p"
-alias myip="ifconfig wlan0 | grep 'inet ' | cut --delimiter=' ' -f12 | sed s/addr://"
-alias pbcopy="xsel --clipboard --input"
-alias pbpaste="xsel --clipboard --output"
-alias ut="tar xavf"
 
 usage() {
   du -sch "$@" | sort -h
