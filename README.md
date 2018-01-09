@@ -10,7 +10,6 @@ Featuring:
 ```
 
 ## fresh
-----------
 
 To setup a _fresh_ mac:
 
@@ -82,7 +81,6 @@ Databases:
 [Redis]: http://redis.io/
 
 ## goods
-----------
 
 Once you've got all _fresh_ it's time to configure the _goods_.
 
