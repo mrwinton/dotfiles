@@ -1,7 +1,4 @@
-## michael's dotfiles
-=====================
-
-My personal dotfiles setup.
+# michael's dotfiles
 
 Featuring:
  - _fresh_ out the box setup
@@ -12,7 +9,7 @@ Featuring:
  git clone <REPO> ~/.dotfiles
 ```
 
-#### fresh
+## fresh
 ----------
 
 To setup a _fresh_ mac:
@@ -84,7 +81,7 @@ Databases:
 [Postgres]: http://www.postgresql.org/
 [Redis]: http://redis.io/
 
-#### goods
+## goods
 ----------
 
 Once you've got all _fresh_ it's time to configure the _goods_.
