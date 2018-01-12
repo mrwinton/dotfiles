@@ -6,15 +6,15 @@ ln -nsf ~/.zshrc.d/pure/async.zsh /usr/local/share/zsh/site-functions/async >/de
 autoload -U promptinit; promptinit
 prompt pure
 
+# extra tab completion
+fpath=(~/.zshrc.d/completions/src $fpath)
+
 # extended tab completion
 autoload -U compinit
 compinit
 
 # case insensitve tab completion
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
-
-# extra tab completion
-fpath=(~/.zshrc.d/completions/src $fpath)
 
 # better history searching with arrow keys
 autoload -U up-line-or-beginning-search
