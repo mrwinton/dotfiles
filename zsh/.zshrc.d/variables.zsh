@@ -1,5 +1,3 @@
-# source $HOME/.bin/git-completion.sh
-
 export ALTERNATE_EDITOR=""
 export BROWSER="chrome"
 export EDITOR="$HOME/.bin/em"
