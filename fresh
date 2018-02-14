@@ -123,6 +123,7 @@ brew "vim"
 brew "watchman"
 brew "zsh"
 brew "stow"
+brew "yarn"
 
 # Image manipulation
 brew "imagemagick"
