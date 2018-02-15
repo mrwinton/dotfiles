@@ -1,15 +1,25 @@
 #!/bin/sh
 
+# set languages
+export LANGUAGE=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LC_TYPE=en_US.UTF-8
+
 ## update and upgrage current packages
 sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get install build-essential
+sudo apt-get install zlib1g-dev
 
 ## set zsh as the shell of choice
 sudo apt-get install zsh
 chsh -s $(which zsh)
 zsh
 touch .zshrc
+
+## install emacs
+apt-get install emacs
 
 ## symlink manager
 sudo apt-get install stow
@@ -26,6 +36,7 @@ sudo apt-get install yarn
 sudo apt-get install imagemagick
 
 ## dependency manager
+sudo apt-get install automake autoconf libreadline-dev libncurses-dev libssl-dev libyaml-dev libxslt-dev libffi-dev libtool unixodbc-dev
 git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.4.2
 echo -e '\n. $HOME/.asdf/asdf.sh' >> ~/.zshrc
 echo -e '\n. $HOME/.asdf/completions/asdf.bash' >> ~/.zshrc
