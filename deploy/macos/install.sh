@@ -123,7 +123,6 @@ brew "vim"
 brew "watchman"
 brew "zsh"
 brew "stow"
-brew "yarn"
 
 # Image manipulation
 brew "imagemagick"
@@ -181,6 +180,7 @@ install_asdf_language() {
 
 fancy_echo "Installing latest Ruby..."
 install_asdf_language "ruby"
+
 gem update --system
 gem_install_or_update "bundler"
 number_of_cores=$(sysctl -n hw.ncpu)
