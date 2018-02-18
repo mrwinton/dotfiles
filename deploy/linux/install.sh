@@ -19,13 +19,16 @@ zsh
 touch .zshrc
 
 ## install emacs
-apt-get install emacs
+sudo apt-get install emacs
+
+## install mosh
+sudo apt-get install mosh
 
 ## symlink manager
 sudo apt-get install stow
 
 ## code search tool
-apt-get install silversearcher-ag
+apt get-sudo install silversearcher-ag
 
 ## front end package manager
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
