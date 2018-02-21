@@ -269,7 +269,7 @@ values."
    ;;                       text-mode
    ;;   :size-limit-kb 1000)
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers t
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
    dotspacemacs-folding-method 'evil
@@ -332,8 +332,12 @@ you should place your code here."
   (setq ivy-virtual-abbreviate 'full)
   (setq ivy-rich-switch-buffer-align-virtual-buffer t)
 
+  ;; HOOKS
+  (add-hook 'ruby-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
+
   ;; MAGIT
   (setq magit-revision-show-gravatars nil)
+  (setq git-magit-status-fullscreen t)
 
   ;; WEB-MODE
   (setq web-mode-markup-indent-offset 2)
