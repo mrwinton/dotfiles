@@ -11,7 +11,7 @@ alias glo="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset 
 alias la="ls -la"
 alias ll="ls -l"
 alias ln="ln -v"
-alias ls="ls -h"
+alias ls="ls -Gh"
 alias mkdir="mkdir -p"
 
 usage() {
