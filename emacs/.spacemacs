@@ -31,6 +31,7 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     html
      yaml
      ruby
      ;; ----------------------------------------------------------------
@@ -340,7 +341,11 @@ you should place your code here."
   (setq git-magit-status-fullscreen t)
 
   ;; WEB-MODE
+  (setq css-indent-offset 2)
   (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-code-indent-offset 2)
+  (setq web-mode-attr-indent-offset 2)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -352,7 +357,7 @@ you should place your code here."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (ac-ispell ace-link ace-window adaptive-wrap aggressive-indent alert anzu async auto-compile auto-complete auto-dictionary auto-highlight-symbol auto-yasnippet avy bind-key bind-map bundler centered-cursor-mode chruby clean-aindent-mode coffee-mode color-identifiers-mode column-enforce-mode company company-quickhelp company-statistics company-tern counsel counsel-projectile dash dash-functional define-word diff-hl diminish dumb-jump elisp-slime-nav epl esh-help eshell-prompt-extras eshell-z eval-sexp-fu evil evil-anzu evil-args evil-ediff evil-escape evil-exchange evil-iedit-state evil-indent-plus evil-lisp-state evil-magit evil-matchit evil-mc evil-nerd-commenter evil-numbers evil-search-highlight-persist evil-surround evil-tutor evil-unimpaired evil-visual-mark-mode evil-visualstar exec-path-from-shell expand-region eyebrowse f fancy-battery fill-column-indicator flx flx-ido flycheck flycheck-pos-tip flyspell-correct flyspell-correct-ivy fringe-helper fuzzy gh-md ghub git-commit git-gutter git-gutter+ git-gutter-fringe git-gutter-fringe+ git-link git-messenger git-timemachine gitattributes-mode gitconfig-mode gitignore-mode gntp gnuplot golden-ratio google-translate goto-chg helm helm-core helm-make highlight highlight-indentation highlight-numbers highlight-parentheses hl-todo htmlize hungry-delete hydra iedit indent-guide inf-ruby ivy ivy-hydra js-doc js2-mode js2-refactor json-mode json-reformat json-snatcher let-alist link-hint linum-relative livid-mode log4e lorem-ipsum macrostep magit magit-gitflow magit-popup markdown-mode markdown-toc minitest mmm-mode move-text multi-term multiple-cursors neotree open-junk-file org-bullets org-category-capture org-download org-mime org-plus-contrib org-pomodoro org-present org-projectile orgit packed paradox parent-mode pcre2el persp-mode pkg-info popup popwin pos-tip powerline projectile rainbow-delimiters rainbow-identifiers rainbow-mode rake rbenv request restart-emacs robe rspec-mode rubocop ruby-test-mode ruby-tools rvm s shell-pop simple-httpd skewer-mode smartparens smeargle smex spaceline spinner swiper tern toc-org undo-tree use-package uuidgen vi-tilde-fringe volatile-highlights web-beautify wgrep which-key winum with-editor ws-butler xterm-color yaml-mode yasnippet))))
+    (web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode haml-mode emmet-mode company-web web-completion-data ac-ispell ace-link ace-window adaptive-wrap aggressive-indent alert anzu async auto-compile auto-complete auto-dictionary auto-highlight-symbol auto-yasnippet avy bind-key bind-map bundler centered-cursor-mode chruby clean-aindent-mode coffee-mode color-identifiers-mode column-enforce-mode company company-quickhelp company-statistics company-tern counsel counsel-projectile dash dash-functional define-word diff-hl diminish dumb-jump elisp-slime-nav epl esh-help eshell-prompt-extras eshell-z eval-sexp-fu evil evil-anzu evil-args evil-ediff evil-escape evil-exchange evil-iedit-state evil-indent-plus evil-lisp-state evil-magit evil-matchit evil-mc evil-nerd-commenter evil-numbers evil-search-highlight-persist evil-surround evil-tutor evil-unimpaired evil-visual-mark-mode evil-visualstar exec-path-from-shell expand-region eyebrowse f fancy-battery fill-column-indicator flx flx-ido flycheck flycheck-pos-tip flyspell-correct flyspell-correct-ivy fringe-helper fuzzy gh-md ghub git-commit git-gutter git-gutter+ git-gutter-fringe git-gutter-fringe+ git-link git-messenger git-timemachine gitattributes-mode gitconfig-mode gitignore-mode gntp gnuplot golden-ratio google-translate goto-chg helm helm-core helm-make highlight highlight-indentation highlight-numbers highlight-parentheses hl-todo htmlize hungry-delete hydra iedit indent-guide inf-ruby ivy ivy-hydra js-doc js2-mode js2-refactor json-mode json-reformat json-snatcher let-alist link-hint linum-relative livid-mode log4e lorem-ipsum macrostep magit magit-gitflow magit-popup markdown-mode markdown-toc minitest mmm-mode move-text multi-term multiple-cursors neotree open-junk-file org-bullets org-category-capture org-download org-mime org-plus-contrib org-pomodoro org-present org-projectile orgit packed paradox parent-mode pcre2el persp-mode pkg-info popup popwin pos-tip powerline projectile rainbow-delimiters rainbow-identifiers rainbow-mode rake rbenv request restart-emacs robe rspec-mode rubocop ruby-test-mode ruby-tools rvm s shell-pop simple-httpd skewer-mode smartparens smeargle smex spaceline spinner swiper tern toc-org undo-tree use-package uuidgen vi-tilde-fringe volatile-highlights web-beautify wgrep which-key winum with-editor ws-butler xterm-color yaml-mode yasnippet))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
