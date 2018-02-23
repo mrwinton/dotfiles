@@ -363,7 +363,7 @@ It should only modify the values of Spacemacs settings."
    ;;                       text-mode
    ;;   :size-limit-kb 1000)
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers t
 
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
@@ -447,7 +447,10 @@ Put your configuration code here, except for variables that should be set
 before packages are loaded."
 
   ;; CENTERED CURSOR
-  (global-centered-cursor-mode 1)
+  ;;(global-centered-cursor-mode 1)
+
+  ;;EVIL ESCAPE
+  (setq-default evil-escape-key-sequence "kj")
 
   ;; FLYCHECK
   (setq flycheck-check-syntax-automatically '(mode-enabled save))
