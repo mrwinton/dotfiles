@@ -61,9 +61,4 @@ alias serve="python -m SimpleHTTPServer"
 
 # eval "$(rbenv init -)"
 
-# psactive () {
-#   [[ `host secure.powershop.co.nz|cut -d" " -f4` == `host akl.secure.powershop.co.nz|cut -d" " -f4` ]] && echo akl
-#   [[ `host secure.powershop.co.nz|cut -d" " -f4` == `host wlg.secure.powershop.co.nz|cut -d" " -f4` ]] && echo wlg
-# }
-
 # alias reset_banking='bundle; be rails db:drop; be rails db:create; be rails db:migrate; be rails db:test:prepare'
