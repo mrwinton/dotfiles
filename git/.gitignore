@@ -10,3 +10,5 @@
 *.iml
 .idea
 .clover
+tags
+!tags/
