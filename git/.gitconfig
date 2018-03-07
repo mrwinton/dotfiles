@@ -1,7 +1,8 @@
 [alias]
   aa = add --all
   amend = commit --amend
-  br = branch
+	br = branch
+	cherry = cherry-pick
   cm = commit -m
   co = checkout
   dc = diff --cached
