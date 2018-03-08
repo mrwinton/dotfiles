@@ -34,6 +34,11 @@ This function should only modify configuration layer settings."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     ;; ----------------------------------------------------------------
+     ;; Example of useful layers you may want to use right away.
+     ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
+     ;; `M-m f e R' (Emacs style) to install them.
+     ;; ----------------------------------------------------------------
      (auto-completion :variables
                       auto-completion-tab-key-behavior 'cycle
                       auto-completion-return-key-behavior 'complete
@@ -42,9 +47,7 @@ This function should only modify configuration layer settings."
                       auto-completion-enable-snippets-in-popup t)
      colors
      ivy
-     emacs-lisp
      git
-     ;; helm
      html
      (javascript :variables
                  js2-basic-offset 2
@@ -54,8 +57,8 @@ This function should only modify configuration layer settings."
      (ruby :variables
            ruby-test-runner 'rspec)
      (shell :variables
-             shell-default-height 30
-             shell-default-position 'bottom)
+            shell-default-height 30
+            shell-default-position 'bottom)
      spell-checking
      syntax-checking
      version-control
@@ -66,7 +69,11 @@ This function should only modify configuration layer settings."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(centered-cursor-mode)
+   ;; To use a local version of a package, use the `:location' property:
+   ;; '(your-package :location "~/path/to/your-package/")
+   ;; Also include the dependencies as they will not be resolved automatically.
+   dotspacemacs-additional-packages '()
+
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
 
@@ -380,6 +387,9 @@ It should only modify the values of Spacemacs settings."
    ;; emphasis the current one). (default 'all)
    dotspacemacs-highlight-delimiters 'all
 
+   ;; If non-nil, start an Emacs server if one is not already running.
+   dotspacemacs-enable-server t
+
    ;; If non-nil, advise quit functions to keep server open when quitting.
    ;; (default nil)
    dotspacemacs-persistent-server nil
@@ -443,9 +453,6 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
 
-  ;; CENTERED CURSOR
-  ;;(global-centered-cursor-mode 1)
-
   ;;EVIL ESCAPE
   (setq-default evil-escape-key-sequence "kj")
 
@@ -475,21 +482,6 @@ before packages are loaded."
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(evil-want-Y-yank-to-eol nil)
- '(package-selected-packages
-   (quote
-    (helm-themes helm-swoop helm-projectile helm-mode-manager helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag flyspell-correct-helm ace-jump-helm-line zenburn-theme zen-and-art-theme white-sand-theme underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme toxi-theme tao-theme tangotango-theme tango-plus-theme tango-2-theme sunny-day-theme sublime-themes subatomic256-theme subatomic-theme spacegray-theme soothe-theme solarized-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme seti-theme reverse-theme rebecca-theme railscasts-theme purple-haze-theme professional-theme planet-theme phoenix-dark-pink-theme phoenix-dark-mono-theme organic-green-theme omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme noctilux-theme naquadah-theme mustang-theme monokai-theme monochrome-theme molokai-theme moe-theme minimal-theme material-theme majapahit-theme madhat2r-theme lush-theme light-soap-theme jbeans-theme jazz-theme ir-black-theme inkpot-theme heroku-theme hemisu-theme hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme gandalf-theme flatui-theme flatland-theme farmhouse-theme exotica-theme espresso-theme dracula-theme django-theme darktooth-theme autothemer darkokai-theme darkmine-theme darkburn-theme dakrone-theme cyberpunk-theme color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized clues-theme cherry-blossom-theme busybee-theme bubbleberry-theme birds-of-paradise-plus-theme badwolf-theme apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes afternoon-theme web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode haml-mode emmet-mode company-web web-completion-data ac-ispell ace-link ace-window adaptive-wrap aggressive-indent alert anzu async auto-compile auto-complete auto-dictionary auto-highlight-symbol auto-yasnippet avy bind-key bind-map bundler centered-cursor-mode chruby clean-aindent-mode coffee-mode color-identifiers-mode column-enforce-mode company company-quickhelp company-statistics company-tern counsel counsel-projectile dash dash-functional define-word diff-hl diminish dumb-jump elisp-slime-nav epl esh-help eshell-prompt-extras eshell-z eval-sexp-fu evil evil-anzu evil-args evil-ediff evil-escape evil-exchange evil-iedit-state evil-indent-plus evil-lisp-state evil-magit evil-matchit evil-mc evil-nerd-commenter evil-numbers evil-search-highlight-persist evil-surround evil-tutor evil-unimpaired evil-visual-mark-mode evil-visualstar exec-path-from-shell expand-region eyebrowse f fancy-battery fill-column-indicator flx flx-ido flycheck flycheck-pos-tip flyspell-correct flyspell-correct-ivy fringe-helper fuzzy gh-md ghub git-commit git-gutter git-gutter+ git-gutter-fringe git-gutter-fringe+ git-link git-messenger git-timemachine gitattributes-mode gitconfig-mode gitignore-mode gntp gnuplot golden-ratio google-translate goto-chg helm helm-core helm-make highlight highlight-indentation highlight-numbers highlight-parentheses hl-todo htmlize hungry-delete hydra iedit indent-guide inf-ruby ivy ivy-hydra js-doc js2-mode js2-refactor json-mode json-reformat json-snatcher let-alist link-hint linum-relative livid-mode log4e lorem-ipsum macrostep magit magit-gitflow magit-popup markdown-mode markdown-toc minitest mmm-mode move-text multi-term multiple-cursors neotree open-junk-file org-bullets org-category-capture org-download org-mime org-plus-contrib org-pomodoro org-present org-projectile orgit packed paradox parent-mode pcre2el persp-mode pkg-info popup popwin pos-tip powerline projectile rainbow-delimiters rainbow-identifiers rainbow-mode rake rbenv request restart-emacs robe rspec-mode rubocop ruby-test-mode ruby-tools rvm s shell-pop simple-httpd skewer-mode smartparens smeargle smex spaceline spinner swiper tern toc-org undo-tree use-package uuidgen vi-tilde-fringe volatile-highlights web-beautify wgrep which-key winum with-editor ws-butler xterm-color yaml-mode yasnippet))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
 (defun dotspacemacs/emacs-custom-settings ()
   "Emacs custom settings.
 This is an auto-generated function, do not modify its content directly, use
@@ -502,7 +494,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (yasnippet-snippets symon string-inflection spaceline-all-the-icons all-the-icons memoize ruby-refactor ruby-hash-syntax password-generator overseer org-brain nameless ivy-xref ivy-purpose window-purpose imenu-list impatient-mode evil-org evil-lion evil-cleverparens paredit editorconfig counsel-css browse-at-remote font-lock+ web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode haml-mode emmet-mode company-web web-completion-data ac-ispell ace-link ace-window adaptive-wrap aggressive-indent alert anzu async auto-compile auto-complete auto-dictionary auto-highlight-symbol auto-yasnippet avy bind-key bind-map bundler centered-cursor-mode chruby clean-aindent-mode coffee-mode color-identifiers-mode column-enforce-mode company company-quickhelp company-statistics company-tern counsel counsel-projectile dash dash-functional define-word diff-hl diminish dumb-jump elisp-slime-nav epl esh-help eshell-prompt-extras eshell-z eval-sexp-fu evil evil-anzu evil-args evil-ediff evil-escape evil-exchange evil-iedit-state evil-indent-plus evil-lisp-state evil-magit evil-matchit evil-mc evil-nerd-commenter evil-numbers evil-search-highlight-persist evil-surround evil-tutor evil-unimpaired evil-visual-mark-mode evil-visualstar exec-path-from-shell expand-region eyebrowse f fancy-battery fill-column-indicator flx flx-ido flycheck flycheck-pos-tip flyspell-correct flyspell-correct-ivy fringe-helper fuzzy gh-md ghub git-commit git-gutter git-gutter+ git-gutter-fringe git-gutter-fringe+ git-link git-messenger git-timemachine gitattributes-mode gitconfig-mode gitignore-mode gntp gnuplot golden-ratio google-translate goto-chg helm helm-core helm-make highlight highlight-indentation highlight-numbers highlight-parentheses hl-todo htmlize hungry-delete hydra iedit indent-guide inf-ruby ivy ivy-hydra js-doc js2-mode js2-refactor json-mode json-reformat json-snatcher let-alist link-hint linum-relative livid-mode log4e lorem-ipsum macrostep magit magit-gitflow magit-popup markdown-mode markdown-toc minitest mmm-mode move-text multi-term multiple-cursors neotree open-junk-file org-bullets org-category-capture org-download org-mime org-plus-contrib org-pomodoro org-present org-projectile orgit packed paradox parent-mode pcre2el persp-mode pkg-info popup popwin pos-tip powerline projectile rainbow-delimiters rainbow-identifiers rainbow-mode rake rbenv request restart-emacs robe rspec-mode rubocop ruby-test-mode ruby-tools rvm s shell-pop simple-httpd skewer-mode smartparens smeargle smex spaceline spinner swiper tern toc-org undo-tree use-package uuidgen vi-tilde-fringe volatile-highlights web-beautify wgrep which-key winum with-editor ws-butler xterm-color yaml-mode yasnippet))))
+    (yasnippet-snippets yaml-mode xterm-color wgrep web-mode web-beautify tagedit smex smeargle slim-mode shell-pop scss-mode sass-mode rvm ruby-tools ruby-test-mode ruby-refactor ruby-hash-syntax rubocop rspec-mode robe rbenv rake rainbow-mode rainbow-identifiers pug-mode orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-brain multi-term mmm-mode minitest markdown-toc markdown-mode magit-gitflow livid-mode skewer-mode less-css-mode json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc ivy-xref ivy-purpose ivy-hydra impatient-mode simple-httpd htmlize haml-mode gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md fuzzy flyspell-correct-ivy flyspell-correct flycheck-pos-tip flycheck evil-org evil-magit magit magit-popup git-commit ghub with-editor eshell-z eshell-prompt-extras esh-help emmet-mode diff-hl counsel-css company-web web-completion-data company-tern dash-functional tern company-statistics company-quickhelp pos-tip company color-identifiers-mode coffee-mode chruby bundler inf-ruby browse-at-remote auto-yasnippet yasnippet auto-dictionary ac-ispell auto-complete ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org symon string-inflection spaceline-all-the-icons restart-emacs request rainbow-delimiters popwin persp-mode pcre2el password-generator paradox overseer org-plus-contrib org-bullets open-junk-file neotree nameless move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio font-lock+ flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eval-sexp-fu elisp-slime-nav editorconfig dumb-jump diminish define-word counsel-projectile column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
