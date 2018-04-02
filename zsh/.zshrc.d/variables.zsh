@@ -9,3 +9,4 @@ export LC_ALL="en_NZ.UTF-8"
 export LC_CTYPE="en_NZ.UTF-8"
 export NAME="Michael Winton"
 export PROMPT_DIRTRIM=3
+export TERM=xterm-256color
