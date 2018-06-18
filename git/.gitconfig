@@ -13,6 +13,7 @@
 	st = status -sb
 	sum = log --oneline --no-merges
 	unstage = reset HEAD
+	hreset = !git reset --hard $(git rev-parse --abbrev-ref --symbolic-full-name @{u})
 [branch]
 	autosetuprebase = always
 [color]
