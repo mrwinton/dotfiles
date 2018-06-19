@@ -1,7 +1,8 @@
 # -*- mode: sh -*-
 
 alias ag="ag --color --color-line-number '0;35' --color-match '46;30' --color-path '4;36'"
-alias emacs="env TERM=xterm-256color emacs -nw"
+alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs"
+alias emacsclient="env TERM=xterm-256color /Applications/Emacs.app/Contents/MacOS/bin/emacsclient -nw"
 alias gco="git checkout"
 alias gm="git merge"
 alias gc="git commit -v"
