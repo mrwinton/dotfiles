@@ -9,6 +9,9 @@ prompt pure
 # extra tab completion
 fpath=(~/.zshrc.d/completions/src $fpath)
 
+# source asdf version manager
+. $HOME/.asdf/asdf.sh
+
 # extended tab completion
 autoload -U compinit
 compinit
