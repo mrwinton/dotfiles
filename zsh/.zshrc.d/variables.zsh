@@ -1,6 +1,6 @@
 export ALTERNATE_EDITOR=""
 export BROWSER="chrome"
-export EDITOR="$HOME/.bin/em"
+export EDITOR="vim"
 export EMAIL="wintonmr@gmail.com"
 export HISTFILESIZE=20000
 export HOMEBREW_NO_ANALYTICS=1
