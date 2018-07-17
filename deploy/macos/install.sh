@@ -115,6 +115,7 @@ tap "caskroom/cask"
 brew "universal-ctags", args: ["HEAD"]
 brew "git"
 brew "openssl"
+brew "proselint"
 brew "rcm"
 brew "reattach-to-user-namespace"
 brew "the_silver_searcher"
@@ -134,7 +135,6 @@ brew "qt@5.5" if MacOS::Xcode.installed?
 brew "libyaml" # should come after openssl
 brew "coreutils"
 brew "yarn"
-brew cask install "gpg-suite"
 
 # Databases
 brew "postgres", restart_service: :changed
