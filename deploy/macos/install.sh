@@ -116,6 +116,7 @@ brew "universal-ctags", args: ["HEAD"]
 brew "git"
 brew "openssl"
 brew "proselint"
+brew "aspell"
 brew "rcm"
 brew "reattach-to-user-namespace"
 brew "the_silver_searcher"
