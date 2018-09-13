@@ -24,6 +24,7 @@ alias be="bundle exec"
 alias migrate="be rake db:migrate db:test:prepare"
 alias reset="be rake db:drop db:create db:migrate db:test:prepare"
 alias seed="be rake db:seed"
+alias sync="bundle exec rake i18nlite:sync"
 alias ret="RAILS_ENV=test"
 
 ### Networking
