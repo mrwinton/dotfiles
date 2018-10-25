@@ -124,6 +124,7 @@ brew "tmux"
 brew "vim"
 brew "watchman"
 brew "zsh"
+brew "zplug"
 brew "stow"
 
 # Image manipulation

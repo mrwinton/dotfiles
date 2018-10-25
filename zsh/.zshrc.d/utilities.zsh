@@ -1,9 +1,13 @@
 # -*- mode: sh -*-
 
 function countpage() {
-  pdf2dsc "$1" /dev/stdout | grep "Pages" | sed s/[^0-9]//g
+    pdf2dsc "$1" /dev/stdout | grep "Pages" | sed s/[^0-9]//g
 }
 
 function path() {
-  echo $PATH | tr ':' '\n'
+    echo $PATH | tr ':' '\n'
+}
+
+function usage() {
+    du -sch "$@" | sort -h
 }

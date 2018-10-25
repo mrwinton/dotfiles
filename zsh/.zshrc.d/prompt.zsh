@@ -1,34 +1,30 @@
-# configure links
-ln -nsf ~/.zshrc.d/pure/pure.zsh /usr/local/share/zsh/site-functions/prompt_pure_setup >/dev/null
-ln -nsf ~/.zshrc.d/pure/async.zsh /usr/local/share/zsh/site-functions/async >/dev/null
+# Initialise zplug: https://github.com/zplug/zplug
+export ZPLUG_HOME=/usr/local/opt/zplug
+source $ZPLUG_HOME/init.zsh
 
-# initialize the prompt system (if not so already) and choose pure
-autoload -U promptinit; promptinit
-prompt pure
+# Source asdf version manager and add completions
+zplug "plugins/asdf",   from:oh-my-zsh
 
-# extra tab completion
-fpath=(~/.zshrc.d/completions/src $fpath)
+# Add completions for the gem command
+zplug "plugins/gem",    from:oh-my-zsh
 
-# source asdf version manager
-. $HOME/.asdf/asdf.sh
+# Add wd: https://github.com/mfaerevaag/wd
+zplug "plugins/wd",     from:oh-my-zsh
 
-# extended tab completion
-autoload -U compinit
-compinit
+# Add zsh autosuggestions
+zplug "zsh-users/zsh-autosuggestions"
 
-# case insensitve tab completion
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+# Add zsh completions
+zplug "zsh-users/zsh-completions"
 
-# better history searching with arrow keys
-autoload -U up-line-or-beginning-search
-autoload -U down-line-or-beginning-search
-zle -N up-line-or-beginning-search
-zle -N down-line-or-beginning-search
-bindkey "^[[A" up-line-or-beginning-search # Up
-bindkey "^[[B" down-line-or-beginning-search # Down
+# Add up, down arrow history search
+zplug "zsh-users/zsh-history-substring-search"
 
-# save command distory
-HISTFILE=~/.zsh_history
-HISTSIZE=SAVEHIST=10000
-setopt sharehistory
-setopt extendedhistory
+# Set theme: https://github.com/denysdovhan/spaceship-prompt
+zplug denysdovhan/spaceship-prompt, use:spaceship.zsh, from:github, as:theme
+
+# [MUST BE LOADED LAST] Add zsh syntax highlighting
+zplug "zsh-users/zsh-syntax-highlighting"
+
+# Source zplug plugins and add commands to $PATH
+zplug load

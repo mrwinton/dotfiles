@@ -1,11 +1,11 @@
 pathmunge () {
-  if ! echo $PATH | egrep -q "(^|:)$1($|:)" ; then
-    if [ "$2" = "after" ] ; then
-      PATH=$PATH:$1
-    else
-      PATH=$1:$PATH
+    if ! echo $PATH | egrep -q "(^|:)$1($|:)" ; then
+        if [ "$2" = "after" ] ; then
+            PATH=$PATH:$1
+        else
+            PATH=$1:$PATH
+        fi
     fi
-  fi
 }
 
 pathmunge /usr/local/sbin
