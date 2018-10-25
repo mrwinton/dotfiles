@@ -8,11 +8,13 @@
 	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
 	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 	loc = !git diff --stat `git hash-object -t tree /dev/null` | tail -1 | cut -d' ' -f5
+	glog = log -E -i --grep
 	pick = cherry-pick
 	pr = pull-request
 	st = status -sb
 	sum = log --oneline --no-merges
-	unstage = reset HEAD
+	unstage = reset
+	uncommit = reset --soft HEAD^
 	hreset = !git reset --hard $(git rev-parse --abbrev-ref --symbolic-full-name @{u})
 [branch]
 	autosetuprebase = always
@@ -37,7 +39,7 @@
 [merge]
 	ff = only
 [push]
-	default = current
+	default = upstream
 [rebase]
 	autosquash = true
 [user]
