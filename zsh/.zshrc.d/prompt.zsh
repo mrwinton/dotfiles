@@ -21,11 +21,14 @@ zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-history-substring-search"
 
 # Set theme: https://github.com/denysdovhan/spaceship-prompt
-zplug denysdovhan/spaceship-prompt, use:spaceship.zsh, from:github, as:theme
-SPACESHIP_DIR_TRUNC=0
-SPACESHIP_PACKAGE_SHOW=false
-SPACESHIP_NODE_SHOW=false
-SPACESHIP_RUBY_SHOW=false
+# zplug denysdovhan/spaceship-prompt, use:spaceship.zsh, from:github, as:theme
+# SPACESHIP_DIR_TRUNC=0
+# SPACESHIP_PACKAGE_SHOW=false
+# SPACESHIP_NODE_SHOW=false
+# SPACESHIP_RUBY_SHOW=false
+
+zplug mafredri/zsh-async, from:github
+zplug sindresorhus/pure, use:pure.zsh, from:github, as:theme
 
 # [MUST BE LOADED LAST] Add zsh syntax highlighting
 zplug "zsh-users/zsh-syntax-highlighting"
