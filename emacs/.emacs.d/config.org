@@ -25,6 +25,14 @@ Always compile packages, and use the newest version available.
   (setq load-prefer-newer t)
 #+END_SRC
 
+Help keep ~/.emacs.d clean.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package no-littering)
+  (require 'no-littering)
+  (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+#+END_SRC
+
 * Better settings
 
 Don't present the usual startup message, and clear the scratch
@@ -166,8 +174,8 @@ insert the text where point is, not where the mouse cursor is.
 * Utility Functions
 
 #+BEGIN_SRC emacs-lisp
-  (defun mrw/reload-dotemacs-file ()
-    "reload your .emacs file without restarting Emacs"
+  (defun mrw/reload-emacs-config ()
+    "reload emacs config file without restarting Emacs"
     (interactive)
     (load-file "~/.emacs.d/init.el") )
 
