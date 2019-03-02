@@ -882,6 +882,13 @@
     (global-set-key (kbd "C-=") 'er/expand-region)
   #+END_SRC
 
+  Cut/copy the current line if no region is active
+
+  #+BEGIN_SRC emacs-lisp
+    (use-package whole-line-or-region)
+    (add-hook 'after-init-hook 'whole-line-or-region-mode)
+  #+END_SRC
+
 * Moving
 
   Configure =projectile=
