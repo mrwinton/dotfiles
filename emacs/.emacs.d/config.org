@@ -183,6 +183,8 @@
       (setq mouse-wheel-scroll-amount '(1
                                         ((shift) . 5)
                                         ((control))))
+
+      (use-package reveal-in-osx-finder)
       )
   #+END_SRC
 
@@ -628,7 +630,6 @@
 
    #+BEGIN_SRC emacs-lisp
      (use-package rspec-mode)
-
      (setq rspec-spec-command "bundle exec rspec")
      (setq rspec-use-bundler-when-possible nil)
      (setq rspec-use-spring-when-possible nil)
@@ -874,6 +875,13 @@
     (global-set-key (kbd "C-c m a") 'mc/edit-beginnings-of-lines)
   #+END_SRC
 
+  Setup expand-region
+
+  #+BEGIN_SRC emacs-lisp
+    (use-package expand-region)
+    (global-set-key (kbd "C-=") 'er/expand-region)
+  #+END_SRC
+
 * Moving
 
   Configure =projectile=
@@ -1036,6 +1044,14 @@
 
   #+BEGIN_SRC emacs-lisp
     (setq dired-recursive-deletes 'top)
+  #+END_SRC
+
+  #+BEGIN_SRC emacs-lisp
+    (use-package diredfl)
+    (diredfl-global-mode) ;; make dired pretty
+
+    (use-package diff-hl)
+    (add-hook 'dired-mode-hook 'diff-hl-dired-mode) ;; show git changes in dired
   #+END_SRC
 
 * Editing settings
