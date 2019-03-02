@@ -1,0 +1,7 @@
+snippet: # -*- mode -*-
+# name: beg
+# key: beg_
+# --
+#+BEGIN_SRC emacs-lisp
+$0
+#+END_SRC
