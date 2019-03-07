@@ -456,6 +456,13 @@ This is my *biggest* bike shed.
       (add-hook 'after-init-hook 'whole-line-or-region-mode)
     #+END_SRC
 
+*** =whitespace-cleanup-mode=
+
+    #+BEGIN_SRC emacs-lisp
+      (use-package whitespace-cleanup-mode)
+      (add-hook 'after-init-hook 'global-whitespace-cleanup-mode)
+    #+END_SRC
+
 *** =vlf=
 
     Handle opening very large files.
@@ -904,4 +911,15 @@ This is my *biggest* bike shed.
 
   #+BEGIN_SRC emacs-lisp
     (global-set-key (kbd "M-j") (lambda () (interactive) (join-line -1)))
+  #+END_SRC
+
+  Show me the whitespace (sometimes)
+
+  #+BEGIN_SRC emacs-lisp
+    (defun mrw/show-trailing-whitespace ()
+      "Enable display of trailing whitespace in this buffer."
+      (setq-local show-trailing-whitespace t))
+
+    (dolist (hook '(prog-mode-hook text-mode-hook conf-mode-hook))
+      (add-hook hook 'mrw/show-trailing-whitespace))
   #+END_SRC
