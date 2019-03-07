@@ -1,9 +1,6 @@
+This is my *biggest* bike shed.
 
-#+TITLE: just emacs things
-#+AUTHOR: Michael Winton
-#+OPTIONS: toc:nil num:nil
-
-* settings
+* core
 
   Use =use-package= to install and configure packages. On start,
   =init.el= includes the initial setup for =package.el= and ensures
@@ -27,12 +24,22 @@
     (setq load-prefer-newer t)
   #+END_SRC
 
+  Update packages every 5 days with =auto-package-update=.
+
+  #+BEGIN_SRC emacs-lisp
+    (use-package auto-package-update
+      :config
+      (setq auto-package-update-interval 5)
+      (setq auto-package-update-delete-old-versions t)
+      (setq auto-package-update-prompt-before-update t)
+      (auto-package-update-maybe))
+  #+END_SRC
+
   Use the $PATH when executing commands from emacs with
   =exec-path-from-shell=.
 
   #+BEGIN_SRC emacs-lisp
     (use-package exec-path-from-shell)
-    (require 'exec-path-from-shell)
     (exec-path-from-shell-initialize)
   #+END_SRC
 
@@ -77,7 +84,8 @@
 
   #+BEGIN_SRC emacs-lisp
     (defun mrw/add-auto-mode (mode &rest patterns)
-      "Add entries to `auto-mode-alist' to use `MODE' for all given file `PATTERNS'."
+      "Add entries to `auto-mode-alist' to use `MODE' for all given
+    file `PATTERNS'."
       (dolist (pattern patterns)
         (add-to-list 'auto-mode-alist (cons pattern mode))))
   #+END_SRC
@@ -89,47 +97,115 @@
     (delete-selection-mode 1)
   #+END_SRC
 
-* macOS
-
-  Is it a mac?
+  Configure =recentf=.
 
   #+BEGIN_SRC emacs-lisp
-    (defconst *is-a-mac* (eq system-type 'darwin))
+    (setq-default
+      recentf-max-saved-items 1000
+      recentf-exclude '("/tmp/" "/ssh:"))
   #+END_SRC
 
-  Change up the modifier keys when it's a mac.
+  When something changes a file, automatically refresh the
+  buffer containing that file so they can't get out of sync.
 
   #+BEGIN_SRC emacs-lisp
-    (when *is-a-mac*
-      (setq mac-command-modifier 'meta)
-      (setq mac-option-modifier 'none))
+    (global-auto-revert-mode t)
   #+END_SRC
 
-  Make the mouse wheel / trackpad scrolling less jerky
+  Configure newline behaviour
 
   #+BEGIN_SRC emacs-lisp
-    (when *is-a-mac*
-      (setq mouse-wheel-scroll-amount '(1
-                                        ((shift) . 5)
-                                        ((control))))
-      (dolist (multiple '("" "double-" "triple-"))
-        (dolist (direction '("right" "left"))
-          (global-set-key (read-kbd-macro (concat "<" multiple "wheel-" direction ">")) 'ignore))))
+    (global-set-key (kbd "RET") 'newline-and-indent)
   #+END_SRC
 
-  Use =reveal-in-osx-finder=
+  Never use tabs. Tabs are the devil’s whitespace.
 
   #+BEGIN_SRC emacs-lisp
-    (when *is-a-mac*
-      (use-package reveal-in-osx-finder))
+    (setq-default indent-tabs-mode nil)
   #+END_SRC
 
-* packages
-** =ag= and =rg=
+  Prefer shallow indentation.
+
+  #+BEGIN_SRC emacs-lisp
+    (setq-default tab-width 2)
+  #+END_SRC
+
+  When saving a file in a directory that doesn't exist, offer to
+  (recursively) create the file's parent directories.
+
+  #+BEGIN_SRC emacs-lisp
+    (add-hook 'before-save-hook
+              (lambda ()
+                (when buffer-file-name
+                  (let ((dir (file-name-directory buffer-file-name)))
+                    (when (and (not (file-exists-p dir))
+                               (y-or-n-p (format "Directory %s does not exist. Create it?" dir)))
+                      (make-directory dir t))))))
+  #+END_SRC
+
+  Don't ask `yes/no?', ask `y/n?'.
+
+  #+BEGIN_SRC emacs-lisp
+    (fset 'yes-or-no-p 'y-or-n-p)
+  #+END_SRC
+
+  If you save a file that doesn't end with a newline, automatically
+  append one.
+
+  #+BEGIN_SRC emacs-lisp
+    (setq require-final-newline t)
+  #+END_SRC
+
+  When middle-clicking the mouse to yank from the clipboard, insert
+  the text where point is, not where the mouse cursor is.
+
+  #+BEGIN_SRC emacs-lisp
+    (setq mouse-yank-at-point t)
+  #+END_SRC
+
+* platform
+** macOS
+
+   Is it a mac?
 
    #+BEGIN_SRC emacs-lisp
-     (setq-default grep-highlight-matches t
-                   grep-scroll-output t)
+     (defconst *is-a-mac* (eq system-type 'darwin))
+   #+END_SRC
+
+   Change up the modifier keys when it's a mac.
+
+   #+BEGIN_SRC emacs-lisp
+     (when *is-a-mac*
+       (setq mac-command-modifier 'meta)
+       (setq mac-option-modifier 'none))
+   #+END_SRC
+
+   Make the mouse wheel / trackpad scrolling less jerky
+
+   #+BEGIN_SRC emacs-lisp
+     (when *is-a-mac*
+       (setq mouse-wheel-scroll-amount '(1
+                                         ((shift) . 5)
+                                         ((control))))
+       (dolist (multiple '("" "double-" "triple-"))
+         (dolist (direction '("right" "left"))
+           (global-set-key (read-kbd-macro (concat "<"
+           multiple "wheel-" direction ">")) 'ignore))))
+   #+END_SRC
+
+   Use =reveal-in-osx-finder=
+
+   #+BEGIN_SRC emacs-lisp
+     (when *is-a-mac*
+       (use-package reveal-in-osx-finder))
+   #+END_SRC
+
+* packages
+** searching
+*** =rg=
+
+   #+BEGIN_SRC emacs-lisp
+     (setq-default grep-highlight-matches t grep-scroll-output t)
 
      (when *is-a-mac*
        (setq-default locate-command "mdfind"))
@@ -138,120 +214,37 @@
      (dolist (key (list (kbd "C-c C-q") (kbd "w")))
        (define-key grep-mode-map key 'wgrep-change-to-wgrep-mode))
 
-     (when (executable-find "ag")
-       (use-package ag)
-       (use-package wgrep-ag)
-       (setq-default ag-highlight-search t)
-       (global-set-key (kbd "M-?") 'ag-project))
-
      (when (executable-find "rg")
        (use-package rg)
-       (use-package deadgrep)
        (global-set-key (kbd "M-?") 'rg-project))
    #+END_SRC
 
-** [TODO] =ibuffer=
-** ==flycheck==
+*** =projectile=
 
-   #+BEGIN_SRC emacs-lisp
-     (use-package flycheck)
-     (setq flycheck-display-errors-function #'flycheck-display-error-messages-unless-error-list)
+   Projectile's default binding of =projectile-rg= to =C-c p s s= is
+   clunky enough that I rarely use it (and forget it when I need
+   it). This binds it to the easier-to-type =C-c p f= to useful
+   searches.
 
-     (global-flycheck-mode 1)
-     ;; TODO (flycheck-color-mode-line-mode)
-   #+END_SRC
-
-** =uniquify=
-
-   Nicer naming of buffers for files with identical names
-
-   #+BEGIN_SRC emacs-lisp
-     (require 'uniquify)
-
-     (setq uniquify-buffer-name-style 'reverse)
-     (setq uniquify-separator " • ")
-     (setq uniquify-after-kill-buffer-p t)
-     (setq uniquify-ignore-buffers-re "^\\*")
-   #+END_SRC
-
-** =subword=
-
-   Treating terms in CamelCase symbols as separate words makes editing a little
-   easier for me, so I like to use =subword-mode= everywhere.
-
-   #+BEGIN_SRC emacs-lisp
-     (use-package subword
-       :config (global-subword-mode 1))
-   #+END_SRC
-
-** =dired=
-
-   #+BEGIN_SRC emacs-lisp
-     (setq-default dired-dwim-target t)
-
-     (use-package diredfl)
-     (diredfl-global-mode 1)
-
-     (use-package diff-hl)
-     (diff-hl-dired-mode 1)
-
-     (setq dired-recursive-deletes 'top)
-     (define-key dired-mode-map [mouse-2] 'dired-find-file)
-     (define-key dired-mode-map (kbd "C-c C-q") 'wdired-change-to-wdired-mode)
-   #+END_SRC
-
-** =magit=
-
-   I use =magit= to handle version control. It's lovely, but I tweak a few things:
-
-   - I bring up the status menu with =C-x g=.
-   - The default behavior of =magit= is to ask before pushing. I haven't had any
-     problems with accidentally pushing, so I'd rather not confirm that every time.
-   - Per [[http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html][tpope's suggestions]], highlight commit text in the summary line that goes
-     beyond 50 characters.
-   - TODO: On the command line I'll generally push a new branch with a plain old =git
-     push=, which automatically creates a tracking branch on (usually) =origin=.
-     Magit, by default, wants me to manually specify an upstream branch. This binds
-     =P P= to =magit-push-implicitly=, which is just a wrapper around =git push
-     -v=. Convenient!
-
-   #+BEGIN_SRC emacs-lisp
-     (use-package magit
-       :bind
-       ("C-x g" . magit-status)
-
-       :config
-       (setq magit-push-always-verify nil)
-       (setq git-commit-summary-max-length 50))
-
-     (use-package git-blamed)
-     (use-package gitignore-mode)
-     (use-package gitconfig-mode)
-   #+END_SRC
-
-** =projectile=
-
-   Projectile's default binding of =projectile-ag= to =C-c p s s= is clunky enough
-   that I rarely use it (and forget it when I need it). This binds it to the
-   easier-to-type =C-c p f= to useful searches.
-
-   Bind =C-p= to fuzzy-finding files in the current project. We also need to
-   explicitly set that in a few other modes.
+   Bind =C-p= to fuzzy-finding files in the current project. We also
+   need to explicitly set that in a few other modes.
 
    I use =ivy= as my completion system.
 
-   When I visit a project with =projectile-switch-project=, the default action is
-   to search for a file in that project. I'd rather just open up the top-level
-   directory of the project in =dired= and find (or create) new files from there.
+   When I visit a project with =projectile-switch-project=, the
+   default action is to search for a file in that project. I'd rather
+   just open up the top-level directory of the project in =dired= and
+   find (or create) new files from there.
 
-   I'd like to /always/ be able to recursively fuzzy-search for files, not just
-   when I'm in a Projectile-defined project. I use the current directory as a
-   project root (if I'm not in a "real" project).
+   I'd like to /always/ be able to recursively fuzzy-search for files,
+   not just when I'm in a Projectile-defined project. I use the
+   current directory as a project root (if I'm not in a "real"
+   project).
 
    #+BEGIN_SRC emacs-lisp
      (use-package projectile
        :bind
-       ("C-c v" . 'projectile-ag)
+       ("C-c v" . 'projectile-rg)
        ("C-c p" . 'projectile-command-map)
 
        :config
@@ -268,7 +261,7 @@
      (projectile-mode t)
    #+END_SRC
 
-** =ivy=
+*** =ivy=
 
    #+BEGIN_SRC emacs-lisp
      (require 'ivy)
@@ -280,137 +273,126 @@
      (global-set-key (kbd "<f6>") 'ivy-resume)
    #+END_SRC
 
-** =anzu=
+*** =anzu=
 
-   #+BEGIN_SRC emacs-lisp
-    (use-package anzu)
-    (add-hook 'after-init-hook 'global-anzu-mode)
-    (setq anzu-mode-lighter "")
-    (global-set-key [remap query-replace-regexp] 'anzu-query-replace-regexp)
-    (global-set-key [remap query-replace] 'anzu-query-replace)
+    #+BEGIN_SRC emacs-lisp
+      (use-package anzu)
+      (add-hook 'after-init-hook 'global-anzu-mode)
+      (setq anzu-mode-lighter "")
+      (global-set-key [remap query-replace-regexp] 'anzu-query-replace-regexp)
+      (global-set-key [remap query-replace] 'anzu-query-replace)
+    #+END_SRC
+
+*** =counsel=
+
+    #+BEGIN_SRC emacs-lisp
+      (use-package counsel
+        :bind
+        ("M-x" . 'counsel-M-x)
+        ("C-s" . 'swiper)
+
+        :config
+        (use-package flx)
+        (use-package smex)
+
+        (ivy-mode 1)
+        (setq ivy-use-virtual-buffers t)
+        (setq ivy-count-format "(%d/%d) ")
+        (setq ivy-initial-inputs-alist nil)
+        (setq ivy-re-builders-alist
+          '((swiper . ivy--regex-plus)
+            (t . ivy--regex-fuzzy))))
    #+END_SRC
 
-** =yasnippet=
+** editing
+*** =dired=
 
-   #+BEGIN_SRC emacs-lisp
-     (use-package yasnippet)
-     (require 'yasnippet)
+    #+BEGIN_SRC emacs-lisp
+      (setq-default dired-dwim-target t)
 
-     (setq yas-snippet-dirs '("~/.emacs.d/snippets"
-                              "~/.emacs.d/snippets/yasnippet-snippets"
-                              "~/.emacs.d/snippets/custom"))
+      (use-package diredfl)
+      (diredfl-global-mode 1)
 
-     (yas-global-mode 1)
-   #+END_SRC
+      (use-package diff-hl)
+      (diff-hl-dired-mode 1)
 
-** =counsel=
+      (setq dired-recursive-deletes 'top)
+      (define-key dired-mode-map [mouse-2] 'dired-find-file)
+      (define-key dired-mode-map (kbd "C-c C-q") 'wdired-change-to-wdired-mode)
+    #+END_SRC
 
-   #+BEGIN_SRC emacs-lisp
-     (use-package counsel
-       :bind
-       ("M-x" . 'counsel-M-x)
-       ("C-s" . 'swiper)
+*** =flycheck=
 
-       :config
-       (use-package flx)
-       (use-package smex)
+    #+BEGIN_SRC emacs-lisp
+      (use-package flycheck)
+      (setq flycheck-display-errors-function #'flycheck-display-error-messages-unless-error-list)
 
-       (ivy-mode 1)
-       (setq ivy-use-virtual-buffers t)
-       (setq ivy-count-format "(%d/%d) ")
-       (setq ivy-initial-inputs-alist nil)
-       (setq ivy-re-builders-alist
-             '((swiper . ivy--regex-plus)
-               (t . ivy--regex-fuzzy))))
-   #+END_SRC
+      (global-flycheck-mode 1)
+      ;; TODO (flycheck-color-mode-line-mode)
+    #+END_SRC
 
-** =company=
+*** =subword=
 
-   Use =company-mode= everywhere.
+    Treating terms in CamelCase symbols as separate words makes
+    editing a little easier for me, so I like to use =subword-mode=
+    everywhere.
 
-   #+BEGIN_SRC emacs-lisp
-     (use-package company)
+    #+BEGIN_SRC emacs-lisp
+      (use-package subword
+        :config (global-subword-mode 1))
+    #+END_SRC
 
-(setq company-idle-delay 0.5)
-(setq company-show-numbers t)
-(setq company-tooltip-limit 10)
-(setq company-minimum-prefix-length 2)
-(setq company-tooltip-align-annotations t)
-;; invert the navigation direction if the the completion popup-isearch-match
-;; is displayed on top (happens near the bottom of windows)
-(setq company-tooltip-flip-when-above t)
+*** =yasnippet=
 
-     (add-hook 'after-init-hook 'global-company-mode)
-   #+END_SRC
+    #+BEGIN_SRC emacs-lisp
+      (use-package yasnippet)
+      (require 'yasnippet)
 
-   Use =M-/= for completion.
+      (setq yas-snippet-dirs '("~/.emacs.d/snippets/custom"
+                               "~/.emacs.d/snippets/yasnippet"))
 
-   #+BEGIN_SRC emacs-lisp
-     (global-set-key (kbd "M-/") 'company-complete-common)
-   #+END_SRC
+      (yas-global-mode 1)
+    #+END_SRC
 
-** =hippie-expand=
+*** =company=
 
-   #+BEGIN_SRC emacs-lisp
-     (global-set-key (kbd "M-/") 'hippie-expand)
+    Use =company-mode= everywhere.
 
-     (setq hippie-expand-try-functions-list
-           '(try-complete-file-name-partially
-             try-complete-file-name
-             try-expand-dabbrev
-             try-expand-dabbrev-all-buffers
-             try-expand-dabbrev-from-kill))
-   #+END_SRC
+    #+BEGIN_SRC emacs-lisp
+      (use-package company)
 
-** =switch-window=
+      (setq company-idle-delay 0.5)
+      (setq company-show-numbers t)
+      (setq company-tooltip-limit 10)
+      (setq company-minimum-prefix-length 2)
+      (setq company-tooltip-align-annotations t)
+      ;; invert the navigation direction if the the completion popup-isearch-match
+      ;; is displayed on top (happens near the bottom of windows)
+      (setq company-tooltip-flip-when-above t)
 
-   #+BEGIN_SRC emacs-lisp
-     (use-package switch-window)
-     (setq-default switch-window-shortcut-style 'alphabet)
-     (setq-default switch-window-timeout nil)
-     (global-set-key (kbd "C-x o") 'switch-window)
-   #+END_SRC
+      (add-hook 'after-init-hook 'global-company-mode)
+    #+END_SRC
 
-   When splitting a window, I invariably want to switch to the new window. This
-   makes that automatic.
+    Use =M-/= for completion.
 
-   #+BEGIN_SRC emacs-lisp
-     (defun mrw/split-window-below-and-switch ()
-       "Split the window horizontally, then switch to the new pane."
-       (interactive)
-       (split-window-below)
-       (balance-windows)
-       (other-window 1))
+    #+BEGIN_SRC emacs-lisp
+      (global-set-key (kbd "M-/") 'company-complete-common)
+    #+END_SRC
 
-     (defun mrw/split-window-right-and-switch ()
-       "Split the window vertically, then switch to the new pane."
-       (interactive)
-       (split-window-right)
-       (balance-windows)
-       (other-window 1))
+*** =hippie-expand=
 
-     (global-set-key (kbd "C-x 2") 'mrw/split-window-below-and-switch)
-     (global-set-key (kbd "C-x 3") 'mrw/split-window-right-and-switch)
-   #+END_SRC
+    #+BEGIN_SRC emacs-lisp
+      (global-set-key (kbd "M-/") 'hippie-expand)
 
-** =recentf=
+      (setq hippie-expand-try-functions-list
+            '(try-complete-file-name-partially
+              try-complete-file-name
+              try-expand-dabbrev
+              try-expand-dabbrev-all-buffers
+              try-expand-dabbrev-from-kill))
+    #+END_SRC
 
-   #+BEGIN_SRC emacs-lisp
-     (setq-default
-      recentf-max-saved-items 1000
-      recentf-exclude '("/tmp/" "/ssh:"))
-   #+END_SRC
-
-** ==global-auto-revert-mode==
-
-   When something changes a file, automatically refresh the
-   buffer containing that file so they can't get out of sync.
-
-   #+BEGIN_SRC emacs-lisp
-     (global-auto-revert-mode t)
-   #+END_SRC
-
-** =undo-tree=
+*** =undo-tree=
 
    Oh boy, tree-based undo management
 
@@ -418,75 +400,158 @@
      (use-package undo-tree)
    #+END_SRC
 
-** =rainbow-delimiters=
+*** =rainbow-delimiters=
 
-   #+BEGIN_SRC emacs-lisp
-     (use-package rainbow-delimiters)
-     (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+    #+BEGIN_SRC emacs-lisp
+      (use-package rainbow-delimiters)
+      (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+    #+END_SRC
+
+*** =browse-kill=ring=
+
+    #+BEGIN_SRC emacs-lisp
+      (use-package browse-kill-ring)
+      (global-set-key (kbd "M-Y") 'browse-kill-ring)
+      (define-key browse-kill-ring-mode-map (kbd "C-g") 'browse-kill-ring-quit)
+      (define-key browse-kill-ring-mode-map (kbd "M-n") 'browse-kill-ring-forward)
+      (define-key browse-kill-ring-mode-map (kbd "M-p") 'browse-kill-ring-previous)
+    #+END_SRC
+
+*** =smart-parens=
+
+    #+BEGIN_SRC emacs-lisp
+      (use-package smartparens
+        :hook ((js-mode . smartparens-mode)
+               (ruby-mode . smartparens-mode)
+               (emacs-lisp-mode . smartparens-mode)))
+    #+END_SRC
+
+*** =show-paren-mode=
+
+    #+BEGIN_SRC emacs-lisp
+      (add-hook 'after-init-hook 'show-paren-mode)
+    #+END_SRC
+
+*** =expand-region=
+
+    #+BEGIN_SRC emacs-lisp
+      (use-package expand-region)
+      (global-set-key (kbd "C-=") 'er/expand-region)
+    #+END_SRC
+
+*** =move-dup=
+
+    #+BEGIN_SRC emacs-lisp
+      (use-package move-dup)
+      (global-set-key [M-up] 'md/move-lines-up)
+      (global-set-key [M-down] 'md/move-lines-down)
+      (global-set-key [M-S-up] 'md/move-lines-up)
+      (global-set-key [M-S-down] 'md/move-lines-down)
+
+      (global-set-key (kbd "C-c d") 'md/duplicate-down)
+      (global-set-key (kbd "C-c u") 'md/duplicate-up)
+    #+END_SRC
+
+*** =whole-line-or-region=
+
+    #+BEGIN_SRC emacs-lisp
+      (use-package whole-line-or-region)
+      (add-hook 'after-init-hook 'whole-line-or-region-mode)
+    #+END_SRC
+
+*** =vlf=
+
+    Handle opening very large files.
+
+    #+BEGIN_SRC emacs-lisp
+      (use-package vlf 
+        :ensure t)
+    #+END_SRC
+
+*** =highlight-escape-sequences=
+
+    #+BEGIN_SRC emacs-lisp
+      (use-package highlight-escape-sequences)
+      (add-hook 'after-init-hook 'hes-mode)
+    #+END_SRC
+
+*** =which-key=
+
+    =which-key= displays the possible completions for a long
+    keybinding. That's really helpful for some modes (like
+    =projectile=, for example).
+
+    #+BEGIN_SRC emacs-lisp
+      (use-package which-key
+        :config (which-key-mode))
+    #+END_SRC
+
+** moving
+*** =switch-window=
+
+    #+BEGIN_SRC emacs-lisp
+      (use-package switch-window)
+      (setq-default switch-window-shortcut-style 'alphabet)
+      (setq-default switch-window-timeout nil)
+      (global-set-key (kbd "C-x o") 'switch-window)
+    #+END_SRC
+
+    When splitting a window, I invariably want to switch to the new
+    window. This makes that automatic.
+
+    #+BEGIN_SRC emacs-lisp
+      (defun mrw/split-window-below-and-switch ()
+        "Split the window horizontally, then switch to the new pane."
+        (interactive)
+        (split-window-below)
+        (balance-windows)
+        (other-window 1))
+
+      (defun mrw/split-window-right-and-switch ()
+        "Split the window vertically, then switch to the new pane."
+        (interactive)
+        (split-window-right)
+        (balance-windows)
+        (other-window 1))
+
+      (global-set-key (kbd "C-x 2") 'mrw/split-window-below-and-switch)
+      (global-set-key (kbd "C-x 3") 'mrw/split-window-right-and-switch)
    #+END_SRC
 
-** =browse-kill=ring=
+** version control
+*** =magit=
 
-   #+BEGIN_SRC emacs-lisp
-     (use-package browse-kill-ring)
-     (global-set-key (kbd "M-Y") 'browse-kill-ring)
-     (define-key browse-kill-ring-mode-map (kbd "C-g") 'browse-kill-ring-quit)
-     (define-key browse-kill-ring-mode-map (kbd "M-n") 'browse-kill-ring-forward)
-     (define-key browse-kill-ring-mode-map (kbd "M-p") 'browse-kill-ring-previous)
-   #+END_SRC
+    I use =magit= to handle version control. It's lovely, but I tweak
+    a few things:
 
-** =show-paren-mode=
+    - I bring up the status menu with =C-x g=.
+    - The default behavior of =magit= is to ask before pushing. I
+      haven't had any problems with accidentally pushing, so I'd
+      rather not confirm that every time.
+    - Per [[http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html][tpope's suggestions]], highlight commit text in the summary
+      line that goes beyond 50 characters.
+    - TODO: On the command line I'll generally push a new branch with
+      a plain old =git push=, which automatically creates a tracking
+      branch on (usually) =origin=.  Magit, by default, wants me to
+      manually specify an upstream branch. This binds =P P= to
+      =magit-push-implicitly=, which is just a wrapper around =git
+      push -v=. Convenient!
 
-   #+BEGIN_SRC emacs-lisp
-     (add-hook 'after-init-hook 'show-paren-mode)
-   #+END_SRC
+    #+BEGIN_SRC emacs-lisp
+      (use-package magit
+        :bind
+        ("C-x g" . magit-status)
 
-** =expand-region=
+        :config
+        (setq magit-push-always-verify nil)
+        (setq git-commit-summary-max-length 50))
 
-   #+BEGIN_SRC emacs-lisp
-     (use-package expand-region)
-     (global-set-key (kbd "C-=") 'er/expand-region)
-   #+END_SRC
-
-** =move-dup=
-
-   #+BEGIN_SRC emacs-lisp
-     (use-package move-dup)
-     (global-set-key [M-up] 'md/move-lines-up)
-     (global-set-key [M-down] 'md/move-lines-down)
-     (global-set-key [M-S-up] 'md/move-lines-up)
-     (global-set-key [M-S-down] 'md/move-lines-down)
-
-     (global-set-key (kbd "C-c d") 'md/duplicate-down)
-     (global-set-key (kbd "C-c u") 'md/duplicate-up)
-   #+END_SRC
-
-** =whole-line-or-region=
-
-   #+BEGIN_SRC emacs-lisp
-     (use-package whole-line-or-region)
-     (add-hook 'after-init-hook 'whole-line-or-region-mode)
-   #+END_SRC
-
-** =highlight-escape-sequences=
-
-   #+BEGIN_SRC emacs-lisp
-     (use-package highlight-escape-sequences)
-     (add-hook 'after-init-hook 'hes-mode)
-   #+END_SRC
-
-** =which-key=
-
-   =which-key= displays the possible completions for a long keybinding. That's
-   really helpful for some modes (like =projectile=, for example).
-
-   #+BEGIN_SRC emacs-lisp
-     (use-package which-key
-       :config (which-key-mode))
-   #+END_SRC
+      (use-package git-blamed)
+      (use-package gitignore-mode)
+      (use-package gitconfig-mode)
+    #+END_SRC
 
 * languages
-
 ** Ruby
 
    Running tests from within Emacs is awfully convenient.
@@ -501,9 +566,9 @@
      (rspec-install-snippets)
    #+END_SRC
 
-   When assigning the result of a conditional, I like to align the expression to
-   match the beginning of the statement instead of indenting it all the way to the
-   =if=.
+   When assigning the result of a conditional, I like to align the
+   expression to match the beginning of the statement instead of
+   indenting it all the way to the =if=.
 
    #+BEGIN_SRC emacs-lisp
      (setq ruby-align-to-stmt-keywords '(def if))
@@ -515,14 +580,15 @@
      (use-package yard-mode)
    #+END_SRC
 
-   Insert =end= keywords automatically when I start to define a method, class,
-   module, or block.
+   Insert =end= keywords automatically when I start to define a
+   method, class, module, or block.
 
    #+BEGIN_SRC emacs-lisp
      (use-package ruby-end)
    #+END_SRC
 
-   Install and enable =projectile-rails= mode in all Rail-related buffers.
+   Install and enable =projectile-rails= mode in all Rail-related
+   buffers.
 
    #+BEGIN_SRC emacs-lisp
      (use-package projectile-rails
@@ -530,12 +596,14 @@
        (projectile-rails-global-mode))
    #+END_SRC
 
-   There are a bunch of things I'd like to do when I open a Ruby buffer:
+   There are a bunch of things I'd like to do when I open a Ruby
+   buffer:
 
    - I don't want to insert an encoding comment.
-   - I want to enable =yas=, =rspec=, =yard=, =flycheck=, and =projectile-rails=.
-   - I'd like my RSpec tests to be run in a random order, and I'd like the output
-     to be colored.
+   - I want to enable =yas=, =rspec=, =yard=, =flycheck=, and
+     =projectile-rails=.
+   - I'd like my RSpec tests to be run in a random order, and I'd like
+     the output to be colored.
 
    #+BEGIN_SRC emacs-lisp
      (add-hook 'ruby-mode-hook
@@ -551,7 +619,8 @@
      (setq-default flycheck-disabled-checkers '(ruby-reek))
    #+END_SRC
 
-   I associate =ruby-mode= with Gemfiles, gemspecs, Rakefiles, and Vagrantfiles.
+   I associate =ruby-mode= with Gemfiles, gemspecs, Rakefiles, and
+   Vagrantfiles.
 
    #+BEGIN_SRC emacs-lisp
      (mrw/add-auto-mode
@@ -574,7 +643,7 @@
                  (setq compilation-scroll-output 'first-error)))
    #+END_SRC
 
-** =web-mode=
+** HTML
 
    #+BEGIN_SRC emacs-lisp
      (use-package web-mode)
@@ -597,8 +666,7 @@
    Use =web-mode= with embedded Ruby files, regular HTML, and PHP.
 
    #+BEGIN_SRC emacs-lisp
-     (mrw/add-auto-mode
-      'web-mode
+     (mrw/add-auto-mode 'web-mode
       "\\.erb$"
       "\\.html$"
       "\\.php$"
@@ -611,14 +679,14 @@
      (use-package yaml-mode)
    #+END_SRC
 
-   If I'm editing YAML I'm usually in a Rails project. I'd like to be able to run
-   the tests from any buffer.
+   If I'm editing YAML I'm usually in a Rails project. I'd like to be
+   able to run the tests from any buffer.
 
    #+BEGIN_SRC emacs-lisp
      (add-hook 'yaml-mode-hook 'rspec-mode)
    #+END_SRC
 
-* UI
+* interface
 
   The =snazzy-theme= is snazzy.
 
@@ -651,9 +719,9 @@
   Mode line settings
 
   #+BEGIN_SRC emacs-lisp
-  (line-number-mode t)
-  (column-number-mode t)
-  (size-indication-mode t)
+    (line-number-mode t)
+    (column-number-mode t)
+    (size-indication-mode t)
   #+END_SRC
 
   Scale text easily with =default-text-scale=.
@@ -717,63 +785,22 @@
       (mrw/set-font-size 220))
 
     (defun mrw/set-font-size (font-height)
-      (custom-set-faces `(default ((t (:height ,font-height :family "menlo"))))))
+      (custom-set-faces `(default ((t (:height, font-height :family "menlo"))))))
 
     (mrw/set-font-bau)
   #+END_SRC
 
-* editing
-
-  Configure newline behaviour
+  Nicer naming of buffers for files with identical names
 
   #+BEGIN_SRC emacs-lisp
-    (global-set-key (kbd "RET") 'newline-and-indent)
+    (require 'uniquify)
+    (setq uniquify-buffer-name-style 'reverse)
+    (setq uniquify-separator " • ")
+    (setq uniquify-after-kill-buffer-p t)
+    (setq uniquify-ignore-buffers-re "^\\*")
   #+END_SRC
 
-  Never use tabs. Tabs are the devil’s whitespace.
-
-  #+BEGIN_SRC emacs-lisp
-    (setq-default indent-tabs-mode nil)
-  #+END_SRC
-
-  Prefer shallow indentation.
-
-  #+BEGIN_SRC emacs-lisp
-    (setq-default tab-width 2)
-  #+END_SRC
-
-  When saving a file in a directory that doesn't exist, offer
-  to (recursively) create the file's parent directories.
-
-  #+BEGIN_SRC emacs-lisp
-    (add-hook 'before-save-hook
-              (lambda ()
-                (when buffer-file-name
-                  (let ((dir (file-name-directory buffer-file-name)))
-                    (when (and (not (file-exists-p dir))
-                               (y-or-n-p (format "Directory %s does not exist. Create it?" dir)))
-                      (make-directory dir t))))))
-  #+END_SRC
-
-  Don't ask `yes/no?', ask `y/n?'.
-
-  #+BEGIN_SRC emacs-lisp
-    (fset 'yes-or-no-p 'y-or-n-p)
-  #+END_SRC
-
-  If you save a file that doesn't end with a newline,
-  automatically append one.
-
-  #+BEGIN_SRC emacs-lisp
-    (setq require-final-newline t)
-  #+END_SRC
-
-  When middle-clicking the mouse to yank from the clipboard,
-  insert the text where point is, not where the mouse cursor is.
-
-  #+BEGIN_SRC emacs-lisp
-    (setq mouse-yank-at-point t)
-  #+END_SRC
+* utilities
 
   String utilities missing from core emacs.
 
@@ -824,8 +851,8 @@
           (rename-buffer new-name))))
   #+END_SRC
 
-  I futz around with my dotfiles a lot. This binds =C-c e= to quickly open my
-  Emacs configuration file.
+  I futz around with my dotfiles a lot. This binds =C-c e= to quickly
+  open my Emacs configuration file.
 
   #+BEGIN_SRC emacs-lisp
     (defun mrw/visit-emacs-config ()
@@ -840,14 +867,16 @@
   #+BEGIN_SRC emacs-lisp
     (defun mrw/smart-open-line ()
       "Insert an empty line after the current line.
-    Position the cursor at its beginning, according to the current mode."
+    Position the cursor at its beginning, according to the current
+    mode."
       (interactive)
       (move-end-of-line nil)
       (newline-and-indent))
 
     (defun mrw/smart-open-line-above ()
       "Insert an empty line above the current line.
-    Position the cursor at it's beginning, according to the current mode."
+    Position the cursor at it's beginning, according to the current
+    mode."
       (interactive)
       (move-beginning-of-line nil)
       (newline-and-indent)
@@ -858,4 +887,10 @@
     (global-set-key (kbd "M-o") 'mrw/smart-open-line)
     (global-set-key [(control shift return)] 'mrw/smart-open-line-above)
     (global-set-key (kbd "M-O") 'mrw/smart-open-line-above)
+  #+END_SRC
+
+  Join lines, simple!
+
+  #+BEGIN_SRC emacs-lisp
+    (global-set-key (kbd "M-j") (lambda () (interactive) (join-line -1)))
   #+END_SRC

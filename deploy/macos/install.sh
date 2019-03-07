@@ -126,6 +126,7 @@ brew "watchman"
 brew "zsh"
 brew "zplug"
 brew "stow"
+brew "ripgrep"
 
 # Image manipulation
 brew "imagemagick"
