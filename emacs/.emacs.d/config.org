@@ -44,6 +44,51 @@
     (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
   #+END_SRC
 
+  Don't present the usual startup message, and clear the scratch
+  buffer.
+
+  #+BEGIN_SRC emacs-lisp
+    (setq inhibit-startup-message t)
+    (setq initial-scratch-message nil)
+  #+END_SRC
+
+  When opening a file, start searching at the user's home
+  directory.
+
+  #+BEGIN_SRC emacs-lisp
+    (setq default-directory "~/")
+  #+END_SRC
+
+  Allow 20MB of memory (instead of 0.76MB) before calling
+  garbage collection. This means GC runs less often, which speeds
+  up some operations.
+
+  #+BEGIN_SRC emacs-lisp
+    (setq gc-cons-threshold 20000000)
+  #+END_SRC
+
+  When opening a file, always follow symlinks.
+
+  #+BEGIN_SRC emacs-lisp
+    (setq vc-follow-symlinks t)
+  #+END_SRC
+
+  Easily add modes.
+
+  #+BEGIN_SRC emacs-lisp
+    (defun mrw/add-auto-mode (mode &rest patterns)
+      "Add entries to `auto-mode-alist' to use `MODE' for all given file `PATTERNS'."
+      (dolist (pattern patterns)
+        (add-to-list 'auto-mode-alist (cons pattern mode))))
+  #+END_SRC
+
+  OMG. Delete the region (selection) upon char insertion or DEL, pls.
+
+  #+BEGIN_SRC emacs-lisp
+    (setq-default delete-selection-mode t)
+    (delete-selection-mode 1)
+  #+END_SRC
+
 * macOS
 
   Is it a mac?
@@ -70,6 +115,13 @@
       (dolist (multiple '("" "double-" "triple-"))
         (dolist (direction '("right" "left"))
           (global-set-key (read-kbd-macro (concat "<" multiple "wheel-" direction ">")) 'ignore))))
+  #+END_SRC
+
+  Use =reveal-in-osx-finder=
+
+  #+BEGIN_SRC emacs-lisp
+    (when *is-a-mac*
+      (use-package reveal-in-osx-finder))
   #+END_SRC
 
 * packages
@@ -206,6 +258,49 @@
        (setq projectile-completion-system 'ivy)
        (setq projectile-switch-project-action 'projectile-dired)
        (setq projectile-require-project-root nil))
+
+     ;; show dired project root rather than asking for a specific file
+     (setq projectile-switch-project-action 'projectile-dired)
+
+     ;; search even if we're not in a "real" project
+     (setq projectile-require-project-root nil)
+
+     (projectile-mode t)
+   #+END_SRC
+
+** =ivy=
+
+   #+BEGIN_SRC emacs-lisp
+     (require 'ivy)
+
+     (ivy-mode 1)
+     (setq ivy-use-virtual-buffers t)
+     (setq enable-recursive-minibuffers t)
+     (global-set-key (kbd "C-c C-r") 'ivy-resume)
+     (global-set-key (kbd "<f6>") 'ivy-resume)
+   #+END_SRC
+
+** =anzu=
+
+   #+BEGIN_SRC emacs-lisp
+    (use-package anzu)
+    (add-hook 'after-init-hook 'global-anzu-mode)
+    (setq anzu-mode-lighter "")
+    (global-set-key [remap query-replace-regexp] 'anzu-query-replace-regexp)
+    (global-set-key [remap query-replace] 'anzu-query-replace)
+   #+END_SRC
+
+** =yasnippet=
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package yasnippet)
+     (require 'yasnippet)
+
+     (setq yas-snippet-dirs '("~/.emacs.d/snippets"
+                              "~/.emacs.d/snippets/yasnippet-snippets"
+                              "~/.emacs.d/snippets/custom"))
+
+     (yas-global-mode 1)
    #+END_SRC
 
 ** =counsel=
@@ -235,6 +330,16 @@
 
    #+BEGIN_SRC emacs-lisp
      (use-package company)
+
+(setq company-idle-delay 0.5)
+(setq company-show-numbers t)
+(setq company-tooltip-limit 10)
+(setq company-minimum-prefix-length 2)
+(setq company-tooltip-align-annotations t)
+;; invert the navigation direction if the the completion popup-isearch-match
+;; is displayed on top (happens near the bottom of windows)
+(setq company-tooltip-flip-when-above t)
+
      (add-hook 'after-init-hook 'global-company-mode)
    #+END_SRC
 
@@ -380,6 +485,139 @@
        :config (which-key-mode))
    #+END_SRC
 
+* languages
+
+** Ruby
+
+   Running tests from within Emacs is awfully convenient.
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package rspec-mode)
+     (setq rspec-spec-command "bundle exec rspec")
+     (setq rspec-use-bundler-when-possible nil)
+     (setq rspec-use-spring-when-possible nil)
+     (setq rspec-use-opts-file-when-available nil)
+     (setq rspec-command-options "--color --format documentation")
+     (rspec-install-snippets)
+   #+END_SRC
+
+   When assigning the result of a conditional, I like to align the expression to
+   match the beginning of the statement instead of indenting it all the way to the
+   =if=.
+
+   #+BEGIN_SRC emacs-lisp
+     (setq ruby-align-to-stmt-keywords '(def if))
+   #+END_SRC
+
+   Ruby method comments are often formatted with Yard.
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package yard-mode)
+   #+END_SRC
+
+   Insert =end= keywords automatically when I start to define a method, class,
+   module, or block.
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package ruby-end)
+   #+END_SRC
+
+   Install and enable =projectile-rails= mode in all Rail-related buffers.
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package projectile-rails
+       :config
+       (projectile-rails-global-mode))
+   #+END_SRC
+
+   There are a bunch of things I'd like to do when I open a Ruby buffer:
+
+   - I don't want to insert an encoding comment.
+   - I want to enable =yas=, =rspec=, =yard=, =flycheck=, and =projectile-rails=.
+   - I'd like my RSpec tests to be run in a random order, and I'd like the output
+     to be colored.
+
+   #+BEGIN_SRC emacs-lisp
+     (add-hook 'ruby-mode-hook
+               (lambda ()
+                 (setq ruby-insert-encoding-magic-comment nil)
+                 (yas-minor-mode)
+                 (rspec-mode)
+                 (yard-mode)
+                 (flycheck-mode)
+                 (local-set-key "\r" 'newline-and-indent)
+                 (setq rspec-command-options "--color --order random")))
+
+     (setq-default flycheck-disabled-checkers '(ruby-reek))
+   #+END_SRC
+
+   I associate =ruby-mode= with Gemfiles, gemspecs, Rakefiles, and Vagrantfiles.
+
+   #+BEGIN_SRC emacs-lisp
+     (mrw/add-auto-mode
+      'ruby-mode
+      "\\Gemfile$"
+      "\\.rake$"
+      "\\.gemspec$"
+      "\\Guardfile$"
+      "\\Rakefile$"
+      "\\Vagrantfile$"
+      "\\Vagrantfile.local$")
+   #+END_SRC
+
+   When running RSpec tests I'd like to scroll to the first error.
+
+   #+BEGIN_SRC emacs-lisp
+     (add-hook 'rspec-compilation-mode-hook
+               (lambda ()
+                 (make-local-variable 'compilation-scroll-output)
+                 (setq compilation-scroll-output 'first-error)))
+   #+END_SRC
+
+** =web-mode=
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package web-mode)
+   #+END_SRC
+
+   If I'm in =web-mode=, I'd like to:
+
+   - Color color-related words with =rainbow-mode=.
+   - Still be able to run RSpec tests from =web-mode= buffers.
+   - Indent everything with 2 spaces.
+
+   #+BEGIN_SRC emacs-lisp
+     (add-hook 'web-mode-hook
+               (lambda ()
+                 (rainbow-mode)
+                 (rspec-mode)
+                 (setq web-mode-markup-indent-offset 2)))
+   #+END_SRC
+
+   Use =web-mode= with embedded Ruby files, regular HTML, and PHP.
+
+   #+BEGIN_SRC emacs-lisp
+     (mrw/add-auto-mode
+      'web-mode
+      "\\.erb$"
+      "\\.html$"
+      "\\.php$"
+      "\\.rhtml$")
+   #+END_SRC
+
+** YAML
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package yaml-mode)
+   #+END_SRC
+
+   If I'm editing YAML I'm usually in a Rails project. I'd like to be able to run
+   the tests from any buffer.
+
+   #+BEGIN_SRC emacs-lisp
+     (add-hook 'yaml-mode-hook 'rspec-mode)
+   #+END_SRC
+
 * UI
 
   The =snazzy-theme= is snazzy.
@@ -410,6 +648,14 @@
       (minions-mode 1))
   #+END_SRC
 
+  Mode line settings
+
+  #+BEGIN_SRC emacs-lisp
+  (line-number-mode t)
+  (column-number-mode t)
+  (size-indication-mode t)
+  #+END_SRC
+
   Scale text easily with =default-text-scale=.
 
   #+BEGIN_SRC emacs-lisp
@@ -435,6 +681,12 @@
     (scroll-bar-mode -1)
   #+END_SRC
 
+  Turn on syntax highlighting whenever possible.
+
+  #+BEGIN_SRC emacs-lisp
+    (global-font-lock-mode t)
+  #+END_SRC
+
   There's a tiny scroll bar that appears in the minibuffer window.
   This disables that:
 
@@ -447,6 +699,27 @@
 
   #+BEGIN_SRC emacs-lisp
     (setq frame-title-format '((:eval (projectile-project-name))))
+  #+END_SRC
+
+  Configure font goodness.
+
+  #+BEGIN_SRC emacs-lisp
+    (defun mrw/set-font-bau ()
+      (interactive)
+      (mrw/set-font-size 120))
+
+    (defun mrw/set-font-pairing-station ()
+      (interactive)
+      (mrw/set-font-size 160))
+
+    (defun mrw/set-font-presentation ()
+      (interactive)
+      (mrw/set-font-size 220))
+
+    (defun mrw/set-font-size (font-height)
+      (custom-set-faces `(default ((t (:height ,font-height :family "menlo"))))))
+
+    (mrw/set-font-bau)
   #+END_SRC
 
 * editing
@@ -467,6 +740,39 @@
 
   #+BEGIN_SRC emacs-lisp
     (setq-default tab-width 2)
+  #+END_SRC
+
+  When saving a file in a directory that doesn't exist, offer
+  to (recursively) create the file's parent directories.
+
+  #+BEGIN_SRC emacs-lisp
+    (add-hook 'before-save-hook
+              (lambda ()
+                (when buffer-file-name
+                  (let ((dir (file-name-directory buffer-file-name)))
+                    (when (and (not (file-exists-p dir))
+                               (y-or-n-p (format "Directory %s does not exist. Create it?" dir)))
+                      (make-directory dir t))))))
+  #+END_SRC
+
+  Don't ask `yes/no?', ask `y/n?'.
+
+  #+BEGIN_SRC emacs-lisp
+    (fset 'yes-or-no-p 'y-or-n-p)
+  #+END_SRC
+
+  If you save a file that doesn't end with a newline,
+  automatically append one.
+
+  #+BEGIN_SRC emacs-lisp
+    (setq require-final-newline t)
+  #+END_SRC
+
+  When middle-clicking the mouse to yank from the clipboard,
+  insert the text where point is, not where the mouse cursor is.
+
+  #+BEGIN_SRC emacs-lisp
+    (setq mouse-yank-at-point t)
   #+END_SRC
 
   String utilities missing from core emacs.
@@ -496,6 +802,8 @@
                                  (file-name-nondirectory buffer-file-name)))
         (delete-file (buffer-file-name))
         (kill-this-buffer)))
+
+    (global-set-key (kbd "C-x k") 'mrw/delete-this-file)
   #+END_SRC
 
   Rename the current file.
@@ -514,4 +822,40 @@
             (rename-file filename new-name 1))
           (set-visited-file-name new-name)
           (rename-buffer new-name))))
+  #+END_SRC
+
+  I futz around with my dotfiles a lot. This binds =C-c e= to quickly open my
+  Emacs configuration file.
+
+  #+BEGIN_SRC emacs-lisp
+    (defun mrw/visit-emacs-config ()
+      (interactive)
+      (find-file "~/.emacs.d/config.org"))
+
+    (global-set-key (kbd "C-c e") 'mrw/visit-emacs-config)
+  #+END_SRC
+
+  Smart new line behaviour.
+
+  #+BEGIN_SRC emacs-lisp
+    (defun mrw/smart-open-line ()
+      "Insert an empty line after the current line.
+    Position the cursor at its beginning, according to the current mode."
+      (interactive)
+      (move-end-of-line nil)
+      (newline-and-indent))
+
+    (defun mrw/smart-open-line-above ()
+      "Insert an empty line above the current line.
+    Position the cursor at it's beginning, according to the current mode."
+      (interactive)
+      (move-beginning-of-line nil)
+      (newline-and-indent)
+      (forward-line -1)
+      (indent-according-to-mode))
+
+    (global-set-key [(shift return)] 'mrw/smart-open-line)
+    (global-set-key (kbd "M-o") 'mrw/smart-open-line)
+    (global-set-key [(control shift return)] 'mrw/smart-open-line-above)
+    (global-set-key (kbd "M-O") 'mrw/smart-open-line-above)
   #+END_SRC
