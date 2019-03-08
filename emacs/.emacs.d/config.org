@@ -200,6 +200,13 @@ This is my *biggest* bike shed.
        (use-package reveal-in-osx-finder))
    #+END_SRC
 
+   Don't use unsupported ls options.
+
+   #+BEGIN_SRC emacs-lisp
+     (when *is-a-mac*
+       (setq dired-use-ls-dired nil))
+   #+END_SRC
+
 * packages
 ** searching
 *** =rg=
