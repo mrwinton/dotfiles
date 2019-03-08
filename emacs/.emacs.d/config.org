@@ -683,7 +683,7 @@ This is my *biggest* bike shed.
    #+BEGIN_SRC emacs-lisp
      (add-hook 'web-mode-hook
                (lambda ()
-                 (rainbow-mode)
+                 ;; (rainbow-mode)
                  (rspec-mode)
                  (setq web-mode-markup-indent-offset 2)))
    #+END_SRC
