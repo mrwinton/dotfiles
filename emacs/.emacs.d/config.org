@@ -112,6 +112,13 @@ This is my *biggest* bike shed.
     (global-auto-revert-mode t)
   #+END_SRC
 
+  Autofresh non-file buffers also, but be quiet when doing so :)
+
+  #+BEGIN_SRC emacs-lisp
+     (setq global-auto-revert-non-file-buffers t)
+     (setq auto-revert-verbose nil)
+  #+END_SRC
+
   Configure newline behaviour
 
   #+BEGIN_SRC emacs-lisp
