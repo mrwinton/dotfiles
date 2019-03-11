@@ -14,6 +14,14 @@ This is my *biggest* bike shed.
     (setq use-package-always-ensure t)
   #+END_SRC
 
+  Benchmark how long it takes to start up!
+
+  #+BEGIN_SRC emacs-lisp
+    (use-package benchmark-init
+      :config
+      (add-hook 'after-init-hook 'benchmark-init/deactivate))
+  #+END_SRC
+
   Always compile packages, and use the newest version available with
   =auto-compile=.
 
@@ -363,13 +371,16 @@ This is my *biggest* bike shed.
 *** =yasnippet=
 
     #+BEGIN_SRC emacs-lisp
-      (use-package yasnippet)
-      (require 'yasnippet)
-
-      (setq yas-snippet-dirs '("~/.emacs.d/snippets/custom"
+      (use-package yasnippet
+        :init
+        (setq yas-expand-only-for-last-commands '(self-insert-command))
+        (setq yas-snippet-dirs '("~/.emacs.d/snippets/custom"
                                "~/.emacs.d/snippets/yasnippet"))
+        :defer t
+        :config
+        (yas-global-mode 1)
+        )
 
-      (yas-global-mode 1)
     #+END_SRC
 
 *** =company=
@@ -378,6 +389,9 @@ This is my *biggest* bike shed.
 
     #+BEGIN_SRC emacs-lisp
       (use-package company)
+
+      (add-to-list 'company-backends 'company-css)
+      (add-to-list 'company-backends 'company-yasnippet)
 
       (setq company-idle-delay 0.5)
       (setq company-show-numbers t)
@@ -489,8 +503,7 @@ This is my *biggest* bike shed.
     Handle opening very large files.
 
     #+BEGIN_SRC emacs-lisp
-      (use-package vlf 
-        :ensure t)
+      (use-package vlf)
     #+END_SRC
 
 *** =highlight-escape-sequences=
@@ -688,25 +701,24 @@ This is my *biggest* bike shed.
      (use-package js2-mode
        :mode ("\\.js\\'")
 
-       :init
-       ;;(use-package prettier-js)
-       (use-package add-node-modules-path)
+       ;; :init
+       ;; (use-package prettier-js)
+       ;; (use-package add-node-modules-path)
 
        :config
-       (defun my-js2-mode-hook()
-         ;; Fix offset to 2 (default is 4)
-         (setq js2-basic-offset 2)
-         ;; disable jshint
-         (setq-default flycheck-disabled-checkers
-           '(javascript-jshint jsxhint-checker json-jsonlint))
+         (defun my-js2-mode-hook()
+           ;; Fix offset to 2 (default is 4)
+           (setq js2-basic-offset 2)
+           ;; disable jshint
+           (setq-default flycheck-disabled-checkers
+             '(javascript-jshint jsxhint-checker json-jsonlint)))
 
-         (add-node-modules-path)
-         ;;(prettier-js-mode)
+       ;;   (add-node-modules-path)
+       ;;   (prettier-js-mode)
 
-         ;;(setq-default js2-ignored-warnings
-         ;;  '("msg.no.side.effects" "msg.missing.semi" "msg.no.return.value"
-         ;;  "msg.anon.no.return.value" "msg.extra.trailing.comma"))
-         )
+       ;;   (setq-default js2-ignored-warnings '("msg.no.side.effects"
+       ;;     "msg.missing.semi" "msg.no.return.value"
+       ;;     "msg.anon.no.return.value" "msg.extra.trailing.comma")) )
 
        (add-hook 'js2-mode-hook 'my-js2-mode-hook))
    #+END_SRC
@@ -747,6 +759,7 @@ This is my *biggest* bike shed.
 
    #+BEGIN_SRC emacs-lisp
      (use-package css-mode
+       :defer t
        :config
        (setq css-indent-offset 2))
    #+END_SRC
@@ -757,6 +770,7 @@ This is my *biggest* bike shed.
 
   #+BEGIN_SRC emacs-lisp
     (use-package scss-mode
+      :defer t
       :config
       (setq scss-compile-at-save nil))
   #+END_SRC
