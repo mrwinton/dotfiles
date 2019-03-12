@@ -127,6 +127,7 @@ brew "zsh"
 brew "zplug"
 brew "stow"
 brew "ripgrep"
+brew "overmind"
 
 # Image manipulation
 brew "imagemagick"
