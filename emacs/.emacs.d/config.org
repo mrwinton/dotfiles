@@ -606,7 +606,7 @@ This is my *biggest* bike shed.
 * languages
 ** Ruby
 
-   Running tests from within Emacs is awfully convenient.
+   Running tests from within Emacs is so good.
 
    #+BEGIN_SRC emacs-lisp
      (use-package rspec-mode)
@@ -616,6 +616,7 @@ This is my *biggest* bike shed.
      (setq rspec-use-opts-file-when-available nil)
      (setq rspec-command-options "--color --format documentation")
      (rspec-install-snippets)
+     (add-hook 'after-init-hook 'inf-ruby-switch-setup)
    #+END_SRC
 
    When assigning the result of a conditional, I like to align the
