@@ -39,7 +39,7 @@
 [merge]
 	ff = only
 [push]
-	default = upstream
+	default = current
 [rebase]
 	autosquash = true
 [user]
