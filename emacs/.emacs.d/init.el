@@ -1,5 +1,5 @@
 ;; Produce backtraces when errors occur
-(setq debug-on-error t)
+;; (setq debug-on-error t)
 
 ;; Configure package.el to include MELPA.
 (require 'package)
