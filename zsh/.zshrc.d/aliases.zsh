@@ -26,3 +26,7 @@ alias ret="RAILS_ENV=test"
 ### Networking
 alias oports="echo 'User:      Command:   Port:'; echo '----------------------------' ; lsof -i 4 -P -n | grep -i 'listen' | awk '{print \$3, \$1, \$9}' | sed 's/ [a-z0-9\.\*]*:/ /' | sort -k 3 -n |xargs printf '%-10s %-10s %-10s\n' | uniq"
 alias serve="python -m SimpleHTTPServer"
+
+### Promote
+alias vup="vagrant up gud.vagrant; vagrant ssh gud.vagrant -c 'sudo service gud restart; (cd /vagrant/repos/promote-dispatcher; bundle exec ruby bin/dispatcher.rb &); (cd /vagrant/repos/promote-gud/; ./bin/reaperctl start &); cat'"
+alias clean="reset && seed && sync"
