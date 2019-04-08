@@ -1,10 +1,7 @@
-# michael's dotfiles
+# .dotfiles
 
-Featuring:
- - handy deploy scripts for mac and linx setup
- - reasonable config for "emacs", "zsh", and "git"
- - a dash of fancy and fun
+Pretty much emacs, really.
 
 ```sh
- git clone <REPO> ~/.dotfiles
+ git clone git@github.com:mrwinton/dotfiles.git ~/.dotfiles
 ```
