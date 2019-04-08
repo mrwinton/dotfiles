@@ -733,15 +733,16 @@ This is my *biggest* bike shed.
    If I'm in =web-mode=, I'd like to:
 
    - Color color-related words with =rainbow-mode=.
-   - Still be able to run RSpec tests from =web-mode= buffers.
    - Indent everything with 2 spaces.
 
    #+BEGIN_SRC emacs-lisp
      (add-hook 'web-mode-hook
                (lambda ()
                  ;; (rainbow-mode)
-                 (rspec-mode)
-                 (setq web-mode-markup-indent-offset 2)))
+                 (setq web-mode-markup-indent-offset 2)
+                 (setq web-mode-css-indent-offset 2)
+                 (setq web-mode-code-indent-offset 2)
+                 ))
    #+END_SRC
 
    Use =web-mode= with embedded Ruby files, regular HTML, and PHP.
