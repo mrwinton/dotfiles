@@ -925,10 +925,11 @@ This is my *biggest* bike shed.
 
   #+BEGIN_SRC emacs-lisp
     (defun mrw/delete-this-file ()
-      "Delete the current file, and kill the buffer."
+      "Delete the current file, and kill the buffer. Just kill the
+    buffer if it is not backed by a file"
       (interactive)
       (unless (buffer-file-name)
-        (error "No file is currently being edited"))
+        (kill-this-buffer))
       (when (yes-or-no-p (format "Really delete '%s'?"
                                  (file-name-nondirectory buffer-file-name)))
         (delete-file (buffer-file-name))
