@@ -486,6 +486,15 @@ This is my *biggest* bike shed.
       (global-set-key (kbd "C-=") 'er/expand-region)
     #+END_SRC
 
+*** =multiple-cursors=
+
+   #+BEGIN_SRC emacs-lisp
+      (use-package multiple-cursors)
+      (global-set-key (kbd "C->") 'mc/mark-next-like-this)
+      (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+      (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+    #+END_SRC
+
 *** =move-dup=
 
     #+BEGIN_SRC emacs-lisp
