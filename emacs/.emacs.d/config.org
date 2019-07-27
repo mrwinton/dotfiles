@@ -164,6 +164,13 @@ This is my *biggest* bike shed.
     (fset 'yes-or-no-p 'y-or-n-p)
   #+END_SRC
 
+  Please never show me a system dialog box, thx.
+
+  #+BEGIN_SRC emacs-lisp
+    (setq use-file-dialog nil)
+    (setq use-dialog-box nil)
+  #+END_SRC
+
   If you save a file that doesn't end with a newline, automatically
   append one.
 
