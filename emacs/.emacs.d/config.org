@@ -878,7 +878,7 @@ This is my *biggest* bike shed.
   #+BEGIN_SRC emacs-lisp
     (defun mrw/set-font-bau ()
       (interactive)
-      (mrw/set-font-size 140))
+      (mrw/set-font-size 160))
 
     (defun mrw/set-font-pairing-station ()
       (interactive)
