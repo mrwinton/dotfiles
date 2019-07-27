@@ -340,6 +340,14 @@ This is my *biggest* bike shed.
             (t . ivy--regex-fuzzy))))
    #+END_SRC
 
+*** =avy=
+
+    #+BEGIN_SRC emacs-lisp
+      (use-package avy
+        :bind
+        ("C-:" . 'avy-goto-char))
+   #+END_SRC
+
 ** editing
 *** =dired=
 
