@@ -110,6 +110,7 @@ tap "thoughtbot/formulae"
 tap "homebrew/services"
 tap "universal-ctags/universal-ctags"
 tap "caskroom/cask"
+tap "heroku/brew"
 
 # Unix
 brew "universal-ctags", args: ["HEAD"]
@@ -128,6 +129,7 @@ brew "zplug"
 brew "stow"
 brew "ripgrep"
 brew "overmind"
+brew "heroku"
 
 # Image manipulation
 brew "imagemagick"
