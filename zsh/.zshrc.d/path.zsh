@@ -7,9 +7,10 @@ pathmunge () {
         fi
     fi
 }
-
-pathmunge /usr/local/sbin
+export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
 pathmunge /usr/local/bin
+pathmunge /usr/local/sbin
+pathmunge /usr/local/opt/libxml2/bin after
 pathmunge /sbin after
 pathmunge $HOME/bin after
 pathmunge $HOME/.bin after
