@@ -1072,3 +1072,17 @@ This is my *biggest* bike shed.
     (dolist (hook '(prog-mode-hook text-mode-hook conf-mode-hook))
       (add-hook hook 'mrw/show-trailing-whitespace))
   #+END_SRC
+
+  #+BEGIN_SRC emacs-lisp
+    (defun mrw/show-buffer-file-name ()
+      "Show the full path to the current file in the minibuffer."
+      (interactive)
+      (let ((file-name (buffer-file-name)))
+      (if file-name
+        (progn
+          (message file-name)
+          (kill-new file-name))
+          (error "Buffer not visiting a file"))))
+
+    (global-set-key (kbd "C-c y") 'mrw/show-buffer-file-name)
+  #+END_SRC
