@@ -717,14 +717,14 @@ This is my *biggest* bike shed.
      (use-package ruby-end)
    #+END_SRC
 
-   Install and enable =projectile-rails= mode in all Rail-related
-   buffers.
+  #  Install and enable =projectile-rails= mode in all Rail-related
+  #  buffers.
 
-   #+BEGIN_SRC emacs-lisp
-     (use-package projectile-rails
-       :config
-       (projectile-rails-global-mode))
-   #+END_SRC
+  #  #+BEGIN_SRC emacs-lisp
+  #    (use-package projectile-rails
+  #      :config
+  #      (projectile-rails-global-mode))
+  #  #+END_SRC
 
    There are a bunch of things I'd like to do when I open a Ruby
    buffer:
