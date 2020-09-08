@@ -499,6 +499,8 @@ This is my *biggest* bike shed.
 
     #+BEGIN_SRC emacs-lisp
       (use-package move-dup)
+      (global-set-key [M-p] 'md/move-lines-up)
+      (global-set-key [M-n] 'md/move-lines-down)
       (global-set-key [M-up] 'md/move-lines-up)
       (global-set-key [M-down] 'md/move-lines-down)
       (global-set-key [M-S-up] 'md/move-lines-up)
