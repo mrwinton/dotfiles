@@ -550,6 +550,15 @@ This is my *biggest* bike shed.
         :config (which-key-mode))
     #+END_SRC
 
+*** =toggle-quotes=
+
+    =toggle-quotes= between single quotes and double quotes...
+
+    #+BEGIN_SRC emacs-lisp
+      (use-package toggle-quotes)
+      (global-set-key (kbd "C-'") 'toggle-quotes)
+    #+END_SRC
+
 ** moving
 *** =switch-window=
 
