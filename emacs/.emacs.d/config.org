@@ -614,6 +614,7 @@ This is my *biggest* bike shed.
       (use-package magit
         :bind
         ("C-x g" . magit-status)
+        ("C-x a" . magit-blame)
 
         :config
         (setq magit-push-always-verify nil)
