@@ -628,15 +628,22 @@ This is my *biggest* bike shed.
 *** =git-timemachine=
 
     #+BEGIN_SRC emacs-lisp
-      (use-package git-timemachine
-        :bind ("C-c t" . 'git-timemachine))
+    (use-package git-timemachine
+    :bind ("C-c t" . 'git-timemachine))
     #+END_SRC
 
 *** =diff-hl=
 
     #+BEGIN_SRC emacs-lisp
-      (use-package diff-hl)
-      (global-diff-hl-mode)
+    (use-package diff-hl)
+    (global-diff-hl-mode)
+    #+END_SRC
+
+*** =git-link=
+
+    #+BEGIN_SRC emacs-lisp
+    (use-package git-link)
+    (global-set-key (kbd "C-c g l") 'git-link)
     #+END_SRC
 
 * languages
@@ -648,12 +655,12 @@ This is my *biggest* bike shed.
    (use-package s :ensure)
 
    (use-package elm-mode
-  :ensure t
-  :init
-  (add-hook 'elm-mode-hook #'elm-oracle-setup-completion)
-  (add-to-list 'company-backends 'company-elm)
-  ; (elm-indent-mode false)
-  (setq elm-indent-offset 2))
+   :ensure t
+   :init
+   (add-hook 'elm-mode-hook #'elm-oracle-setup-completion)
+   (add-to-list 'company-backends 'company-elm)
+   ; (elm-indent-mode false)
+   (setq elm-indent-offset 2))
    #+END_SRC
 
 ** Ruby
