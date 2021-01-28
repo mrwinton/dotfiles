@@ -16,5 +16,6 @@ pathmunge $HOME/bin after
 pathmunge $HOME/.bin after
 pathmunge $HOME/.cask/bin after
 pathmunge $HOME/.local/bin after
+pathmunge $HOME/.emacs.d/bin:$PATH
 
 export PATH
