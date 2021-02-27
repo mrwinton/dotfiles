@@ -3,13 +3,6 @@
 with pkgs;
 
 {
-  home.file = {
-    p10k = {
-      source = ./p10k.zsh;
-      target = ".p10k.zsh";
-    };
-  };
-  
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -18,8 +11,7 @@ with pkgs;
     initExtra = ''
     source $HOME/.nix-profile/asdf/asdf.sh
 
-    # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-    [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+    eval "$(starship init zsh)"
 
     function path() {
       echo $PATH | tr ':' '\n'
@@ -72,19 +64,7 @@ with pkgs;
       e   = "emacsclient -nw";
     };
 
-    oh-my-zsh = {
-      enable = true;
-      plugins = [
-        "git"
-      ];
-    };
-
     plugins = [
-      {
-        name = "powerlevel10k";
-        src = pkgs.zsh-powerlevel10k;
-        file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
-      }
       {
         name = "zsh-autosuggestions";
         src = pkgs.fetchFromGitHub {

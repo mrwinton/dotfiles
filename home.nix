@@ -34,6 +34,7 @@ in {
     nixfmt
     openssl.dev
     ripgrep
+    starship
     tmux
     universal-ctags
     zsh
