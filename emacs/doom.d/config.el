@@ -17,7 +17,8 @@
   projectile-enable-caching nil
 
   org-directory "~/org/"
-  lsp-solargraph-autoformat t)
+  lsp-solargraph-autoformat t
+  require-final-newline t)
 
 ;; Update modifier keys on mac
 (cond (IS-MAC
