@@ -39,10 +39,8 @@ in {
     zsh
   ];
 
-  # Home Manager info
   home.username = "michaelwinton";
   home.homeDirectory = "/Users/michaelwinton";
 
-  # Avoid backwards incompatible changes
   home.stateVersion = "21.05";
 }
