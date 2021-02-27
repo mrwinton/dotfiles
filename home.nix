@@ -36,6 +36,7 @@ in {
     ripgrep
     starship
     tmux
+    youtube-dl
     universal-ctags
     zsh
   ];
