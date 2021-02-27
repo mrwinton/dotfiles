@@ -92,6 +92,9 @@ mode."
 (global-set-key [(control shift return)] 'mrw/smart-open-line-above)
 (global-set-key (kbd "M-O") 'mrw/smart-open-line-above)
 
+;; Focus the emacs window in the foreground
+(x-focus-frame nil)
+
 ;;
 ;;;; Configuring Doom
 ;;
