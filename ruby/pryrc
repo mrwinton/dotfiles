@@ -14,11 +14,11 @@ if defined?(PryByebug)
   end
 end
 
-begin
-  $LOAD_PATH << '~/.asdf/installs/ruby/3.0.0/lib/ruby/gems/3.0.0/gems/awesome_print-1.8.0/lib/'
-  require 'awesome_print'
+# begin
+#   $LOAD_PATH << '~/.asdf/installs/ruby/3.0.0/lib/ruby/gems/3.0.0/gems/awesome_print-1.8.0/lib/'
+#   require 'awesome_print'
 
-  AwesomePrint.pry!
-rescue LoadError => e
-  puts "no awesome_print :( - #{e}"
-end
+#   AwesomePrint.pry!
+# rescue LoadError => e
+#   puts "no awesome_print :( - #{e}"
+# end
