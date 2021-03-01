@@ -13,6 +13,7 @@ in {
     ./asdf/config.nix
     ./emacs/config.nix
     ./git/config.nix
+    ./kitty/config.nix
     ./ruby/config.nix
     ./zsh/config.nix
   ];
@@ -43,6 +44,5 @@ in {
 
   home.username = "michaelwinton";
   home.homeDirectory = "/Users/michaelwinton";
-
   home.stateVersion = "21.05";
 }
