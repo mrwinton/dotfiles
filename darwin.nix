@@ -3,6 +3,10 @@
 let
   homeDir = builtins.getEnv("HOME");
 in {
+  imports = [
+    <home-manager/nix-darwin>
+  ];
+
   users.users.michaelwinton = {
     home = homeDir;
     description = "Michael Winton";
@@ -24,6 +28,8 @@ in {
       powerline-fonts
     ];
   };
+
+  home-manager.users.michaelwinton = (import ./home.nix);
 
   programs.zsh = {
     enable = true;
