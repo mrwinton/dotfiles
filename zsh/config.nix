@@ -10,7 +10,8 @@ with pkgs;
 
     initExtra = ''
     source $HOME/.nix-profile/asdf/asdf.sh
-    PATH="$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
+    PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
+    PATH="/Applications/Redis.app/Contents/Resources/Vendor/redis/bin:$PATH"
 
     eval "$(starship init zsh)"
 
