@@ -14,14 +14,15 @@
      ];
 
      aliases = {
-       s = "status -s";
+       co = "checkout";
+       glog = "log --oneline --decorate --all --graph";
+       hreset = "!git reset --hard $(git rev-parse --abbrev-ref --symbolic-full-name @{u})";
        last = "log -1";
        lol = "log --oneline";
        pushf = "push --force-with-lease";
-       glog = "log --oneline --decorate --all --graph";
        recommit = "commit -a --amend --no-edit";
+       s = "status -s";
        uncommit = "reset --soft HEAD^";
-       hreset = "!git reset --hard $(git rev-parse --abbrev-ref --symbolic-full-name @{u})";
      };
 
      extraConfig = {
