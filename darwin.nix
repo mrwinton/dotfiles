@@ -1,11 +1,8 @@
 { pkgs, ... }:
 
-let
-  homeDir = builtins.getEnv("HOME");
+let homeDir = builtins.getEnv ("HOME");
 in {
-  imports = [
-    <home-manager/nix-darwin>
-  ];
+  imports = [ <home-manager/nix-darwin> ];
 
   users.users.michaelwinton = {
     home = homeDir;
@@ -26,7 +23,7 @@ in {
     fonts = with pkgs; [
       emacs-all-the-icons-fonts
       powerline-fonts
-      (nerdfonts.override { fonts = ["Meslo"]; })
+      (nerdfonts.override { fonts = [ "Meslo" ]; })
     ];
   };
 
@@ -36,19 +33,14 @@ in {
     enable = true;
     enableCompletion = true;
   };
-  
   system.keyboard = {
     enableKeyMapping = true;
     remapCapsLockToControl = true;
   };
 
   system.defaults = {
-    finder = {
-      FXEnableExtensionChangeWarning = false;
-    };
-    screencapture = {
-      location = "${homeDir}/Downloads";
-    };
+    finder = { FXEnableExtensionChangeWarning = false; };
+    screencapture = { location = "${homeDir}/Downloads"; };
     trackpad = {
       Clicking = true;
       TrackpadThreeFingerDrag = true;
