@@ -33,6 +33,7 @@ in {
     imagemagick
     nixfmt
     openssl.dev
+    proselint
     ripgrep
     starship
     tmux
