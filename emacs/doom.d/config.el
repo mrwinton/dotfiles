@@ -68,7 +68,9 @@
 
       "C-."     #'+default/search-project-for-symbol-at-point
 
-      "C-:"     #'avy-goto-char)
+      "C-:"     #'avy-goto-char
+
+      "C-c \\"  #'+format/region-or-buffer)
 
 (defun mrw/smart-open-line ()
   "Insert an empty line after the current line.
