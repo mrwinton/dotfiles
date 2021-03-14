@@ -24,6 +24,7 @@ in {
       aspellDicts.en
       aspellDicts.en-computers
       aspellDicts.en-science
+      redis
     ];
 
   fonts = {
@@ -43,6 +44,12 @@ in {
     enable = true;
     enableCompletion = true;
   };
+
+  services.redis = {
+    enable = true;
+    dataDir = "${homeDir}/.local/share/redis";
+  };
+
   system.keyboard = {
     enableKeyMapping = true;
     remapCapsLockToControl = true;
