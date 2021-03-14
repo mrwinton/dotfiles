@@ -9,29 +9,33 @@ with pkgs;
     enableAutosuggestions = true;
 
     initExtra = ''
-    source $HOME/.nix-profile/asdf/asdf.sh
-    PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
-    export LANG="en_GB"
-    export LC_ALL="en_GB.UTF-8"
-    export LC_CTYPE="en_GB.UTF-8"
+      source $HOME/.nix-profile/asdf/asdf.sh
+      PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
+      export LANG="en_GB"
+      export LC_ALL="en_GB.UTF-8"
+      export LC_CTYPE="en_GB.UTF-8"
 
-    eval "$(starship init zsh)"
+      eval "$(starship init zsh)"
 
-    function path() {
-      echo $PATH | tr ':' '\n'
-    }
+      function path() {
+        echo $PATH | tr ':' '\n'
+      }
 
-    function usage() {
+      function usage() {
         du -sch "$@" | sort -h
-    }
+      }
 
-    function active_branch {
-      echo $(git_current_branch | tr -d "[[:space:]]")
-    }
+      function active_branch {
+        echo $(git_current_branch | tr -d "[[:space:]]")
+      }
 
-    function active_branch_cleaned {
-      echo $(git_current_branch | tr "[:upper:]" "[:lower:]" | sed "s/[^0-9a-z_-]//g")
-    }
+      function active_branch_cleaned {
+        echo $(git_current_branch | tr "[:upper:]" "[:lower:]" | sed "s/[^0-9a-z_-]//g")
+      }
+
+      function oports {
+        lsof -i 4 -P -n | grep -i 'listen'
+      }
     '';
 
     history = {
@@ -41,31 +45,18 @@ with pkgs;
     };
 
     shellAliases = {
-      ag = "ag --color --color-line-number '0;35' --color-match '46;30' --color-path '4;36'";
-
+      ag =
+        "ag --color --color-line-number '0;35' --color-match '46;30' --color-path '4;36'";
       be = "bundle exec";
-      bi = "bundle install";
-      bo = "bundle open";
-      bu = "bundle update";
-
-      cat = "bat";
-
-      gco = "git checkout";
-      gm = "git merge";
-      gc = "git commit -v";
       gst = "git status";
-      gdc = "git diff --cached";
-      glo = "git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
-      glr = "git branch --sort='-committerdate' --format='%(color:green)%(committerdate:relative)%(color:reset) %(refname:short)'";
-
+      glo =
+        "git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
+      glr =
+        "git branch --sort='-committerdate' --format='%(color:green)%(committerdate:relative)%(color:reset) %(refname:short)'";
       la = "ls -la";
-      ll = "ls -l";
-      ln = "ln -v";
-      
       mkdir = "mkdir -p";
-
       vim = "emacsclient -nw";
-      e   = "emacsclient -nw";
+      e = "emacsclient -nw";
     };
 
     plugins = [
