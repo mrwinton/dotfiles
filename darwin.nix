@@ -29,6 +29,8 @@ in {
 
   home-manager.users.michaelwinton = (import ./home.nix);
 
+  nixpkgs.config.allowUnfree = true;
+
   programs.zsh = {
     enable = true;
     enableCompletion = true;
