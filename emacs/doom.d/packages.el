@@ -7,6 +7,7 @@
 
 (package! whole-line-or-region)
 (package! company-tabnine)
+(package! xml-format)
 
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)
