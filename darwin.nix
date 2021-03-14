@@ -18,6 +18,14 @@ in {
   # $ darwin-rebuild switch -I darwin-config=$HOME/src/dotfiles/darwin.nix
   environment.darwinConfig = "${homeDir}/src/dotfiles/darwin.nix";
 
+  environment.systemPackages = with pkgs;
+    [
+      aspell
+      aspellDicts.en
+      aspellDicts.en-computers
+      aspellDicts.en-science
+    ];
+
   fonts = {
     enableFontDir = true;
     fonts = with pkgs; [

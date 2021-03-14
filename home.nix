@@ -21,7 +21,6 @@ in {
   # https://search.nixos.org/packages?channel=unstable
   home.packages = with pkgs; [
     asdf
-    aspell
     autoconf
     automake
     bat
