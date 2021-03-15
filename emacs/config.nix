@@ -11,4 +11,8 @@ in {
   home.file.".emacs.d/init.el".text = ''
       (load "default.el")
   '';
+
+  programs.zsh.sessionVariables = {
+    EDITOR = "${doom-emacs}/bin/emacsclient";
+  };
 }
