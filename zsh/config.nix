@@ -21,16 +21,20 @@ with pkgs;
         echo $PATH | tr ':' '\n'
       }
 
-      function usage() {
-        du -sch "$@" | sort -h
-      }
-
       function em {
-        emacs $argv &
+        emacs $argv >/tmp/emacs.log 2>&1 &
       }
 
-      function oports {
+      function ports {
         lsof -i 4 -P -n | grep -i 'listen'
+      }
+
+      function rebuild {
+        darwin-rebuild switch -I darwin-config=$HOME/src/dotfiles/darwin.nix
+      }
+
+      function update {
+        nix-channel --update; rebuild;
       }
     '';
 
