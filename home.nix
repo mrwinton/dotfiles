@@ -6,7 +6,6 @@ let
   asdf = callPackage ~/src/dotfiles/asdf/package.nix { };
   comma = callPackage ~/src/dotfiles/comma/package.nix { };
 in {
-  # Let Home Manager install and manage itself
   programs.home-manager.enable = true;
 
   imports = [
