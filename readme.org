@@ -32,3 +32,13 @@ nix-channel --update
 darwin-rebuild switch -I darwin-config=$HOME/src/dotfiles/darwin.nix
 #+END_SRC
 
+** Install a Ruby
+
+#+BEGIN_SRC bash
+asdf install ruby VERSION
+asdf local ruby VERSION
+gem install rubocop
+gem install rubocop-rails
+gem install rubocop-performance
+gem install solargraph
+#+END_SRC
