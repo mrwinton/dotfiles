@@ -36,6 +36,10 @@ with pkgs;
       function update {
         nix-channel --update; rebuild;
       }
+
+      function clean {
+        nix-collect-garbage -d
+      }
     '';
 
     history = {
