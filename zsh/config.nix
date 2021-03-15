@@ -25,12 +25,8 @@ with pkgs;
         du -sch "$@" | sort -h
       }
 
-      function active_branch {
-        echo $(git_current_branch | tr -d "[[:space:]]")
-      }
-
-      function active_branch_cleaned {
-        echo $(git_current_branch | tr "[:upper:]" "[:lower:]" | sed "s/[^0-9a-z_-]//g")
+      function em {
+        emacs $argv &
       }
 
       function oports {
