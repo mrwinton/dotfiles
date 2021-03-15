@@ -26,3 +26,9 @@ chown -R $USER:staff /nix/var/nix/gcroots/per-user/$USER
 #+END_SRC
 
 ** Update
+
+#+BEGIN_SRC bash
+nix-channel --update
+darwin-rebuild switch -I darwin-config=$HOME/src/dotfiles/darwin.nix
+#+END_SRC
+
