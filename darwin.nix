@@ -67,6 +67,9 @@ in {
   system.activationScripts.postActivation.text = ''
     # Use list view in Finder by default
     defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
+
+    # Ensure that redis' data dir exists
+    mkdir ${homeDir}/.local/share/redis
   '';
 
   # Auto upgrade nix package and the daemon service.
