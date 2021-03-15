@@ -69,7 +69,7 @@ in {
     defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
 
     # Ensure that redis' data dir exists
-    mkdir ${homeDir}/.local/share/redis
+    mkdir -p ${homeDir}/.local/share/redis
   '';
 
   # Auto upgrade nix package and the daemon service.
