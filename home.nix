@@ -34,7 +34,6 @@ in {
     openssl.dev
     proselint
     ripgrep
-    starship
     tmux
     youtube-dl
     universal-ctags
