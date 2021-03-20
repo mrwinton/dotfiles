@@ -18,6 +18,7 @@
        hreset = "!git reset --hard $(git rev-parse --abbrev-ref --symbolic-full-name @{u})";
        pushf = "push --force-with-lease";
        uncommit = "reset --soft HEAD^";
+       safe = "!mkdir $(git rev-parse --git-dir)/safe";
      };
 
      extraConfig = {

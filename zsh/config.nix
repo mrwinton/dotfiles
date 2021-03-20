@@ -18,6 +18,8 @@ with pkgs;
     initExtra = ''
       source $HOME/.nix-profile/asdf/asdf.sh
       PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
+      PATH=".git/safe/../../bin:$PATH"
+
       export LANG="en_GB"
       export LC_ALL="en_GB.UTF-8"
       export LC_CTYPE="en_GB.UTF-8"
