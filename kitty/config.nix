@@ -8,6 +8,7 @@
       font_size 13
       bold_font auto
       italic_font auto
+      macos_thicken_font 0.4
 
       clear_all_shortcuts yes
       close_on_child_death yes
