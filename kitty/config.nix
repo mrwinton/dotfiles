@@ -4,7 +4,7 @@
   programs.kitty = {
     enable = true;
     extraConfig = ''
-      font_family Menlo
+      font_family "MesloLGS Nerd Font Mono"
       font_size 13
       bold_font auto
       italic_font auto

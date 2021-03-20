@@ -3,13 +3,9 @@
 (setq user-full-name "Michael Winton"
   user-mail-address "wintonmr@gmail.com"
 
-  ;; doom-theme 'doom-dracula
-  ;; doom-theme 'doom-one-light
-  ;; doom-theme 'doom-flatwhite
-  ;; doom-theme 'doom-tomorrow-day
   doom-theme 'doom-ayu-light
   display-line-numbers-type nil
-  doom-font (font-spec :family "Menlo" :size 14 :weight 'normal)
+  doom-font (font-spec :family "MesloLGS Nerd Font Mono" :size 13 :weight 'normal)
 
   lsp-enable-file-watchers nil
 
