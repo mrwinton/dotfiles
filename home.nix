@@ -5,6 +5,7 @@ let
 
   asdf = callPackage ~/src/dotfiles/asdf/package.nix { };
   comma = callPackage ~/src/dotfiles/comma/package.nix { };
+  hammerspoon = callPackage ~/src/dotfiles/hammerspoon/package.nix { };
 in {
   programs.home-manager.enable = true;
 
@@ -12,6 +13,7 @@ in {
     ./asdf/config.nix
     ./emacs/config.nix
     ./git/config.nix
+    ./hammerspoon/config.nix
     ./kitty/config.nix
     ./ruby/config.nix
     ./zsh/config.nix
@@ -29,6 +31,7 @@ in {
     git
     gitAndTools.gh
     gitAndTools.hub
+    hammerspoon
     heroku
     imagemagick
     nixfmt
