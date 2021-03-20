@@ -29,6 +29,7 @@
 
       scrollback_lines 100000
       map cmd+shift+l show_scrollback
+      map cmd+f launch --type=overlay --stdin-source=@screen_scrollback /Users/michaelwinton/.nix-profile/bin/fzf --no-sort --no-mouse --exact -i
 
       copy_on_select yes
       map cmd+c copy_to_clipboard
