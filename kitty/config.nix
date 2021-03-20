@@ -13,6 +13,7 @@
       close_on_child_death yes
       enable_audio_bell no
       remember_window_size no
+      window_padding_width 5
 
       active_border_color none
       inactive_text_alpha 0.6
@@ -20,6 +21,7 @@
       tab_bar_edge top
       tab_bar_style separator
       tab_separator " ┇"
+      tab_title_template {index}:{title}
 
       open_url_modifiers cmd
       url_style single
