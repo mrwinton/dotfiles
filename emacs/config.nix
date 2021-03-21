@@ -14,5 +14,6 @@ in {
 
   programs.zsh.sessionVariables = {
     EDITOR = "${doom-emacs}/bin/emacsclient";
+    VISUAL = "${doom-emacs}/bin/emacs";
   };
 }
