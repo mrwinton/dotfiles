@@ -27,6 +27,7 @@ in {
     bat
     coreutils-prefixed
     comma
+    fd
     fzf
     git
     gitAndTools.gh
