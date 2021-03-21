@@ -30,7 +30,6 @@ in {
     enableFontDir = true;
     fonts = with pkgs; [
       emacs-all-the-icons-fonts
-      powerline-fonts
       (nerdfonts.override { fonts = [ "Meslo" ]; })
     ];
   };
