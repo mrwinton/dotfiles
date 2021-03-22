@@ -1,3 +1,6 @@
+-- All credit to Teo Ljungberg who wrote this config that I have subsequently
+-- shamelessly stolen! SRC: https://github.com/teoljungberg/dotfiles
+
 local pixelDifference = 50
 local menuBarInPixles = 23
 local numberOfCells = 8

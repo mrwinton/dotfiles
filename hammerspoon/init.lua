@@ -1,3 +1,6 @@
+-- All credit to Teo Ljungberg who wrote this config that I have subsequently
+-- shamelessly stolen! SRC: https://github.com/teoljungberg/dotfiles
+
 functions = require "functions"
 
 hs.window.animationDuration = 0
