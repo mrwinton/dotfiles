@@ -9,7 +9,7 @@
 
   lsp-enable-file-watchers nil
 
-  projectile-project-search-path '("~/repos/personal/" "~/repos/work/")
+  projectile-project-search-path '("~/src/")
   projectile-enable-caching nil
 
   org-directory "~/org/"
