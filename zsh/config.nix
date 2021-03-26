@@ -24,6 +24,8 @@ with pkgs;
       export LC_ALL="en_GB.UTF-8"
       export LC_CTYPE="en_GB.UTF-8"
 
+      [[ ! -f ~/.zshrc.local ]] || source ~/.zshrc.local
+
       # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
       [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
