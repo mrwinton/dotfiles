@@ -1,18 +1,17 @@
-if defined?(PryByebug)
-  Pry.commands.alias_command 'ss', 'step'
-  Pry.commands.alias_command 'nn', 'next'
-  Pry.commands.alias_command 'cc', 'continue'
-  Pry.commands.alias_command 'fin', 'finish'
-  Pry.commands.alias_command 'uu', 'up'
-  Pry.commands.alias_command 'dd', 'down'
-  Pry.commands.alias_command 'ff', 'frame'
-  Pry.commands.alias_command 'bb', 'break'
-  Pry.commands.alias_command 'ww', 'whereami'
+#!/usr/bin/ruby
+load File.expand_path('~/.irbrc')
 
-  Pry::Commands.command(/^$/, 'repeat last command') do
-    _pry_.run_command Pry.history.to_a.last
+if defined?(PryByebug)
+  Pry.commands.alias_command 'c', 'continue'
+  Pry.commands.alias_command 's', 'step'
+  Pry.commands.alias_command 'n', 'next'
+  Pry.commands.alias_command 'f', 'finish'
+  Pry::Commands.command /^$/, "repeat last command" do
+    pry_instance.run_command Pry.history.to_a.last
   end
 end
+
+Pry.config.history_file = File.expand_path('~/.pry_history')
 
 class Object
   def local_methods(obj = self)

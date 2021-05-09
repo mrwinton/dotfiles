@@ -6,5 +6,9 @@
       source = ./pryrc;
       target = ".pryrc";
     };
+    irbrc = {
+      source = ./irbrc;
+      target = ".irbrc";
+    };
   };
 }
