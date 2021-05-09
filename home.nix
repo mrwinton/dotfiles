@@ -25,10 +25,12 @@ in {
     autoconf
     automake
     bat
+    chromedriver
     coreutils-prefixed
     comma
     fd
     fzf
+    geckodriver
     git
     gitAndTools.gh
     gitAndTools.hub
