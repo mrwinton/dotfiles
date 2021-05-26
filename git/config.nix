@@ -15,6 +15,7 @@
 
      aliases = {
        co = "checkout";
+       cp = "cherry-pick";
        hreset = "!git reset --hard $(git rev-parse --abbrev-ref --symbolic-full-name @{u})";
        pushf = "push --force-with-lease";
        uncommit = "reset --soft HEAD^";
