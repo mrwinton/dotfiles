@@ -26,7 +26,6 @@
        color.ui = true;
        github.user = "mrwinton";
        hub.protocol = "https";
-       merge.ff = "only";
        merge.summary = true;
        pull.rebase = true;
        push.default = "current";
