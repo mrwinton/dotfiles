@@ -41,6 +41,7 @@ in {
     openssl.dev
     proselint
     ripgrep
+    stripe-cli
     tmux
     youtube-dl
     universal-ctags
