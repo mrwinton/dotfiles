@@ -84,20 +84,11 @@ local function moveBottomRight()
   move({positions.lower50Right50})
 end
 
-local function findOtherScreen()
-  hs.fnutils.find(
-    hs.screen.allScreens(), function(s)
-      return s ~= window:screen()
-    end
-  )
-end
-
 local function moveScreen()
-  local window = hs.window.focusedWindow()
-  local otherScreen = findOtherScreen()
-  if otherScreen ~= nil then
-    window:moveToScreen(otherScreen)
-  end
+  local window = getWindow()
+  local screen = window:screen()
+
+  window:move(window:frame():toUnitRect(screen:frame()), screen:next(), true, 0)
 end
 
 local function hideAlreadyRunningApplication(bundleID)
