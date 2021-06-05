@@ -9,9 +9,9 @@
   };
 
   home.file = {
-    functions = {
-      source = ./functions.lua;
-      target = ".hammerspoon/functions.lua";
+    utils = {
+      source = ./utils.lua;
+      target = ".hammerspoon/utils.lua";
     };
   };
 }

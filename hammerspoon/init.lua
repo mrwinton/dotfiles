@@ -1,54 +1,26 @@
--- All credit to Teo Ljungberg who wrote this config that I have subsequently
--- shamelessly stolen! SRC: https://github.com/teoljungberg/dotfiles
+-- Credit to:
+-- - Teo Ljungberg, https://github.com/teoljungberg/dotfiles
+-- - Steve Purcell, https://github.com/purcell/dot-hammerspoon
 
-functions = require "functions"
+local utils = require "utils"
+local leader = {"ctrl", "alt"}
 
 hs.window.animationDuration = 0
 
-hs.hotkey.bind({"ctrl", "alt"}, "r", functions.reloadConfig)
+hs.hotkey.bind(leader, "q", utils.moveTopLeft)
+hs.hotkey.bind(leader, "w", utils.moveTop)
+hs.hotkey.bind(leader, "e", utils.moveTopRight)
+hs.hotkey.bind(leader, "a", utils.moveLeft)
+hs.hotkey.bind(leader, "s", utils.maximize)
+hs.hotkey.bind(leader, "d", utils.moveRight)
+hs.hotkey.bind(leader, "z", utils.moveBottomLeft)
+hs.hotkey.bind(leader, "x", utils.moveBottom)
+hs.hotkey.bind(leader, "c", utils.moveBottomRight)
+hs.hotkey.bind(leader, "/", utils.moveScreen)
 
-hs.hotkey.bind({"cmd", "alt"}, "right", functions.moveLeft)
-hs.hotkey.bind({"cmd", "alt"}, "left", functions.moveRight)
-hs.hotkey.bind({"cmd", "alt"}, "up", functions.moveUp)
-hs.hotkey.bind({"cmd", "alt"}, "down", functions.moveDown)
-
-hs.hotkey.bind({"cmd", "alt", "shift"}, "left", functions.resizeLeft)
-hs.hotkey.bind({"cmd", "alt", "shift"}, "right", functions.resizeRight)
-hs.hotkey.bind({"cmd", "alt", "shift"}, "up", functions.resizeUp)
-hs.hotkey.bind({"cmd", "alt", "shift"}, "down", functions.resizeDown)
-
-hs.hotkey.bind({"ctrl", "alt"}, "left", functions.moveWindowLeftHalfScreen)
-hs.hotkey.bind({"ctrl", "alt"}, "right", functions.moveWindowRightHalfScreen)
-hs.hotkey.bind({"ctrl", "alt"}, "return", functions.fullScreenWindow)
-hs.hotkey.bind({"ctrl", "alt", "shift"}, "return", functions.centralizeWindow)
-
-hs.hotkey.bind({"ctrl", "alt", "cmd"}, "left", functions.moveWindowToWestDisplay)
-hs.hotkey.bind({"ctrl", "alt", "cmd"}, "right", functions.moveWindowToEastDisplay)
-hs.hotkey.bind({"ctrl", "alt", "cmd"}, "up", functions.moveWindowToNorthDisplay)
-hs.hotkey.bind({"ctrl", "alt", "cmd"}, "down", functions.moveWindowToSouthDisplay)
-
--- The bundle ID is fetched with the following AppleScript:
---
--- `osascript -e 'id of app "NAME OF APP"'`
---
-local function applicationShortcutToBundleMapping()
-  return {
-    [1] = nil,
-    [2] = nil,
-    [3] = nil,
-    [4] = nil,
-    [5] = nil,
-    [6] = "com.apple.safari",
-    [7] = "com.spotify.client",
-    [8] = "com.tinyspeck.slackmacgap",
-    [9] = "com.apple.mail",
-    [0] = "com.brave.Browser",
-    ["o"] = "net.kovidgoyal.kitty",
-    ["p"] = "org.gnu.Emacs",
-  }
-end
-for key, bundleID in pairs(applicationShortcutToBundleMapping()) do
-  if bundleID then
-    hs.hotkey.bind({"ctrl", "alt"}, tostring(key), functions.toggleApplication(bundleID))
-  end
-end
+hs.hotkey.bind(leader, "1", utils.toggleApplication("org.gnu.Emacs"))
+hs.hotkey.bind(leader, "2", utils.toggleApplication("net.kovidgoyal.Kitty"))
+hs.hotkey.bind(leader, "3", utils.toggleApplication("com.spotify.client"))
+hs.hotkey.bind(leader, "m", utils.toggleApplication("com.apple.mail"))
+hs.hotkey.bind(leader, ",", utils.toggleApplication("com.tinyspeck.slackmacgap"))
+hs.hotkey.bind(leader, ".", utils.toggleApplication("com.brave.Browser"))
