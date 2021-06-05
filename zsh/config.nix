@@ -9,7 +9,7 @@ with pkgs;
       target = ".p10k.zsh";
     };
   };
-  
+
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -85,9 +85,7 @@ with pkgs;
 
     oh-my-zsh = {
       enable = true;
-      plugins = [
-        "git"
-      ];
+      plugins = [ "git" ];
     };
 
     plugins = [
