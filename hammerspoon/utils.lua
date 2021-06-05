@@ -19,9 +19,19 @@ local positions = {
   lower50Right50 = {x=0.5, y=0.5, w=0.5, h=0.5}
 }
 
+local function getWindow()
+  local window = hs.window.focusedWindow()
+
+  if window == nil then
+    return
+  else
+    return window
+  end
+end
+
 local function move(units)
   local screen = hs.screen.mainScreen()
-  local window = hs.window.focusedWindow()
+  local window = getWindow()
   local windowGeo = window:frame()
 
   local index = 0
