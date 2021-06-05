@@ -16,14 +16,6 @@ with pkgs;
     enableAutosuggestions = true;
 
     initExtra = ''
-      source $HOME/.nix-profile/asdf/asdf.sh
-      PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
-      PATH=".git/safe/../../bin:$PATH"
-
-      export LANG="en_GB"
-      export LC_ALL="en_GB.UTF-8"
-      export LC_CTYPE="en_GB.UTF-8"
-
       [[ ! -f ~/.zshrc.local ]] || source ~/.zshrc.local
 
       # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
@@ -52,6 +44,22 @@ with pkgs;
       function clean {
         nix-collect-garbage -d
       }
+    '';
+
+    envExtra = ''
+      typeset -U PATH
+      PATH="$PATH:$HOME/.bin"
+      PATH="$PATH:/run/current-system/sw/bin:$PATH"
+      PATH="$PATH:/usr/sbin"
+      PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
+      PATH=".git/safe/../../bin:$PATH"
+      export PATH
+
+      export LANG="en_GB"
+      export LC_ALL="en_GB.UTF-8"
+      export LC_CTYPE="en_GB.UTF-8"
+
+      source $HOME/.nix-profile/asdf/asdf.sh
     '';
 
     history = {
