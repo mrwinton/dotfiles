@@ -92,7 +92,7 @@ local function moveScreen()
 end
 
 local function hideAlreadyRunningApplication(bundleID)
-  local focus = hs.window.focusedWindow()
+  local focus = getWindow()
 
   if focus and focus:application():bundleID() == bundleID then
     focus:application():hide()
