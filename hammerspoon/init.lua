@@ -16,7 +16,7 @@ hs.hotkey.bind(leader, "d", utils.moveRight)
 hs.hotkey.bind(leader, "z", utils.moveBottomLeft)
 hs.hotkey.bind(leader, "x", utils.moveBottom)
 hs.hotkey.bind(leader, "c", utils.moveBottomRight)
-hs.hotkey.bind(leader, "/", utils.moveScreen)
+hs.hotkey.bind(leader, "/", utils.moveWindow)
 
 hs.hotkey.bind(leader, "1", utils.toggleApplication("org.gnu.Emacs"))
 hs.hotkey.bind(leader, "2", utils.toggleApplication("net.kovidgoyal.Kitty"))

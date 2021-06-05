@@ -84,7 +84,7 @@ local function moveBottomRight()
   move({positions.lower50Right50})
 end
 
-local function moveScreen()
+local function moveWindow()
   local window = getWindow()
   local screen = window:screen()
 
@@ -139,6 +139,6 @@ return {
   moveTopRight = moveTopRight,
   moveBottomLeft = moveBottomLeft,
   moveBottomRight = moveBottomRight,
-  moveScreen = moveScreen,
+  moveWindow = moveWindow,
   toggleApplication = toggleApplication,
 }
