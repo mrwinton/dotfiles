@@ -81,6 +81,7 @@ with pkgs;
       mkdir = "mkdir -p";
       vim = "emacsclient -nw";
       e = "emacsclient -nw";
+      emacs_gui = "/Applications/Emacs.app/Contents/MacOS/Emacs";
     };
 
     oh-my-zsh = {
