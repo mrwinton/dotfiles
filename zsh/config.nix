@@ -16,6 +16,7 @@ with pkgs;
     enableAutosuggestions = true;
 
     initExtra = ''
+      PATH=".git/safe/../../bin:$PATH"
       [[ ! -f ~/.zshrc.local ]] || source ~/.zshrc.local
 
       # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
@@ -52,7 +53,6 @@ with pkgs;
       PATH="$PATH:/run/current-system/sw/bin:$PATH"
       PATH="$PATH:/usr/sbin"
       PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
-      PATH=".git/safe/../../bin:$PATH"
       export PATH
 
       export LANG="en_GB"
