@@ -28,6 +28,7 @@ in {
     chromedriver
     coreutils-prefixed
     comma
+    emacs
     fd
     fzf
     geckodriver
