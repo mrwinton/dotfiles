@@ -19,10 +19,12 @@ in {
   environment.darwinConfig = "${homeDir}/src/dotfiles/darwin.nix";
 
   environment.systemPackages = with pkgs; [
-    aspell
-    aspellDicts.en
-    aspellDicts.en-computers
-    aspellDicts.en-science
+    (hunspellWithDicts [
+      hunspellDicts.en-gb-ise
+      hunspellDicts.en-gb-ize
+      hunspellDicts.en-us
+      hunspellDicts.sv-se
+    ])
     redis
   ];
 
