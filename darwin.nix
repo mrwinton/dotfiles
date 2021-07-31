@@ -32,7 +32,7 @@ in {
     enableFontDir = true;
     fonts = with pkgs; [
       emacs-all-the-icons-fonts
-      (nerdfonts.override { fonts = [ "Meslo" ]; })
+      hack-font
     ];
   };
 

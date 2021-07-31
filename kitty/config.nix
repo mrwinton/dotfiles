@@ -4,8 +4,8 @@
   programs.kitty = {
     enable = true;
     extraConfig = ''
-      font_family "MesloLGS Nerd Font Mono"
-      font_size 13
+      font_family "Hack"
+      font_size 12
       bold_font auto
       italic_font auto
       macos_thicken_font 0.4
