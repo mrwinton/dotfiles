@@ -24,3 +24,11 @@ hs.hotkey.bind(leader, "3", utils.toggleApplication("com.spotify.client"))
 hs.hotkey.bind(leader, "m", utils.toggleApplication("com.apple.mail"))
 hs.hotkey.bind(leader, ",", utils.toggleApplication("com.tinyspeck.slackmacgap"))
 hs.hotkey.bind(leader, ".", utils.toggleApplication("com.brave.Browser"))
+
+hs.hotkey.bindSpec({leader, "\\"}, function ()
+    hs.task.new("/bin/sh", nil, {
+                  "-l",
+                  "-c",
+                  "emacsclient --eval '(emacs-everywhere)'"
+    }):start()
+end)
