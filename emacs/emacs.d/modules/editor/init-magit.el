@@ -11,6 +11,9 @@
   (setq git-commit-summary-max-length 50)
   (setq git-commit-fill-column 72))
 
+(use-package forge
+  :after magit)
+
 (use-package git-blamed)
 (use-package gitignore-mode)
 (use-package gitconfig-mode)
