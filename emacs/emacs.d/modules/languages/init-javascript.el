@@ -5,9 +5,6 @@
 (use-package js2-mode
   :mode (("\\.js\\'" . js2-mode)
          ("\\.prettierrc'" . js2-mode))
-  :hook ((js2-mode . js2-imenu-extras-mode)
-         (js2-mode . js2-highlight-unused-variables-mode)
-         (js2-mode . add-node-modules-path))
   :config
   (setq js-indent-level 2
         js-basic-offset 2
