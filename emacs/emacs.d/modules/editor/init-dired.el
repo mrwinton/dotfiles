@@ -8,6 +8,9 @@
 (setq dired-clean-up-buffers-too t)
 (setq-default dired-dwim-target t)
 
+;; Human-readable units (KB, MB, etc) in dired buffers, directories first
+(setq-default dired-listing-switches "-alh")
+
 (use-package diff-hl
   :defer 1
   :config

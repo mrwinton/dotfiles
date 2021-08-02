@@ -145,9 +145,6 @@
 (transient-mark-mode t)
 (delete-selection-mode t)
 
-;; Human-readable units (KB, MB, etc) in dired buffers
-(setq-default dired-listing-switches "-alh")
-
 ;; Don't ask `yes/no?', ask `y/n?'
 (fset 'yes-or-no-p 'y-or-n-p)
 
