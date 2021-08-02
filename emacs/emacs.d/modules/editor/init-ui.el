@@ -38,5 +38,7 @@
   (mood-line-mode))
 
 (set-frame-font "Hack 12" nil t)
+(setq-default cursor-type '(hbar .  2))
+(setq-default cursor-in-non-selected-windows nil)
 
 (provide 'init-ui)
