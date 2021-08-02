@@ -87,6 +87,7 @@
   :init (advice-add #'completing-read-multiple
                     :override #'consult-completing-read-multiple)
   :config
+  (setq completion-styles '(substring))
   (autoload 'projectile-project-root "projectile")
   (setq consult-project-root-function #'projectile-project-root))
 
