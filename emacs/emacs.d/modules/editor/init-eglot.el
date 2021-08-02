@@ -3,7 +3,8 @@
 ;;; Code:
 
 (use-package eglot
-  :hook ((ruby-mode enh-ruby-mode) . eglot-ensure)
+  :hook (((ruby-mode enh-ruby-mode) . eglot-ensure)
+         (js2-mode . eglot-ensure))
   :config
   (add-to-list 'eglot-server-programs '(enh-ruby-mode "solargraph" "socket" "--port" :autoport))
   (setq eglot-autoshutdown t
