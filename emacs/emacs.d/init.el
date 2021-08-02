@@ -37,7 +37,6 @@
 (require 'init-projectile)
 (require 'init-snippets)
 (require 'init-spelling)
-(require 'init-term)
 (require 'init-text)
 (require 'init-ui)
 (require 'init-windows)
