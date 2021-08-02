@@ -21,6 +21,7 @@
   ("C-x 7" . crux-swap-windows))
 
 (use-package editorconfig
+  :defer 1
   :config
   (editorconfig-mode 1))
 
@@ -28,6 +29,7 @@
   :hook (prog-mode . rainbow-delimiters-mode))
 
 (use-package smartparens
+  :defer 1
   :config
   ;; Load the default pair definitions
   (require 'smartparens-config)
@@ -39,11 +41,15 @@
   (show-smartparens-global-mode +1))
 
 (use-package undo-tree
+  :defer 1
   :bind (:map undo-tree-map
               ("M-/" . undo-tree-redo))
   :config
   (setq undo-tree-auto-save-history t)
-  (setq undo-tree-enable-undo-in-region nil))
+  (setq undo-tree-enable-undo-in-region nil)
+  (setq undo-tree-visualizer-diff t)
+
+  (global-undo-tree-mode))
 
 (use-package ws-butler
   :defer 1
@@ -76,7 +82,9 @@
   :config
   (global-move-dup-mode))
 
-(use-package vlf)
+;; Open large files fast
+(use-package vlf
+  :defer 1)
 
 (defun mrwinton/smart-open-line-above ()
   "Insert an empty line above the current line.
