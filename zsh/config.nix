@@ -73,6 +73,7 @@ with pkgs;
       ag =
         "ag --color --color-line-number '0;35' --color-match '46;30' --color-path '4;36'";
       be = "bundle exec";
+      bat = "bat --theme='OneHalfLight'";
       gst = "git status";
       glo =
         "git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
