@@ -39,7 +39,25 @@
   :demand t
   :config
   (load-theme 'minimal-light t)
-  (set-face-background 'highlight "gray90"))
+  (set-face-background 'highlight "gray90")
+  (set-face-background 'fringe "gray100")
+
+  (set-face-attribute 'mode-line nil
+                      :background "grey95"
+                      :foreground "grey20"
+                      :box '(:line-width 4 :color "grey95" :style nil)
+                      :overline nil
+                      :underline nil)
+
+  (set-face-attribute 'mode-line-inactive nil
+                      :background "grey98"
+                      :foreground "grey50"
+                      :box '(:line-width 4 :color "grey98" :style nil)
+                      :overline nil
+                      :underline nil)
+
+  (set-face-attribute 'vertical-border nil
+                      :foreground "gray97"))
 
 (use-package mood-line
   :demand t
