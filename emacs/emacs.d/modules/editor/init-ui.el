@@ -2,6 +2,15 @@
 ;;; Commentary:
 ;;; Code:
 
+;; Optimization
+(setq idle-update-delay 1.0)
+
+(setq-default cursor-in-non-selected-windows nil)
+(setq highlight-nonselected-windows nil)
+
+(setq fast-but-imprecise-scrolling t)
+(setq redisplay-skip-fontification-on-input t)
+
 (defun mrwinton/frame-title-format ()
   "Return frame title with current project name, where applicable."
   (let ((file buffer-file-name))
