@@ -3,7 +3,7 @@
 ;;; Code:
 
 (setq dired-use-ls-dired nil)
-(setq dired-recursive-deletes 'top)
+(setq dired-recursive-deletes 'always)
 (setq dired-recursive-copies 'always)
 (setq dired-clean-up-buffers-too t)
 (setq-default dired-dwim-target t)
