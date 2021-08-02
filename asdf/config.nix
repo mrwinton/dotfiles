@@ -15,4 +15,12 @@
       solargraph
     '';
   };
+
+  home.file = {
+    ".default-npm-packages".text = ''
+      yarn
+      typescript
+      typescript-language-server
+    '';
+  };
 }
