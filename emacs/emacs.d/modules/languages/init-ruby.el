@@ -21,8 +21,6 @@
   (setq enh-ruby-add-encoding-comment-on-save nil)
   (setq ruby-insert-encoding-magic-comment nil))
 
-(use-package ruby-end)
-
 (use-package rspec-mode
   :after exec-path-from-shell
   :init
