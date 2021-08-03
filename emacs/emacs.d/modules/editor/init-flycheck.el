@@ -3,6 +3,7 @@
 ;;; Code:
 
 (use-package flycheck
+  :defer 1
   :config
   (setq flycheck-display-errors-function #'flycheck-display-error-messages-unless-error-list)
   (global-flycheck-mode))
