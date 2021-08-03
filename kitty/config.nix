@@ -4,7 +4,7 @@
   programs.kitty = {
     enable = true;
     extraConfig = ''
-      font_family "Hack"
+      font_family "Hack Nerd Font Mono"
       font_size 12
       bold_font auto
       italic_font auto
