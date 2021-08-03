@@ -85,6 +85,9 @@
                  (message "Loaded in %.2fs! Happy hacking ♥" elapsed)))
             t))
 
+(use-package el-patch
+  :demand t)
+
 (provide 'init-bootstrap)
 
 ;;; init-bootstrap.el ends here
