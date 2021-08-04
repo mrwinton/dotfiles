@@ -2,14 +2,17 @@
 ;;; Commentary:
 ;;; Code:
 
-(setq ispell-program-name "/run/current-system/sw/bin/hunspell")
-(setq ispell-dictionary "en_GB")
 (setenv "DICTIONARY" "en_GB")
-
-(use-package spell-fu
+(use-package ispell
   :after exec-path-from-shell
   :config
-  (global-spell-fu-mode))
+  (let ((executable (executable-find "hunspell")))
+    (when executable
+      (setq-default ispell-program-name executable)
+      (setq ispell-command-name "hunspell"
+            ispell-dictionary "en_GB"
+            ispell-really-hunspell t
+            ispell-extra-args '("-a" "-i" "utf-8")))))
 
 (provide 'init-spelling)
 ;;; init-spelling.el ends here
