@@ -117,5 +117,11 @@
             ('interrupted (propertize (el-patch-swap "⏸ Paused  " " Pause  ") 'face 'mood-line-status-neutral))
             ('no-checker "")))))
 
+(use-package beacon
+  :config
+  (setq beacon-color 0.1)
+  (setq beacon-size 20)
+  (beacon-mode +1))
+
 (provide 'init-ui)
 ;;; init-ui.el ends here
