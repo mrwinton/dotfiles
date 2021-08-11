@@ -50,6 +50,11 @@ in {
     zsh
   ];
 
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
+
   home.activation.copyApplications = let
     apps = pkgs.buildEnv {
       name = "home-manager-applications";

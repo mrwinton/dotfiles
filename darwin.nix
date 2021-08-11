@@ -76,4 +76,13 @@ in {
   nix.package = pkgs.nix;
 
   system.stateVersion = 4;
+
+  nix = {
+    buildCores = 4;
+    maxJobs = 8;
+    extraOptions = ''
+      keep-outputs = true
+      keep-derivations = true
+    '';
+  };
 }

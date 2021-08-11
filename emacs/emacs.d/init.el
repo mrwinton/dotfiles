@@ -24,6 +24,7 @@
 (require 'init-defaults)
 (require 'init-macos)
 (require 'init-exec-path)
+(require 'init-direnv)
 
 ;; Editor
 (require 'init-advice)
