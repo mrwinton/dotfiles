@@ -61,6 +61,10 @@ in {
   system.activationScripts.postActivation.text = ''
     # Use list view in Finder by default
     defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
+
+    # Restart Hammerspoon after the build to apply new configuration
+    osascript -e 'quit app "Hammerspoon"'
+    open -a Hammerspoon
   '';
 
   # Auto upgrade nix package and the daemon service.
