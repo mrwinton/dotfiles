@@ -3,9 +3,9 @@
 let
   callPackage = pkgs.callPackage;
 
-  asdf = callPackage ~/src/github.com/mrwinton/dotfiles/asdf/package.nix { };
-  comma = callPackage ~/src/github.com/mrwinton/dotfiles/comma/package.nix { };
-  hammerspoon = callPackage ~/src/github.com/mrwinton/dotfiles/hammerspoon/package.nix { };
+  asdf = callPackage ./asdf/package.nix { };
+  comma = callPackage ./comma/package.nix { };
+  hammerspoon = callPackage ./hammerspoon/package.nix { };
 in {
   programs.home-manager.enable = true;
 
