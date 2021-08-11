@@ -24,6 +24,7 @@
 
      extraConfig = {
        color.ui = true;
+       ghq.root = "~/src";
        github.user = "mrwinton";
        hub.protocol = "https";
        merge.summary = true;

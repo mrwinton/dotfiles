@@ -35,7 +35,7 @@ with pkgs;
       }
 
       function rebuild {
-        darwin-rebuild switch -I darwin-config=$HOME/src/dotfiles/darwin.nix
+        darwin-rebuild switch -I darwin-config=$HOME/src/github.com/mrwinton/dotfiles/darwin.nix
       }
 
       function update {
@@ -74,11 +74,13 @@ with pkgs;
         "ag --color --color-line-number '0;35' --color-match '46;30' --color-path '4;36'";
       be = "bundle exec";
       bat = "bat --theme='OneHalfLight'";
+      clone = "ghq get";
       gst = "git status";
       glo =
         "git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
       glr =
         "git branch --sort='-committerdate' --format='%(color:green)%(committerdate:relative)%(color:reset) %(refname:short)'";
+      j = "cd $(ghq list -p | fzf -1 -e)";
       la = "ls -la";
       mkdir = "mkdir -p";
       vim = "emacsclient -nw";

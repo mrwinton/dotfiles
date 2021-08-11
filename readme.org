@@ -14,8 +14,8 @@
 # https://github.com/nix-community/home-manager
 
 # Use dotfiles' home.nix configuration
-darwin-rebuild switch -I darwin-config=$HOME/src/dotfiles/darwin.nix
-home-manager switch -f $HOME/src/dotfiles/home.nix
+darwin-rebuild switch -I darwin-config=$HOME/src/github.com/mrwinton/dotfiles/darwin.nix
+home-manager switch -f $HOME/src/github.com/mrwinton/dotfiles/home.nix
 
 # If there are permission issues due to daemon mode:
 chown -R root:nixbld /nix
@@ -29,5 +29,5 @@ chown -R $USER:staff /nix/var/nix/gcroots/per-user/$USER
 
 #+BEGIN_SRC bash
 nix-channel --update
-darwin-rebuild switch -I darwin-config=$HOME/src/dotfiles/darwin.nix
+darwin-rebuild switch -I darwin-config=$HOME/src/github.com/mrwinton/dotfiles/darwin.nix
 #+END_SRC

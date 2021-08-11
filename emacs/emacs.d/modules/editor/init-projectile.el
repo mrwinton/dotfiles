@@ -5,7 +5,7 @@
 (use-package projectile
   :bind-keymap* (("C-c p" . projectile-command-map))
   :config
-  (setq projectile-project-search-path '("~/src/"))
+  (setq projectile-project-search-path '(("~/src" . 2)))
 
   (setq projectile-indexing-method 'alien)
 

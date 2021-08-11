@@ -15,8 +15,7 @@ in {
     loginShell = "/run/current-system/sw/bin/zsh";
   };
 
-  # $ darwin-rebuild switch -I darwin-config=$HOME/src/dotfiles/darwin.nix
-  environment.darwinConfig = "${homeDir}/src/dotfiles/darwin.nix";
+  environment.darwinConfig = "${homeDir}/src/github.com/mrwinton/dotfiles/darwin.nix";
 
   environment.systemPackages = with pkgs; [
     (hunspellWithDicts [

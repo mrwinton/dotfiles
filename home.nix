@@ -3,9 +3,9 @@
 let
   callPackage = pkgs.callPackage;
 
-  asdf = callPackage ~/src/dotfiles/asdf/package.nix { };
-  comma = callPackage ~/src/dotfiles/comma/package.nix { };
-  hammerspoon = callPackage ~/src/dotfiles/hammerspoon/package.nix { };
+  asdf = callPackage ~/src/github.com/mrwinton/dotfiles/asdf/package.nix { };
+  comma = callPackage ~/src/github.com/mrwinton/dotfiles/comma/package.nix { };
+  hammerspoon = callPackage ~/src/github.com/mrwinton/dotfiles/hammerspoon/package.nix { };
 in {
   programs.home-manager.enable = true;
 
@@ -32,6 +32,7 @@ in {
     fd
     fzf
     geckodriver
+    ghq
     git
     gitAndTools.gh
     gitAndTools.hub
