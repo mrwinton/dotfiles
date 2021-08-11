@@ -4,7 +4,7 @@
 
 (use-package magit
   :bind (("C-x g" . magit-status)
-         ("C-x a" . magit-blame))
+         ("C-c g b" . magit-blame))
   :config
   (setq magit-set-upstream-on-push t)
   (setq magit-push-always-verify nil)
@@ -19,7 +19,7 @@
 (use-package gitconfig-mode)
 
 (use-package git-timemachine
-  :bind ("C-c t" . 'git-timemachine))
+  :bind ("C-c g t" . 'git-timemachine))
 
 (use-package git-link
   :bind ("C-c g l" . 'git-link))
