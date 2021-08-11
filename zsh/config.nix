@@ -56,7 +56,6 @@ with pkgs;
       PATH="$PATH:$HOME/.bin"
       PATH="$PATH:/run/current-system/sw/bin:$PATH"
       PATH="$PATH:/usr/sbin"
-      PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
       export PATH
 
       export LANG="en_GB"
