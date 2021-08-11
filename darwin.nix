@@ -44,11 +44,6 @@ in {
     enableCompletion = true;
   };
 
-  services.redis = {
-    enable = true;
-    dataDir = "${homeDir}/.local/share/redis";
-  };
-
   system.keyboard = {
     enableKeyMapping = true;
     remapCapsLockToControl = true;
@@ -66,9 +61,6 @@ in {
   system.activationScripts.postActivation.text = ''
     # Use list view in Finder by default
     defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
-
-    # Ensure that redis' data dir exists
-    mkdir -p ${homeDir}/.local/share/redis
   '';
 
   # Auto upgrade nix package and the daemon service.
