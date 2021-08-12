@@ -9,6 +9,13 @@ let
 in {
   programs.home-manager.enable = true;
 
+  nixpkgs.overlays = [
+    (import (builtins.fetchTarball {
+      url =
+        "https://github.com/nix-community/emacs-overlay/archive/master.tar.gz";
+    }))
+  ];
+
   imports = [
     ./asdf/config.nix
     ./emacs/config.nix
@@ -28,7 +35,7 @@ in {
     chromedriver
     coreutils-prefixed
     comma
-    emacs
+    emacsGcc
     fd
     fzf
     geckodriver
