@@ -7,7 +7,8 @@
          ("C-c g b" . magit-blame))
   :config
   (setq magit-set-upstream-on-push t)
-  (setq magit-push-always-verify nil)
+  (setq magit-stage-all-confirm nil)
+  (setq magit-unstage-all-confirm nil)
   (setq git-commit-summary-max-length 50)
   (setq git-commit-fill-column 72))
 
@@ -34,7 +35,8 @@
          ;; has yet to be saved
          ((dired-mode prog-mode vc-dir-mode) . diff-hl-flydiff-mode)
 
-         ;; Refresh diff-hl after Magit operations
+         ;; Refresh diff-hl on Magit operations
+         (magit-pre-refresh  . diff-hl-magit-pre-refresh)
          (magit-post-refresh . diff-hl-magit-post-refresh))
   :init
   (global-diff-hl-mode))
