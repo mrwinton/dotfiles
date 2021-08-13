@@ -88,6 +88,12 @@
 (use-package el-patch
   :demand t)
 
+(when (fboundp 'native-compile-async)
+  (setq
+   comp-num-cpus 4
+   comp-deferred-compilation t
+   comp-deferred-compilation-black-list '("/mu4e.*\\.el$")))
+
 (provide 'init-bootstrap)
 
 ;;; init-bootstrap.el ends here
