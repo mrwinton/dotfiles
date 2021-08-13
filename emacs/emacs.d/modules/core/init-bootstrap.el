@@ -61,8 +61,7 @@
                    file-name-handler-alist-backup
                    file-name-handler-alist))))
 
-(use-package benchmark-init
-  :demand t)
+(use-package esup)
 
 (use-package project
   :demand t)
