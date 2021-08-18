@@ -118,6 +118,7 @@
             ('no-checker "")))))
 
 (use-package beacon
+  :defer 1
   :config
   (setq beacon-color 0.1)
   (setq beacon-size 20)
