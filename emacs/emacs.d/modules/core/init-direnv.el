@@ -2,11 +2,14 @@
 ;;; Commentary:
 ;;; Code:
 
-(use-package direnv
-  :defer 1
-  :config
-  (setq direnv-always-show-summary nil)
-  (direnv-mode))
+(use-package envrc
+  :defer 2
+  :ensure t
+  :commands (envrc-allow)
+  :if (executable-find "direnv")
+  :bind (:map envrc-mode-map
+              ("C-c d" . envrc-command-map))
+  :config (envrc-global-mode))
 
 (provide 'init-direnv)
 
