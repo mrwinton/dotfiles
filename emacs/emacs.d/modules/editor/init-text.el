@@ -86,6 +86,11 @@
 (use-package vlf
   :defer 1)
 
+(use-package dumb-jump
+  :config
+  (add-to-list 'xref-backend-functions #'dumb-jump-xref-activate t)
+  (setq xref-show-definitions-function #'xref-show-definitions-completing-read))
+
 (defun mrwinton/smart-open-line-above ()
   "Insert an empty line above the current line.
                               Position the cursor at it's beginning, according to the current
