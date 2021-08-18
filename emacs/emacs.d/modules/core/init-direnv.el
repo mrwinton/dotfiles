@@ -3,13 +3,8 @@
 ;;; Code:
 
 (use-package envrc
-  :defer 2
-  :ensure t
-  :commands (envrc-allow)
-  :if (executable-find "direnv")
-  :bind (:map envrc-mode-map
-              ("C-c d" . envrc-command-map))
-  :config (envrc-global-mode))
+  :hook (after-init . envrc-global-mode)
+  :bind (("C-c e" . envrc-command-map)))
 
 (provide 'init-direnv)
 
