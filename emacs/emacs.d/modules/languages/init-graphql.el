@@ -2,6 +2,9 @@
 ;;; Commentary:
 ;;; Code:
 
-(use-package graphql-mode)
+(use-package graphql-mode
+  :mode (("\\.gql\\'" . graphql-mode)
+         ("\\.graphql'" . graphql-mode)))
 
 (provide 'init-graphql)
+;;; init-graphql.el ends here
