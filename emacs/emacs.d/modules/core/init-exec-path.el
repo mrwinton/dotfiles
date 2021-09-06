@@ -4,10 +4,26 @@
 
 (use-package exec-path-from-shell
   :defer 1
+  :custom
+  (exec-path-from-shell-arguments nil)
+  (exec-path-from-shell-variables
+   '("ASPELL_CONF"
+     "DICTIONARY"
+     "EDITOR"
+     "GPG_AGENT_INFO"
+     "LDFLAGS"
+     "LANG"
+     "LC_CTYPE"
+     "MANPATH"
+     "NIX_PATH"
+     "NIX_PROFILES"
+     "NIX_SSL_CERT_FILE"
+     "NIX_USER_PROFILE_DIR"
+     "PATH"
+     "SSH_AUTH_SOCK"
+     "SSH_AGENT_PID"))
   :config
-  (exec-path-from-shell-initialize)
-  (dolist (var '("SSH_AUTH_SOCK" "SSH_AGENT_PID" "GPG_AGENT_INFO" "LANG" "LC_CTYPE" "NIX_SSL_CERT_FILE" "NIX_PATH"))
-    (add-to-list 'exec-path-from-shell-variables var)))
+  (exec-path-from-shell-initialize))
 
 (provide 'init-exec-path)
 
