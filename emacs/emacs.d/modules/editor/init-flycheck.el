@@ -3,15 +3,15 @@
 ;;; Code:
 
 (use-package flycheck
-  :defer 1
-  :commands (flycheck-list-errors flycheck-buffer flycheck-add-next-checker)
+  :commands (flycheck-mode flycheck-list-errors flycheck-buffer flycheck-add-next-checker)
+  :hook (prog-mode . flycheck-mode)
+  :custom
+  (flycheck-display-errors-function #'flycheck-display-error-messages-unless-error-list)
+  (flycheck-check-syntax-automatically '(save idle-change new-line mode-enabled))
   :config
-  (setq flycheck-display-errors-function #'flycheck-display-error-messages-unless-error-list)
-  (setq flycheck-check-syntax-automatically '(save idle-change new-line mode-enabled))
   (global-flycheck-mode))
 
 (use-package flycheck-posframe
-  :after flycheck
   :hook (flycheck-mode . flycheck-posframe-mode)
   :config
   (flycheck-posframe-configure-pretty-defaults))
