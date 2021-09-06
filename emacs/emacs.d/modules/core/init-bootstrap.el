@@ -8,8 +8,6 @@
 
 ;;; Code:
 
-(defconst emacs-start-time (current-time))
-
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
@@ -24,12 +22,18 @@
   (load bootstrap-file nil 'nomessage))
 
 (setq straight-fix-flycheck t
-      straight-vc-git-default-clone-depth 1)
+      straight-vc-git-default-clone-depth 1
+      straight-check-for-modifications '(check-on-save find-when-checking))
 
 ;; Package `use-package' provides a handy macro by the same name which
 ;; is essentially a wrapper around `with-eval-after-load' with a lot
 ;; of handy syntactic sugar and useful features.
 (straight-use-package 'use-package)
+
+;; Install org as early as possible after straight so that the built-in version
+;; of org doesn't get activated between here and where org is actually
+;; configured.
+(straight-use-package 'org)
 
 ;; When configuring a feature with `use-package', also tell
 ;; straight.el to install a package of the same name, unless otherwise
@@ -42,11 +46,10 @@
 ;; loading is lazy. See
 ;; https://github.com/jwiegley/use-package#notes-about-lazy-loading.
 (setq use-package-always-defer t)
+(setq use-package-verbose t)
 
-;; Do not use the default package.el
-(setq package-enable-at-startup nil)
-
-;; Temporarily increase GC's threshold during startup.
+;; Temporarily increase GC's threshold during startup and use file-name handler
+;; hack.
 (defvar file-name-handler-alist-backup
   file-name-handler-alist)
 (setq gc-cons-threshold most-positive-fixnum
@@ -61,10 +64,11 @@
                    file-name-handler-alist-backup
                    file-name-handler-alist))))
 
-(use-package esup)
 
 (use-package project
   :demand t)
+
+(use-package esup)
 
 ;; Allow access from emacsclient
 (add-hook 'after-init-hook
@@ -74,24 +78,21 @@
               (server-start))))
 
 (when (display-graphic-p)
-  (let ((elapsed (float-time (time-subtract (current-time) emacs-start-time))))
+  (let ((elapsed (float-time (time-subtract after-init-time before-init-time))))
     (message "Loaded in %.2fs! Happy hacking ♥" elapsed))
 
   (add-hook 'after-init-hook
             `(lambda ()
                (let ((elapsed (float-time
-                               (time-subtract (current-time) emacs-start-time))))
+                               (time-subtract after-init-time before-init-time))))
                  (message "Loaded in %.2fs! Happy hacking ♥" elapsed)))
             t))
 
-(use-package el-patch
-  :demand t)
-
 (when (fboundp 'native-compile-async)
-  (setq
-   comp-num-cpus 4
-   comp-deferred-compilation t
-   comp-deferred-compilation-black-list '("/mu4e.*\\.el$")))
+  (setq native-comp-async-report-warnings-errors nil)
+  (setq comp-num-cpus 4)
+  (setq comp-deferred-compilation t)
+  (setq comp-deferred-compilation-black-list '("/mu4e.*\\.el$")))
 
 (provide 'init-bootstrap)
 
