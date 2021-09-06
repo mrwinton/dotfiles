@@ -3,11 +3,12 @@
 ;;; Code:
 
 (use-package switch-window
-  :demand t
-  :config
-  (setq-default switch-window-shortcut-style 'alphabet)
-  (setq-default switch-window-timeout nil)
-  (global-set-key (kbd "C-x o") 'switch-window))
+  :commands (switch-window)
+  :bind
+  ("C-x o" . switch-window)
+  :custom
+  (switch-window-shortcut-style 'alphabet)
+  (switch-window-timeout nil))
 
 (defun mrwinton/split-window-below-and-switch ()
   "Split the window horizontally, then switch to the new pane."
