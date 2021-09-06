@@ -7,7 +7,7 @@
   :bind-keymap
   ("C-c p" . projectile-command-map)
   :custom
-  (projectile-project-search-path '(("~/src" . 2)))
+  (projectile-project-search-path '(("~/src" . 3)))
   (projectile-indexing-method 'alien)
 
   ;; Use Selectrum (via `completing-read') for Projectile instead of IDO.
