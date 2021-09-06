@@ -2,6 +2,9 @@
 ;;; Commentary:
 ;;; Code:
 
+;; Package `no-littering' changes the default paths for lots of
+;; different packages, with the net result that the ~/.emacs.d folder
+;; is much more clean and organized.
 (use-package no-littering
   :demand t
   :init (setq auto-save-file-name-transforms
