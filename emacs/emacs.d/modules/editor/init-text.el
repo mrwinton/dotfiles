@@ -21,15 +21,14 @@
   ("C-x 7" . crux-swap-windows))
 
 (use-package editorconfig
-  :defer 1
-  :config
-  (editorconfig-mode 1))
+  :hook ((prog-mode . editorconfig-mode)))
 
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
 
 (use-package smartparens
-  :defer 1
+  :hook
+  (prog-mode . smartparens-mode)
   :config
   ;; Load the default pair definitions
   (require 'smartparens-config)
@@ -44,65 +43,58 @@
   :defer 1
   :bind (:map undo-tree-map
               ("M-/" . undo-tree-redo))
+  :custom
+  (undo-tree-auto-save-history t)
+  (undo-tree-enable-undo-in-region nil)
+  (undo-tree-visualizer-diff t)
   :config
-  (setq undo-tree-auto-save-history t)
-  (setq undo-tree-enable-undo-in-region nil)
-  (setq undo-tree-visualizer-diff t)
-
   (global-undo-tree-mode))
 
 (use-package ws-butler
-  :defer 1
-  :config
-  (add-hook 'prog-mode-hook #'ws-butler-mode))
+  :hook
+  (prog-mode . ws-butler-mode))
 
 ;; Package `visual-regexp' provides an alternate version of
 ;; `query-replace' which highlights matches and replacements as you
 ;; type.
 (use-package visual-regexp
-  :defer 1
-  :bind (("C-c q" . #'vr/query-replace)))
+  :commands (vr/query-replace)
+  :bind (([remap query-replace] . #'vr/query-replace)
+         ("M-r" . 'vr/query-replace)))
 
-(use-package expand-region)
-(global-set-key (kbd "C-=") 'er/expand-region)
+(use-package expand-region
+  :commands (er/expand-region)
+  :bind (("C-=" . 'er/expand-region)))
 
-(use-package multiple-cursors)
-(global-set-key (kbd "C->") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+(use-package multiple-cursors
+  :commands (mc/mark-next-like-this mc/mark-previous-like-this mc/mark-all-like-this)
+  :bind (("C->" . mc/mark-next-like-this)
+         ("C-<" . mc/mark-previous-like-this)
+         ("C-c C->" . mc/mark-all-like-this)))
 
 (use-package whole-line-or-region
+  :defer t
   :init
   (whole-line-or-region-global-mode))
 
 (use-package move-dup
-  :defer 1
+  :hook (after-init . move-dup-mode)
+  :commands (md/move-lines-up md/move-lines-down)
   :bind (([M-up] . md/move-lines-up)
          ([M-down] . md/move-lines-down))
   :config
   (global-move-dup-mode))
 
-;; Open large files fast
 (use-package vlf
-  :defer 1)
+  :hook (after-init . (lambda () (require 'vlf-setup))))
 
 (use-package dumb-jump
+  :custom
+  (xref-show-definitions-function #'xref-show-definitions-completing-read)
   :config
-  (add-to-list 'xref-backend-functions #'dumb-jump-xref-activate t)
-  (setq xref-show-definitions-function #'xref-show-definitions-completing-read))
+  (add-to-list 'xref-backend-functions #'dumb-jump-xref-activate t))
 
-(defun mrwinton/smart-open-line-above ()
-  "Insert an empty line above the current line.
-                              Position the cursor at it's beginning, according to the current
-                              mode."
-  (interactive)
-  (move-beginning-of-line nil)
-  (newline-and-indent)
-  (forward-line -1)
-  (indent-according-to-mode))
-
-(global-set-key [(control shift return)] 'mrwinton/smart-open-line-above)
-(global-set-key (kbd "M-O") 'mrwinton/smart-open-line-above)
+(use-package rainbow-mode)
 
 ;; Easily adjust the font size in all frames
 (use-package default-text-scale
@@ -114,5 +106,42 @@
               ("C-s-=" . default-text-scale-increase)
               ("C-s--" . default-text-scale-decrease)
               ("C-s-0" . default-text-scale-reset)))
+
+(defun mrwinton/smart-open-line-above ()
+  "Insert an empty line above the current line."
+  (interactive)
+  (move-beginning-of-line nil)
+  (newline-and-indent)
+  (forward-line -1)
+  (indent-according-to-mode))
+
+(global-set-key [(control shift return)] 'mrwinton/smart-open-line-above)
+(global-set-key (kbd "M-O") 'mrwinton/smart-open-line-above)
+
+;; Join lines whether you're in a region or not.
+(defun mrwinton/smart-join-line (beg end)
+  "If in a region, join all the lines in it. If not, join the
+current line with the next line."
+  (interactive "r")
+  (if mark-active
+      (mrwinton/join-region beg end)
+      (mrwinton/top-join-line)))
+
+(defun mrwinton/top-join-line ()
+  "Join the current line with the next line."
+  (interactive)
+  (delete-indentation 1))
+
+(defun mrwinton/join-region (beg end)
+  "Join all the lines in the region."
+  (interactive "r")
+  (if mark-active
+      (let ((beg (region-beginning))
+            (end (copy-marker (region-end))))
+        (goto-char beg)
+        (while (< (point) end)
+          (join-line 1)))))
+
+(global-set-key (kbd "M-j") 'mrwinton/smart-join-line)
 
 (provide 'init-text)
