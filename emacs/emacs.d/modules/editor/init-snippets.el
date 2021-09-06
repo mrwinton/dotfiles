@@ -3,27 +3,20 @@
 ;;; Code:
 
 (use-package yasnippet
-  :after company
-  :hook ((org-mode rspec-mode ruby-mode enh-ruby-mode) . yas-minor-mode)
+  :after (company-mode)
+  :hook (((org-mode prog-mode) . yas-minor-mode)
+         (snippet-mode . (lambda ()
+                           ;; Temporarily disable required newline at the end of
+                           ;; file This fixes the problem with an extra newline
+                           ;; when expanding snippets
+                           (setq-local require-final-newline nil))))
+  :custom
+  (yas-snippet-dirs (list (expand-file-name "~/.emacs.d/snippets")))
+  (yas-indent-line 'fixed) ;; Don't mess with the indentation
+  (yas-verbosity 1) ;; Tone down verbosity
   :config
-
-  ;; Use only own snippets, do not use bundled ones
-  (setq yas-snippet-dirs (list (expand-file-name "~/.emacs.d/snippets")))
-
-  ;; Don't mess with the indentation
-  (setq yas-indent-line 'fixed)
-
-  ;; No need to be so verbose
-  (setq yas-verbosity 1)
-
   (yas-reload-all)
-
-  (add-to-list 'company-backends 'company-yasnippet)
-
-  (add-hook 'snippet-mode-hook
-            (lambda ()
-              ;; Temporarily disable required newline at the end of file
-              ;; This fixes the problem with an extra newline when expanding snippets
-              (setq-local require-final-newline nil))))
+  (add-to-list 'company-backends 'company-yasnippet))
 
 (provide 'init-snippets)
+;;; init-snippets.el ends here
