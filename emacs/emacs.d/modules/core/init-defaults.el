@@ -1,12 +1,12 @@
-;;; init-defaults.el --- Steal from better/improved/doom defaults -*- lexical-binding: t; -*-
+;;; init-defaults.el --- Improve defaults -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
-;; Emacs has ... surprising ... defaults. Here we steal from others' whom have improved them.
+;; Configure Emacs defaults, stolen from and inspired by:
+;; - https://github.com/hlissner/doom-emacs/blob/develop/core/core.el
+;; - https://git.sr.ht/~technomancy/better-defaults/tree/master/item/better-defaults.el
 
 ;;; Code:
-
-;; [[Doom Emacs][https://github.com/hlissner/doom-emacs/blob/develop/core/core.el]].
 
 ;; A second, case-insensitive pass over `auto-mode-alist' is time wasted, and
 ;; indicates misconfiguration (don't rely on case insensitivity for file names).
@@ -51,14 +51,13 @@
 (setq inhibit-compacting-font-caches t)
 
 ;; Increase how much is read from processes in a single chunk (default is 4kb).
-;; This is further increased elsewhere, where needed (like our LSP module).
 (setq read-process-output-max (* 64 1024))  ; 64kb
 
 ;; Introduced in Emacs HEAD (b2f8c9f), this inhibits fontification while
 ;; receiving input, which should help a little with scrolling performance.
 (setq redisplay-skip-fontification-on-input t)
 
-;; Remove command line options that aren't relevant to our macOS.
+;; Remove command line options that aren't relevant to macOS.
 (setq command-line-ns-option-alist nil)
 
 ;; Emacs is essentially one huge security vulnerability, what with all the
@@ -86,8 +85,6 @@
                     ;; compatibility fallbacks
                     "gnutls-cli -p %p %h"))
 
-;; STARTUP SCREEN:
-
 ;; Disable warnings from legacy advice system. They aren't useful, and what can
 ;; we do about them, besides changing packages upstream?
 (setq ad-redefinition-action 'accept)
@@ -106,54 +103,83 @@
       initial-major-mode 'fundamental-mode
       initial-scratch-message nil)
 
-
-;; IMPROVE DEFAULTS
-
-(unless (eq window-system 'ns)
-  (menu-bar-mode -1))
-(when (fboundp 'tool-bar-mode)
-  (tool-bar-mode -1))
-(when (fboundp 'scroll-bar-mode)
-  (scroll-bar-mode -1))
-(when (fboundp 'horizontal-scroll-bar-mode)
-  (horizontal-scroll-bar-mode -1))
-
+;; Override Emacs’ default mechanism for making buffer names unique (using
+;; suffixes like <2>, <3> etc.) with a more sensible behaviour which use parts
+;; of the file names to make the buffer names distinguishable.
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
 
+;; When you visit a file, point goes to the last place where it was when you
+;; previously visited the same file.
 (save-place-mode 1)
+
+;; Save the session's mini-buffer history.
 (savehist-mode 1)
+
+;; Show column numbers in the modeline.
+(column-number-mode 1)
+
+;; See matching pairs of parentheses and other characters.
 (show-paren-mode 1)
 (setq show-paren-delay 0.0)
 
-(setq-default indent-tabs-mode nil)
-
-(setq save-interprogram-paste-before-kill t
-      apropos-do-all t
-      mouse-yank-at-point t
-      require-final-newline t
-      visible-bell t
-      load-prefer-newer t
-      ediff-window-setup-function 'ediff-setup-windows-plain
-      custom-file (expand-file-name "~/.emacs.d/custom.el"))
-
-(setq default-directory "~/"
-      vc-follow-symlinks t
-      sentence-end-double-space nil
-      confirm-kill-emacs 'y-or-n-p)
-
-(transient-mark-mode t)
+;; Typed text replaces the selection if the selection is active. Otherwise,
+;; typed text is just inserted at point regardless of any selection.
 (delete-selection-mode t)
 
+;; Disable Emacs' default tabs behaviour.
+(setq-default indent-tabs-mode nil)
+
+;; Use two spaces when TAB-ing.
+(setq-default tab-width 2)
+
+;; When an Emacs kill command puts text in the clipboard, the existing clipboard
+;; contents are normally lost. By enabling save-interprogram-paste-before-kill
+;; to t, Emacs will first save the clipboard to its kill ring, preventing you
+;; from losing the old clipboard data—at the risk of high memory consumption if
+;; that data turns out to be large.
+(setq save-interprogram-paste-before-kill t)
+
+;; Show all variables, functions, etc when invoking apropos.
+(setq apropos-do-all t)
+
+;; Enable middle-clicking to paste.
+(setq mouse-yank-at-point t)
+
+;; When saving or writing a file silently puts a newline at the end if there
+;; isn’t already one there.
+(setq require-final-newline t)
+
+;; Avoid loading old byte-compiled files.
+(setq load-prefer-newer t)
+
+;; Emacs will save customizations into your init.el file by default. So instead
+;; we save them in an explicit file for customisation.
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+
+;; Start Emacs at the user root directory.
+(setq default-directory "~/")
+
+;; Automatically visit symlinked files instead of warning.
+(setq vc-follow-symlinks t)
+
+;; Fill paragraphs with only a single space.
+(setq sentence-end-double-space nil)
+
+;; Ask for confirmation before exiting Emacs.
+(setq confirm-kill-emacs 'y-or-n-p)
+
 ;; Don't ask `yes/no?', ask `y/n?'
-(fset 'yes-or-no-p 'y-or-n-p)
+(setq use-short-answers t)
 
 ;; Always turn on syntax highlighting where possible
 (global-font-lock-mode t)
 
 ;; Refresh buffers automatically when the file/buffer changes
 (setq global-auto-revert-non-file-buffers t)
-(global-auto-revert-mode t)
+(add-hook 'after-init-hook
+          (lambda ()
+           (global-auto-revert-mode t)))
 
 ;; Treat CamelCaseSubWords as separate words in programming modes
 (add-hook 'prog-mode-hook 'subword-mode)
@@ -172,17 +198,11 @@
                            (y-or-n-p (format "Directory %s does not exist. Create it?" dir)))
                   (make-directory dir t))))))
 
-;; Do not show system dialog boxes
+;; Do not show system dialog boxes.
 (setq use-file-dialog nil)
 (setq use-dialog-box nil)
 
-(setq-default tab-width 2)
-
-(unless backup-directory-alist
-  (setq backup-directory-alist `(("." . ,(concat user-emacs-directory
-                                                 "backups")))))
-
-;; Cull duplicates in the kill ring to reduce bloat and make the kill ring
+;; Cull duplicates in the kill ring to reduce bloat and make the kill ring.
 ;; easier to peruse (with `counsel-yank-pop' or `helm-show-kill-ring'.
 (setq kill-do-not-save-duplicates t)
 
@@ -195,9 +215,35 @@
 ;; warning as it will redirect you to the existing buffer anyway.
 (setq find-file-suppress-same-file-warnings t)
 
+;; Follow symlinks when opening files. This has the concrete impact,
+;; for instance, that when you edit init.el with M-P e e i and then
+;; later do C-x C-f, you will be in the Radian repository instead of
+;; your home directory.
+(setq find-file-visit-truename t)
+
 ;; Default to soft line-wrapping in text modes. It is more sensibile for text
 ;; modes, even if hard wrapping is more performant.
 (add-hook 'text-mode-hook #'visual-line-mode)
+
+;; Allow doing a command that requires candidate-selection when you
+;; are already in the middle of candidate-selection. Sometimes it's
+;; handy!
+(setq enable-recursive-minibuffers t)
+
+;; Don't make backup files.
+(setq make-backup-files nil)
+
+;; Don't make autosave files.
+(setq auto-save-default nil)
+
+;; Don't make lockfiles.
+(setq create-lockfiles nil)
+
+;; Trigger auto-fill after punctutation characters, not just white-space.
+(mapc
+ (lambda (c)
+   (set-char-table-range auto-fill-chars c t))
+ "!-=+]};:'\",.?")
 
 (provide 'init-defaults)
 
