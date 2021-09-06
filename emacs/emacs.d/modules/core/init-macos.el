@@ -4,7 +4,6 @@
 
 (setq mac-command-modifier 'meta)
 (setq mac-option-modifier 'none)
-
 (setq mouse-wheel-scroll-amount '(1
                                   ((shift) . 5)
                                   ((control))))
@@ -23,8 +22,10 @@
   :config
   (ns-auto-titlebar-mode))
 
-(use-package reveal-in-osx-finder)
+(use-package reveal-in-osx-finder
+  :commands (reveal-in-osx-finder))
 
-(use-package emacs-everywhere)
+(use-package emacs-everywhere
+  :commands (emacs-everywhere))
 
 (provide 'init-macos)
