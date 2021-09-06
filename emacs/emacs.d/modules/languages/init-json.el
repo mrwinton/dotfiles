@@ -6,6 +6,7 @@
   :mode "\\.json'")
 
 (use-package json-mode
-  :mode "//.json'")
+  :mode "\\.json'")
 
 (provide 'init-json)
+;;; init-json.el ends here
