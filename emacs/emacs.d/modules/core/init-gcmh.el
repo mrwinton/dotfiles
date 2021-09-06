@@ -9,9 +9,9 @@
 ;;; Code:
 
 (use-package gcmh
-  :init
-  (setq gcmh-idle-delay 5  ; default is 15s
-        gcmh-high-cons-threshold (* 16 1024 1024))  ; 16mb
+  :custom
+  (gcmh-idle-delay 5)
+  (gcmh-high-cons-threshold (* 16 1024 1024))
   :config
   (gcmh-mode 1))
 
