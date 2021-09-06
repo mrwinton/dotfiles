@@ -3,3 +3,4 @@
 ;;; Code:
 
 (provide 'init-sql)
+;;; init-sql.el ends here
