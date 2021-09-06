@@ -2,14 +2,52 @@
 ;;; Commentary:
 ;;; Code:
 
-;; Optimization
-(setq idle-update-delay 1.0)
+;; Go fullscreen on startup
+(add-to-list 'initial-frame-alist '(fullscreen . maximized))
 
-(setq-default cursor-in-non-selected-windows nil)
-(setq highlight-nonselected-windows nil)
+;; Focus the emacs window in the foreground
+(x-focus-frame nil)
 
-(setq fast-but-imprecise-scrolling t)
-(setq redisplay-skip-fontification-on-input t)
+;; Highlight the active line, everywhere.
+(global-hl-line-mode 1)
+
+(use-package mode-line-bell
+  :hook (after-init . mode-line-bell-mode))
+
+(use-package modus-themes
+  :demand t
+  :custom
+  (modus-themes-mode-line '(accented borderless))
+  (modus-themes-bold-constructs t)
+  (modus-themes-italic-constructs t)
+  (modus-themes-scale-headings t)
+  (modus-themes-lang-checkers '(straight-underline))
+  (modus-themes-hl-line '(accented))
+  (modus-themes-region '(bg-only accented))
+  (modus-themes-diffs 'desaturated)
+  (modus-themes-org-blocks 'tinted-background)
+  (modus-themes-headings '((1 . (no-bold overline)) (t . (no-bold))))
+  :config
+  (load-theme 'modus-operandi t)
+  (set-face-foreground 'vertical-border (modus-themes-color 'bg-inactive)))
+
+(use-package solar
+  :straight (:type built-in)
+  :demand t
+  :custom
+  (calendar-latitude 59.3)
+  (calendar-longitude 18.1))
+
+(use-package circadian
+  :demand t
+  :custom
+  (circadian-themes '((:sunrise . modus-operandi)
+                      (:sunset  . modus-vivendi)))
+  :config
+  (circadian-setup))
+
+(use-package minions
+  :hook (after-init . minions-mode))
 
 (defun mrwinton/frame-title-format ()
   "Return frame title with current project name, where applicable."
@@ -23,106 +61,6 @@
 
 (when (display-graphic-p)
   (setq frame-title-format '((:eval (mrwinton/frame-title-format)))))
-
-(use-package mode-line-bell
-  :demand t
-  :config
-  (mode-line-bell-mode 1))
-
-;; Go fullscreen on startup
-(add-to-list 'initial-frame-alist '(fullscreen . maximized))
-
-;; Focus the emacs window in the foreground
-(x-focus-frame nil)
-
-(use-package minimal-theme
-  :demand t
-  :config
-  (load-theme 'minimal-light t)
-  (set-face-background 'highlight "gray90")
-  (set-face-background 'fringe "gray100")
-
-  (set-face-attribute 'mode-line nil
-                      :background "grey95"
-                      :foreground "grey20"
-                      :box '(:line-width 4 :color "grey95" :style nil)
-                      :overline nil
-                      :underline nil)
-
-  (set-face-attribute 'mode-line-inactive nil
-                      :background "grey98"
-                      :foreground "grey50"
-                      :box '(:line-width 4 :color "grey98" :style nil)
-                      :overline nil
-                      :underline nil)
-
-  (set-face-attribute 'vertical-border nil
-                      :foreground "gray97"))
-
-(use-package mood-line
-  :demand t
-  :config
-  (mood-line-mode))
-
-(set-frame-font "Hack Nerd Font Mono 12" nil t)
-(setq-default cursor-type '(hbar .  2))
-(setq-default cursor-in-non-selected-windows nil)
-
-(el-patch-feature mood-line)
-(with-eval-after-load 'mood-line
-  (el-patch-defun mood-line--update-vc-segment (&rest _)
-    "Update `mood-line--vc-text' against the current VCS state."
-    (setq mood-line--vc-text
-          (when (and vc-mode buffer-file-name)
-            (let ((backend (vc-backend buffer-file-name))
-                  (state (vc-state buffer-file-name (vc-backend buffer-file-name))))
-              (let ((face 'mode-line-neutral))
-                (concat (cond ((memq state '(edited added))
-                               (setq face 'mood-line-status-info)
-                               (propertize (el-patch-swap "+ " " ") 'face face))
-                              ((eq state 'needs-merge)
-                               (setq face 'mood-line-status-warning)
-                               (propertize (el-patch-swap "⟷ " " ") 'face face))
-                              ((eq state 'needs-update)
-                               (setq face 'mood-line-status-warning)
-                               (propertize (el-patch-swap "↑ " " ") 'face face))
-                              ((memq state '(removed conflict unregistered))
-                               (setq face 'mood-line-status-error)
-                               (propertize (el-patch-swap "✖ " " ") 'face face))
-                              (t
-                               (setq face 'mood-line-status-neutral)
-                               (propertize (el-patch-swap "✔ " " ") 'face face)))
-                        (propertize (substring vc-mode (+ (if (eq backend 'Hg) 2 3) 2))
-                                    'face face
-                                    'mouse-face face)
-                        "  "))))))
-
-
-  (el-patch-defun mood-line--update-flycheck-segment (&optional status)
-    "Update `mood-line--flycheck-text' against the reported flycheck STATUS."
-    (setq mood-line--flycheck-text
-          (pcase status
-            ('finished (if flycheck-current-errors
-                           (let-alist (flycheck-count-errors flycheck-current-errors)
-                             (let ((sum (+ (or .error 0) (or .warning 0))))
-                               (propertize (concat (el-patch-swap "⚑ Issues: " " Issues (")
-                                                   (number-to-string sum)
-                                                   (el-patch-swap "  " ")  "))
-                                           'face (if .error
-                                                     'mood-line-status-error
-                                                   'mood-line-status-warning))))
-                         (propertize (el-patch-swap "✔ Good  " " Nice  ") 'face 'mood-line-status-success)))
-            ('running (propertize (el-patch-swap "Δ Checking  " " Testing  ") 'face 'mood-line-status-info))
-            ('errored (propertize (el-patch-swap "✖ Error  " " Hmm  ") 'face 'mood-line-status-error))
-            ('interrupted (propertize (el-patch-swap "⏸ Paused  " " Pause  ") 'face 'mood-line-status-neutral))
-            ('no-checker "")))))
-
-(use-package beacon
-  :defer 1
-  :config
-  (setq beacon-color 0.1)
-  (setq beacon-size 20)
-  (beacon-mode +1))
 
 (provide 'init-ui)
 ;;; init-ui.el ends here
