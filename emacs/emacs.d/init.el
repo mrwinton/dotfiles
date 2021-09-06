@@ -1,8 +1,8 @@
 ;;; init.el --- Initialize my biggest bike shed -*- lexical-binding: t -*-
 ;;; Commentary:
 
-;; This file bootstraps the configuration, which is divided into
-;; a number of other files.
+;; This file bootstraps the configuration, which is divided into a number of
+;; other files.
 
 ;;; Code:
 
