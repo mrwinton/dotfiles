@@ -8,6 +8,10 @@
 
 ;;; Code:
 
+(setq straight-fix-flycheck t)
+(setq straight-vc-git-default-clone-depth 1)
+(setq straight-check-for-modifications '(check-on-save find-when-checking))
+
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
@@ -20,10 +24,6 @@
       (goto-char (point-max))
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
-
-(setq straight-fix-flycheck t
-      straight-vc-git-default-clone-depth 1
-      straight-check-for-modifications '(check-on-save find-when-checking))
 
 ;; Package `use-package' provides a handy macro by the same name which
 ;; is essentially a wrapper around `with-eval-after-load' with a lot
