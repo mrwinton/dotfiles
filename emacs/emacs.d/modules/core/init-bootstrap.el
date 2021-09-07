@@ -46,7 +46,7 @@
 ;; loading is lazy. See
 ;; https://github.com/jwiegley/use-package#notes-about-lazy-loading.
 (setq use-package-always-defer t)
-(setq use-package-verbose t)
+(setq use-package-verbose nil)
 
 ;; Temporarily increase GC's threshold during startup and use file-name handler
 ;; hack.
