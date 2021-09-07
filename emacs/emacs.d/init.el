@@ -36,6 +36,7 @@
 (require 'init-flycheck)
 (require 'init-formatter)
 (require 'init-magit)
+(require 'init-prodigy)
 (require 'init-projectile)
 (require 'init-snippets)
 (require 'init-spelling)
