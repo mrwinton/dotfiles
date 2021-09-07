@@ -11,7 +11,7 @@
     :cwd "~/src/github.com/UniversalAvenue/smart-portal"
     :path "~/.nix-profile/bin"
     :command "nix-shell"
-    :args '("--pure" "--run" "bundle exec rails server")
+    :args '("--run" "bundle exec rails server")
     :ready-message ".*Worker.*booted.*"
     :stop-signal 'kill
     :kill-process-buffer-on-stop nil)
@@ -21,7 +21,7 @@
     :cwd "~/src/github.com/UniversalAvenue/smart-portal"
     :path "~/.nix-profile/bin"
     :command "nix-shell"
-    :args '("--pure" "--run" "bin/webpack-dev-server")
+    :args '("--run" "bin/webpack-dev-server")
     :ready-message ".*Compiled successfully.*"
     :stop-signal 'kill
     :kill-process-buffer-on-stop nil)
@@ -31,7 +31,7 @@
     :cwd "~/src/github.com/UniversalAvenue/UniversalAvenue"
     :path "~/.nix-profile/bin"
     :command "nix-shell"
-    :args '("--pure" "--run" "bundle exec rails server -p 3001")
+    :args '("--run" "bundle exec rails server -p 3001")
     :ready-message ".*Worker.*booted.*"
     :stop-signal 'kill
     :kill-process-buffer-on-stop nil))
