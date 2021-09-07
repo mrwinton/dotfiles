@@ -17,6 +17,9 @@
 
 (use-package forge
   :after magit
+  :hook
+  (forge-post-mode . (lambda ()
+                       (set-fill-column 72)))
   :custom
   (forge-database-file "~/.config/forge/database.sqlite"))
 
