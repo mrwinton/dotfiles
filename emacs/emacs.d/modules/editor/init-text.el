@@ -37,7 +37,19 @@
   (smartparens-global-mode +1)
 
   ;; Highlight matching delimiters
-  (show-smartparens-global-mode +1))
+  (show-smartparens-global-mode +1)
+
+  ;; Fix pairing in web-mode
+  (sp-with-modes '(web-mode)
+    (sp-local-pair "%" "%"
+                   :unless '(sp-in-string-p)
+                   :post-handlers '(((lambda (&rest _ignored)
+                                       (just-one-space)
+                                       (save-excursion (insert " ")))
+                                     "SPC" "=" "#")))
+    (sp-local-tag "%" "<% "  " %>")
+    (sp-local-tag "=" "<%= " " %>")
+    (sp-local-tag "#" "<%# " " %>")))
 
 (use-package undo-tree
   :defer 1

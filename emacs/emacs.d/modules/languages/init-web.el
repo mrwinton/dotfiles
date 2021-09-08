@@ -3,16 +3,14 @@
 ;;; Code:
 
 (use-package web-mode
-  :after smartparens
-  :mode
-  (("\\.html?\\'" . web-mode)
-   ("\\.phtml?\\'" . web-mode)
-   ("\\.tpl\\.php\\'" . web-mode)
-   ("\\.[agj]sp\\'" . web-mode)
-   ("\\.as[cp]x\\'" . web-mode)
-   ("\\.erb\\'" . web-mode)
-   ("\\.mustache\\'" . web-mode)
-   ("\\.djhtml\\'" . web-mode))
+  :mode ("\\.html\\'"
+         "\\.phtml\\'"
+         "\\.tpl\\.php\\'"
+         "\\.[agj]sp\\'"
+         "\\.as[cp]x\\'"
+         "\\.erb\\'"
+         "\\.mustache\\'"
+         "\\.djhtml\\'")
   :custom
   (web-mode-markup-indent-offset 2)
 	(web-mode-css-indent-offset 2)
@@ -25,18 +23,7 @@
   (web-mode-auto-close-style 2) ;; Insert matching tags automatically.
   ;; Disable `web-mode' automatically re-indenting a bunch of
   ;; surrounding code when you paste anything.
-  (web-mode-enable-auto-indentation nil)
-  :config
-  (sp-with-modes '(web-mode)
-    (sp-local-pair "%" "%"
-                   :unless '(sp-in-string-p)
-                   :post-handlers '(((lambda (&rest _ignored)
-                                       (just-one-space)
-                                       (save-excursion (insert " ")))
-                                     "SPC" "=" "#")))
-    (sp-local-tag "%" "<% "  " %>")
-    (sp-local-tag "=" "<%= " " %>")
-    (sp-local-tag "#" "<%# " " %>")))
+  (web-mode-enable-auto-indentation nil))
 
 (provide 'init-web)
 ;;; init-web.el ends here
