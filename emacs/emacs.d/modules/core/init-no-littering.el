@@ -12,5 +12,4 @@
               custom-file (no-littering-expand-etc-file-name "custom.el")))
 
 (provide 'init-no-littering)
-
 ;;; init-no-littering.el ends here

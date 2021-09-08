@@ -246,5 +246,4 @@
  "!-=+]};:'\",.?")
 
 (provide 'init-defaults)
-
 ;;; init-defaults.el ends here

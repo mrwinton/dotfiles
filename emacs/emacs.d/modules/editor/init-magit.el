@@ -81,3 +81,4 @@
       ("h" "highlight" smerge-refine)]]))
 
 (provide 'init-magit)
+;;; init-magit.el ends here

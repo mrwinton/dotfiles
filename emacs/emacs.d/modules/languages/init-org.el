@@ -19,3 +19,4 @@
   (org-support-shift-select t))    ;; Allow shift selection with arrows.
 
 (provide 'init-org)
+;;; init-org.el ends here

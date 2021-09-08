@@ -95,5 +95,4 @@
   (setq comp-deferred-compilation-black-list '("/mu4e.*\\.el$")))
 
 (provide 'init-bootstrap)
-
 ;;; init-bootstrap.el ends here

@@ -7,3 +7,4 @@
   :mode "\\.nix\\'")
 
 (provide 'init-nix)
+;;; init-nix.el ends here

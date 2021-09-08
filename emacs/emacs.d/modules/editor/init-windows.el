@@ -48,3 +48,4 @@
 (global-set-key (kbd "C-c . Y") 'mrwinton/yank-buffer-path-relative-to-project)
 
 (provide 'init-windows)
+;;; init-windows.el ends here

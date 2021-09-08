@@ -7,5 +7,4 @@
   :bind (("C-c e" . envrc-command-map)))
 
 (provide 'init-direnv)
-
 ;;; init-direnv.el ends here

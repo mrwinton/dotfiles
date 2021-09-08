@@ -29,3 +29,4 @@
   :commands (emacs-everywhere))
 
 (provide 'init-macos)
+;;; init-macos.el ends here

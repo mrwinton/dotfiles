@@ -157,3 +157,4 @@ current line with the next line."
 (global-set-key (kbd "M-j") 'mrwinton/smart-join-line)
 
 (provide 'init-text)
+;;; init-text.el ends here

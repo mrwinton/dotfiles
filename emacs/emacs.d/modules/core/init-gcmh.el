@@ -16,5 +16,4 @@
   (gcmh-mode 1))
 
 (provide 'init-gcmh)
-
 ;;; init-gcmh.el ends here
