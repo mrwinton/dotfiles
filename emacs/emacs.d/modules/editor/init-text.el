@@ -39,6 +39,19 @@
   ;; Highlight matching delimiters
   (show-smartparens-global-mode +1)
 
+  ;; The default is 100, because smartparen's scans are relatively expensive
+  ;; (especially with large pair lists for some modes), we reduce it, as a
+  ;; better compromise between performance and accuracy.
+  (setq sp-max-prefix-length 25)
+
+  ;; No pair has any business being longer than 4 characters; if they must, set
+  ;; it buffer-locally. It's less work for smartparens.
+  (setq sp-max-pair-length 4)
+
+  ;; Silence some harmless but annoying echo-area spam
+  (dolist (key '(:unmatched-expression :no-matching-tag))
+    (setf (alist-get key sp-message-alist) nil))
+
   ;; Fix pairing in web-mode
   (sp-with-modes '(web-mode)
     (sp-local-pair "%" "%"
