@@ -116,7 +116,10 @@
             (save-place-mode 1)))
 
 ;; Save the session's mini-buffer history.
-(savehist-mode 1)
+(setq-default history-length 1000)
+(add-hook 'after-init-hook
+          (lambda ()
+            (savehist-mode 1)))
 
 ;; Show column numbers in the modeline.
 (column-number-mode 1)
