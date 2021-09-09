@@ -111,7 +111,9 @@
 
 ;; When you visit a file, point goes to the last place where it was when you
 ;; previously visited the same file.
-(save-place-mode 1)
+(add-hook 'after-init-hook
+          (lambda ()
+            (save-place-mode 1)))
 
 ;; Save the session's mini-buffer history.
 (savehist-mode 1)
