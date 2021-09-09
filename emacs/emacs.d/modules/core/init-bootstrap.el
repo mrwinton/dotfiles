@@ -78,9 +78,6 @@
               (server-start))))
 
 (when (display-graphic-p)
-  (let ((elapsed (float-time (time-subtract after-init-time before-init-time))))
-    (message "Loaded in %.2fs! Happy hacking ♥" elapsed))
-
   (add-hook 'after-init-hook
             `(lambda ()
                (let ((elapsed (float-time
