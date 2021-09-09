@@ -264,5 +264,9 @@
 ;; kill ring. This way, you can paste it with `yank-pop'.
 (setq save-interprogram-paste-before-kill t)
 
+;; Unset the mouse-wheel scale bindings.
+(global-unset-key [C-<wheel-down>])
+(global-unset-key [C-<wheel-up>])
+
 (provide 'init-defaults)
 ;;; init-defaults.el ends here
