@@ -12,7 +12,7 @@
   (dired-recursive-deletes 'always)
   (dired-recursive-copies 'always)
   (dired-clean-up-buffers-too t)
-  (insert-directory-program (executable-find "gls")))
+  (insert-directory-program (executable-find "ls")))
 
 (use-package diff-hl
   :hook (dired-mode . diff-hl-dired-mode))
