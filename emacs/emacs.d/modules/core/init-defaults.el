@@ -127,8 +127,10 @@
             (column-number-mode 1)))
 
 ;; See matching pairs of parentheses and other characters.
-(show-paren-mode 1)
 (setq show-paren-delay 0.0)
+(add-hook 'after-init-hook
+          (lambda ()
+            (show-paren-mode 1)))
 
 ;; Typed text replaces the selection if the selection is active. Otherwise,
 ;; typed text is just inserted at point regardless of any selection.
