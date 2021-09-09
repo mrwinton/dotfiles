@@ -8,7 +8,7 @@
 
 ;; Produce backtraces when errors occur: can be helpful to diagnose startup issues
 (setq debug-on-error t)
-(add-hook 'after-init-hook '(lambda () (setq debug-on-error nil)))
+(add-hook 'after-init-hook #'(lambda () (setq debug-on-error nil)))
 
 ;; Set and forget UTF-8, no need to include in each file.
 (set-language-environment "UTF-8")
