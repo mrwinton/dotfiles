@@ -122,7 +122,9 @@
             (savehist-mode 1)))
 
 ;; Show column numbers in the modeline.
-(column-number-mode 1)
+(add-hook 'after-init-hook
+          (lambda ()
+            (column-number-mode 1)))
 
 ;; See matching pairs of parentheses and other characters.
 (show-paren-mode 1)
