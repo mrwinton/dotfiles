@@ -190,7 +190,7 @@
 (setq global-auto-revert-non-file-buffers t)
 (add-hook 'after-init-hook
           (lambda ()
-           (global-auto-revert-mode t)))
+            (global-auto-revert-mode t)))
 
 ;; Treat CamelCaseSubWords as separate words in programming modes
 (add-hook 'prog-mode-hook 'subword-mode)
