@@ -256,5 +256,13 @@
    (set-char-table-range auto-fill-chars c t))
  "!-=+]};:'\",.?")
 
+;; If you have something on the system clipboard, and then kill
+;; something in Emacs, then by default whatever you had on the system
+;; clipboard is gone and there is no way to get it back. Setting the
+;; following option makes it so that when you kill something in Emacs,
+;; whatever was previously on the system clipboard is pushed into the
+;; kill ring. This way, you can paste it with `yank-pop'.
+(setq save-interprogram-paste-before-kill t)
+
 (provide 'init-defaults)
 ;;; init-defaults.el ends here
