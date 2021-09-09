@@ -3,7 +3,6 @@
 let
   callPackage = pkgs.callPackage;
 
-  asdf = callPackage ./asdf/package.nix { };
   comma = callPackage ./comma/package.nix { };
   hammerspoon = callPackage ./hammerspoon/package.nix { };
 
@@ -33,7 +32,6 @@ in {
 
   # https://search.nixos.org/packages?channel=unstable
   home.packages = [
-    asdf
     pkgs_aarch64.autoconf
     pkgs_aarch64.automake
     pkgs_aarch64.bat

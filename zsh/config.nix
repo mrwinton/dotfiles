@@ -62,8 +62,6 @@ with pkgs;
       export LC_ALL="en_GB.UTF-8"
       export LC_CTYPE="en_GB.UTF-8"
       export GIT_SSL_CAINFO="/etc/ssl/certs/ca-certificates.crt"
-
-      source $HOME/.nix-profile/asdf/asdf.sh
     '';
 
     history = {
