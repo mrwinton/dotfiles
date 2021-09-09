@@ -182,7 +182,9 @@
 (setq use-short-answers t)
 
 ;; Always turn on syntax highlighting where possible
-(global-font-lock-mode t)
+(add-hook 'after-init-hook
+          (lambda ()
+            (global-font-lock-mode t)))
 
 ;; Refresh buffers automatically when the file/buffer changes
 (setq global-auto-revert-non-file-buffers t)
