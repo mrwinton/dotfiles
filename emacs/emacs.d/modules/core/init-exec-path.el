@@ -3,7 +3,7 @@
 ;;; Code:
 
 (use-package exec-path-from-shell
-  :defer 1
+  :defer 0
   :custom
   (exec-path-from-shell-arguments nil)
   (exec-path-from-shell-variables
