@@ -7,7 +7,6 @@
 
   home.file = {
     ".default-gems".text = ''
-      awesome_print
       pry
       rubocop
       rubocop-performance
