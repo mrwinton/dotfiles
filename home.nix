@@ -22,7 +22,6 @@ in {
   programs.home-manager.enable = true;
 
   imports = [
-    ./asdf/config.nix
     ./emacs/config.nix
     ./git/config.nix
     ./hammerspoon/config.nix
