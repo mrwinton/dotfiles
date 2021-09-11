@@ -13,7 +13,8 @@ let
     localSystem = "aarch64-darwin";
     overlays = [
       (import (builtins.fetchTarball {
-        url =  "https://github.com/nix-community/emacs-overlay/archive/${emacs_sha}.tar.gz";
+        url =
+          "https://github.com/nix-community/emacs-overlay/archive/${emacs_sha}.tar.gz";
       }))
     ];
   };

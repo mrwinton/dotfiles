@@ -15,7 +15,8 @@ in {
     loginShell = "/run/current-system/sw/bin/zsh";
   };
 
-  environment.darwinConfig = "${homeDir}/src/github.com/mrwinton/dotfiles/darwin.nix";
+  environment.darwinConfig =
+    "${homeDir}/src/github.com/mrwinton/dotfiles/darwin.nix";
 
   environment.systemPackages = with pkgs; [
     (hunspellWithDicts [
