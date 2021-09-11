@@ -80,8 +80,8 @@ in {
     extraOptions = ''
       keep-outputs = true
       keep-derivations = true
-      system = x86_64-darwin
-      extra-platforms = x86_64-darwin aarch64-darwin
+      extra-platforms = aarch64-darwin x86_64-darwin
+      system = aarch64-darwin
     '';
   };
 }
