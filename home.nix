@@ -49,7 +49,7 @@ in {
     hammerspoon
     pkgs_aarch64.heroku
     pkgs_aarch64.imagemagick
-    pkgs_aarch64.nixfmt
+    pkgs_aarch64.nixpkgs-fmt
     pkgs_aarch64.openssl.dev
     pkgs_aarch64.proselint
     pkgs_aarch64.ripgrep
