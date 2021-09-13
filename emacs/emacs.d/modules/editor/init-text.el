@@ -121,6 +121,12 @@
 
 (use-package rainbow-mode)
 
+(use-package super-save
+  :hook (after-init . super-save-mode)
+  :custom
+  (super-save-remote-files nil))
+  (super-save-auto-save-when-idle t))
+
 ;; Easily adjust the font size in all frames
 (use-package default-text-scale
   :hook (after-init . default-text-scale-mode)
