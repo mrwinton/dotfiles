@@ -1,37 +1,37 @@
 { ... }:
 
 {
-   programs.git = {
-     enable = true;
+  programs.git = {
+    enable = true;
 
-     userName = "Michael Winton";
-     userEmail = "wintonmr@gmail.com";
+    userName = "Michael Winton";
+    userEmail = "wintonmr@gmail.com";
 
-     ignores = [
-       ".DS_Store"
-       ".env"
-       "*.orig"
-     ];
+    ignores = [
+      ".DS_Store"
+      ".env"
+      "*.orig"
+    ];
 
-     aliases = {
-       co = "checkout";
-       cp = "cherry-pick";
-       hreset = "!git reset --hard $(git rev-parse --abbrev-ref --symbolic-full-name @{u})";
-       pushf = "push --force-with-lease";
-       uncommit = "reset --soft HEAD^";
-       safe = "!mkdir $(git rev-parse --git-dir)/safe";
-     };
+    aliases = {
+      co = "checkout";
+      cp = "cherry-pick";
+      hreset = "!git reset --hard $(git rev-parse --abbrev-ref --symbolic-full-name @{u})";
+      pushf = "push --force-with-lease";
+      uncommit = "reset --soft HEAD^";
+      safe = "!mkdir $(git rev-parse --git-dir)/safe";
+    };
 
-     extraConfig = {
-       color.ui = true;
-       ghq.root = "~/src";
-       github.user = "mrwinton";
-       hub.protocol = "https";
-       merge.summary = true;
-       pull.rebase = true;
-       push.default = "current";
-       fetch.prune = true;
-       http.sslcainfo = "~/.nix-profile/etc/ssl/certs/ca-bundle.crt";
+    extraConfig = {
+      color.ui = true;
+      ghq.root = "~/src";
+      github.user = "mrwinton";
+      hub.protocol = "https";
+      merge.summary = true;
+      pull.rebase = true;
+      push.default = "current";
+      fetch.prune = true;
+      http.sslcainfo = "~/.nix-profile/etc/ssl/certs/ca-bundle.crt";
     };
   };
 }

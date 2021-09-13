@@ -1,7 +1,8 @@
 { pkgs, ... }:
 
 let homeDir = builtins.getEnv ("HOME");
-in {
+in
+{
   imports = [ <home-manager/nix-darwin> ];
 
   users.users.michaelwinton = {

@@ -18,7 +18,8 @@ let
       }))
     ];
   };
-in {
+in
+{
   programs.home-manager.enable = true;
 
   imports = [
@@ -65,24 +66,26 @@ in {
     nix-direnv.enable = true;
   };
 
-  home.activation.copyApplications = let
-    apps = pkgs.buildEnv {
-      name = "home-manager-applications";
-      paths = config.home.packages;
-      pathsToLink = "/Applications";
-    };
-  in lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    baseDir="/Applications/Home Manager"
-    if [ -d "$baseDir" ]; then
-      $DRY_RUN_CMD sudo rm -rf "$baseDir"
-    fi
-    sudo mkdir -p "$baseDir"
-    for appFile in ${apps}/Applications/*; do
-      target="$baseDir/$(basename "$appFile")"
-      sudo cp ''${VERBOSE_ARG:+-v} -fHRL "$appFile" "$baseDir"
-      sudo chmod ''${VERBOSE_ARG:+-v} -R +w "$target"
-    done
-  '';
+  home.activation.copyApplications =
+    let
+      apps = pkgs.buildEnv {
+        name = "home-manager-applications";
+        paths = config.home.packages;
+        pathsToLink = "/Applications";
+      };
+    in
+    lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      baseDir="/Applications/Home Manager"
+      if [ -d "$baseDir" ]; then
+        $DRY_RUN_CMD sudo rm -rf "$baseDir"
+      fi
+      sudo mkdir -p "$baseDir"
+      for appFile in ${apps}/Applications/*; do
+        target="$baseDir/$(basename "$appFile")"
+        sudo cp ''${VERBOSE_ARG:+-v} -fHRL "$appFile" "$baseDir"
+        sudo chmod ''${VERBOSE_ARG:+-v} -R +w "$target"
+      done
+    '';
 
   home.username = "michaelwinton";
   home.homeDirectory = "/Users/michaelwinton";
