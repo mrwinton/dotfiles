@@ -46,7 +46,6 @@ in
     pkgs_aarch64.ghq
     pkgs.git
     pkgs.gitAndTools.gh
-    pkgs.gitAndTools.hub
     hammerspoon
     pkgs_aarch64.heroku
     pkgs_aarch64.imagemagick
