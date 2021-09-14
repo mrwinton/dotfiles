@@ -17,14 +17,6 @@
 darwin-rebuild switch -I darwin-config=$HOME/src/github.com/mrwinton/dotfiles/darwin.nix
 home-manager switch -f $HOME/src/github.com/mrwinton/dotfiles/home.nix
 
-# If there are permission issues due to daemon mode:
-chown -R root:nixbld /nix
-chmod 1777 /nix/var/nix/profiles/per-user
-chown -R $USER:staff /nix/var/nix/profiles/per-user/$USER
-mkdir -m 1777 -p /nix/var/nix/gcroots/per-user
-chown -R $USER:staff /nix/var/nix/gcroots/per-user/$USER
-#+END_SRC
-
 ** Update
 
 #+BEGIN_SRC bash
