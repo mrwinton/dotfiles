@@ -38,12 +38,16 @@ with pkgs;
         lsof -i 4 -P -n | grep -i 'listen'
       }
 
-      function rebuild {
+      function rebuild-darwin {
         darwin-rebuild switch -I darwin-config=$HOME/src/github.com/mrwinton/dotfiles/darwin.nix
       }
 
+      function rebuild-home {
+        home-manager switch -f $HOME/src/github.com/mrwinton/dotfiles/home.nix
+      }
+
       function update {
-        nix-channel --update; rebuild;
+        nix-channel --update
       }
 
       function clean {
