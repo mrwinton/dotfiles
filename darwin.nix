@@ -3,7 +3,6 @@
 let homeDir = builtins.getEnv ("HOME");
 in
 {
-  imports = [ <home-manager/nix-darwin> ];
 
   users.users.michaelwinton = {
     home = homeDir;
@@ -36,8 +35,6 @@ in
       (nerdfonts.override { fonts = [ "Hack" ]; })
     ];
   };
-
-  home-manager.users.michaelwinton = (import ./home.nix);
 
   nixpkgs.config.allowUnfree = true;
 
