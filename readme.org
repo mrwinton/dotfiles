@@ -5,7 +5,7 @@
 
 #+BEGIN_SRC bash
 # Install nix
-# https://nixos.org/download.html
+# https://nixos.org/manual/nix/stable/#sect-macos-installation
 
 # Install nix-darwin
 # https://github.com/LnL7/nix-darwin
