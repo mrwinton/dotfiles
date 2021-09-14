@@ -3,6 +3,7 @@
 let homeDir = builtins.getEnv ("HOME");
 in
 {
+  services.nix-daemon.enable = false;
 
   users.users.michaelwinton = {
     home = homeDir;
@@ -65,10 +66,6 @@ in
     osascript -e 'quit app "Hammerspoon"'
     open -a Hammerspoon
   '';
-
-  # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
-  nix.package = pkgs.nix;
 
   system.stateVersion = 4;
 
