@@ -3,8 +3,8 @@
 ;;; Code:
 
 (use-package yasnippet
-  :after (company-mode)
-  :hook (((org-mode prog-mode) . yas-minor-mode)
+  :after company
+  :hook (((org-mode enh-ruby-mode ruby-mode js2-mode js-mode markdown-mode rspec-mode) . yas-minor-mode)
          (snippet-mode . (lambda ()
                            ;; Temporarily disable required newline at the end of
                            ;; file This fixes the problem with an extra newline
