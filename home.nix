@@ -26,7 +26,7 @@ in
     ./emacs/config.nix
     ./git/config.nix
     ./hammerspoon/config.nix
-    ./kitty/config.nix
+    # ./kitty/config.nix
     ./ruby/config.nix
     ./zsh/config.nix
   ];
