@@ -6,7 +6,8 @@
   :mode ("\\.yml\\'" "\\.yaml\\'" "\\.yaml.erb\\'"))
 
 (use-package yaml-tomato
-  :mode ("\\.yml\\'" "\\.yaml\\'" "\\.yaml.erb\\'"))
+  :commands
+  (yaml-tomato-show-current-path yaml-tomato-copy))
 
 (provide 'init-yaml)
 ;;; init-yaml.el ends here
