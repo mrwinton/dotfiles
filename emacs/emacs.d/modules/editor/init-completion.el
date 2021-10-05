@@ -52,6 +52,11 @@
   :straight (hotfuzz :type git :host github :repo "axelf4/hotfuzz")
   :defer 1
   :after selectrum
+  :custom
+  (completion-ignore-case t)
+  (read-file-name-completion-ignore-case t)
+  (read-buffer-completion-ignore-case t)
+  (selectrum-extend-current-candidate-highlight t)
   :config
   (hotfuzz-selectrum-mode +1))
 
