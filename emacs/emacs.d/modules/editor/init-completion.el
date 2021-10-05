@@ -55,18 +55,6 @@
   :config
   (hotfuzz-selectrum-mode +1))
 
-(use-package selectrum-prescient
-  :after selectrum
-  :config
-  ;; to make sorting and filtering more intelligent.
-  (selectrum-prescient-mode +1)
-
-  ;; The default, 100, is a little too small.
-  (setq prescient-history-length 1000)
-
-  ;; Persist across sessions so the sorting gets more intelligent over time.
-  (prescient-persist-mode +1))
-
 (use-package marginalia
   :after selectrum
   :defer 1
