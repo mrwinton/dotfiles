@@ -63,12 +63,5 @@
   :config
   (add-to-list 'company-backends 'company-web-html))
 
-(use-package company-tabnine
-  :after company
-  :custom
-  (company-tabnine-binaries-folder "~/.TabNine")
-  :config
-  (add-to-list 'company-backends #'company-tabnine))
-
 (provide 'init-company)
 ;;; init-company.el ends here
