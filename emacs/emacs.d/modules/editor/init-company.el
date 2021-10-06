@@ -16,6 +16,7 @@
 
   ;; Make completions display as soon as possible
   (company-idle-delay 0.0)
+  (company-echo-delay 0.0)
 
   ;; Make completions display after only typed one character, instead
   ;; of three.
