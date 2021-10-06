@@ -50,6 +50,10 @@
   ;; metadata, like a type signature, align that information to the
   ;; right-hand side. This usually makes it look neater.
   (company-tooltip-align-annotations t)
+
+  ;; Disable company in the following modes.
+  (company-global-modes '(not erc-mode message-mode help-mode
+                              gud-mode eshell-mode shell-mode))
   :config
   (global-company-mode +1))
 
