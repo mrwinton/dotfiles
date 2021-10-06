@@ -12,7 +12,7 @@
                            (setq-local require-final-newline nil))))
   :custom
   (yas-snippet-dirs (list (expand-file-name "~/.emacs.d/snippets")))
-  (yas-indent-line 'fixed) ;; Don't mess with the indentation
+  (yas-indent-line 'auto) ;; Indent using major mode
   (yas-verbosity 1) ;; Tone down verbosity
   :config
   (yas-reload-all)
