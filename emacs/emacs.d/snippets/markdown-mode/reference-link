@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: Footnote
+# name: Reference link
 # key: ll
 # --
 [${1:id}]
