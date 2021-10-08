@@ -36,6 +36,8 @@
                             "* TODO %?\n  %i\n  %a" :empty-lines 1)
                            ("f" "Todo (file)" entry (file+headline "~/src/github.com/mrwinton/org/todo.org" "Inbox")
                             "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)))
+  :config
+  (advice-add 'org-refile :after 'org-save-all-org-buffers))
 
 (provide 'init-org)
 ;;; init-org.el ends here
