@@ -26,6 +26,8 @@
   (org-log-done 'time)
   ;; Allow shift selection with arrows.
   (org-support-shift-select t)
+  ;; Have one empty line separator shown between collapsed trees
+  (org-cycle-separator-lines 1)
 
 (provide 'init-org)
 ;;; init-org.el ends here
