@@ -28,6 +28,10 @@
   (org-support-shift-select t)
   ;; Have one empty line separator shown between collapsed trees
   (org-cycle-separator-lines 1)
+  ;; Targets include this file and any file contributing to the agenda - up to 5 levels deep
+  (org-refile-targets '((nil :maxlevel . 5)
+                        (org-agenda-files :maxlevel . 5)
+                        ("~/src/github.com/mrwinton/org/archive.org" :maxlevel . 5)))
 
 (provide 'init-org)
 ;;; init-org.el ends here
