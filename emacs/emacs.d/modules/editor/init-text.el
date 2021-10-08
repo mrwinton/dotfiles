@@ -10,14 +10,13 @@
   ("M-o" . crux-smart-open-line)
   ("C-<BACKSPACE>" . crux-kill-line-backwards)
   ("C-<DEL>" . crux-kill-line-forwards)
-  ("C-c c" . crux-create-scratch-buffer)
+  ("C-c M-s" . crux-create-scratch-buffer)
   ("C-c d" . crux-duplicate-current-line-or-region)
   ("C-c M-d" . crux-duplicate-and-comment-current-line-or-region)
   ("C-c D" . crux-delete-file-and-buffer)
-  ("C-c r" . crux-rename-buffer-and-file)
-  ("C-c t" . crux-visit-term-buffer)
+  ("C-c R" . crux-rename-buffer-and-file)
+  ("C-c T" . crux-visit-term-buffer)
   ("C-h RET" . crux-find-user-init-file)
-  ("C-x x e" . crux-open-with)
   ("C-x 7" . crux-swap-windows))
 
 (use-package editorconfig
@@ -137,17 +136,6 @@
               ("C-s-=" . default-text-scale-increase)
               ("C-s--" . default-text-scale-decrease)
               ("C-s-0" . default-text-scale-reset)))
-
-(defun mrwinton/smart-open-line-above ()
-  "Insert an empty line above the current line."
-  (interactive)
-  (move-beginning-of-line nil)
-  (newline-and-indent)
-  (forward-line -1)
-  (indent-according-to-mode))
-
-(global-set-key [(control shift return)] 'mrwinton/smart-open-line-above)
-(global-set-key (kbd "M-O") 'mrwinton/smart-open-line-above)
 
 ;; Join lines whether you're in a region or not.
 (defun mrwinton/smart-join-line (beg end)
