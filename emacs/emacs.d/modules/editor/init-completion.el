@@ -23,6 +23,13 @@
                          ((executable-find "git" #'consult-git-grep))
                          (t #'consult-grep))))
       (funcall command dir initial)))
+  (defun mrwinton/selectrum-backward-kill-sexp-no-kill-ring (&optional arg)
+    (interactive "p")
+    (save-restriction
+      (narrow-to-region (minibuffer-prompt-end) (point-max))
+      (let ((opoint (point)))
+        (forward-sexp (- (or arg 1)))
+        (delete-region opoint (point)))))
   :bind
   ("C-c b" . consult-buffer)
   ("C-c f" . consult-find)
@@ -34,6 +41,8 @@
   ("M-y"   . consult-yank-pop)
   ("M-g g" . consult-goto-line)
   ([remap goto-line] . consult-goto-line)
+  (:map selectrum-minibuffer-map
+        ("<C-backspace>" . mrwinton/selectrum-backward-kill-sexp-no-kill-ring))
   :custom
   (consult-async-input-debounce 0.1)
   (consult-async-input-throttle 0.2)
