@@ -6,7 +6,9 @@
   :commands (org-mode org-capture org-agenda)
   :bind
   ("C-c a" . org-agenda)
-  ("C-c r" . org-capture)
+  ("C-c c" . org-capture)
+  ("C-c l" . org-store-link)
+  ("C-c C-r" . org-refile)
   :custom
   (org-directory "~/src/github.com/mrwinton/org")
   (org-agenda-files '("~/src/github.com/mrwinton/org/todo.org"))
