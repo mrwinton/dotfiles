@@ -32,6 +32,10 @@
   (org-refile-targets '((nil :maxlevel . 5)
                         (org-agenda-files :maxlevel . 5)
                         ("~/src/github.com/mrwinton/org/archive.org" :maxlevel . 5)))
+  (org-capture-templates '(("t" "Todo" entry (file+headline "~/src/github.com/mrwinton/org/todo.org" "Inbox")
+                            "* TODO %?\n  %i\n  %a" :empty-lines 1)
+                           ("f" "Todo (file)" entry (file+headline "~/src/github.com/mrwinton/org/todo.org" "Inbox")
+                            "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)))
 
 (provide 'init-org)
 ;;; init-org.el ends here
