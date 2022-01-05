@@ -23,12 +23,6 @@
   :custom
   (forge-database-file "~/.config/forge/database.sqlite"))
 
-(use-package gitignore-mode
-  :after magit)
-
-(use-package gitconfig-mode
-  :after magit)
-
 (use-package git-timemachine
   :commands (git-timemachine)
   :bind ("C-c g t" . 'git-timemachine))
