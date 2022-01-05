@@ -30,10 +30,13 @@
 ;; of handy syntactic sugar and useful features.
 (straight-use-package 'use-package)
 
-;; Install org as early as possible after straight so that the built-in version
-;; of org doesn't get activated between here and where org is actually
-;; configured.
-(straight-use-package 'org)
+;; Prevent Emacs-provided Org from being loaded. Doing this now means
+;; that if any packages that are installed in the meantime depend on
+;; Org, they will not accidentally cause the Emacs-provided (outdated
+;; and duplicated) version of Org to be loaded before the real one is
+;; registered.
+(straight-register-package 'org)
+(straight-register-package 'org-contrib)
 
 ;; When configuring a feature with `use-package', also tell
 ;; straight.el to install a package of the same name, unless otherwise
