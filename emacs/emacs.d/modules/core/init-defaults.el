@@ -192,6 +192,12 @@
           (lambda ()
             (global-auto-revert-mode t)))
 
+;; Disable major-mode and expensive minor modes in minified files to prevent
+;; hanging
+(add-hook 'after-init-hook
+          (lambda ()
+            (global-so-long-mode t)))
+
 ;; Treat CamelCaseSubWords as separate words in programming modes
 (add-hook 'prog-mode-hook 'subword-mode)
 
