@@ -76,7 +76,17 @@
   :custom
   (undo-tree-auto-save-history t)
   (undo-tree-enable-undo-in-region nil)
-  (undo-tree-visualizer-diff nil))
+  (undo-tree-visualizer-diff nil)
+  :config
+  (defun mrwinton/undo-tree-save-history-advice (orig-fn &rest args)
+    "Advice for `undo-tree-save-history' to hide echo area messages."
+    (let ((message-log-max nil)
+          (inhibit-message t))
+      (apply orig-fn args)))
+
+  (advice-add 'undo-tree-save-history :around 'mrwinton/undo-tree-save-history-advice))
+
+(use-package)
 
 (use-package ws-butler
   :hook
