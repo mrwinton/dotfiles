@@ -10,6 +10,28 @@
   (switch-window-shortcut-style 'alphabet)
   (switch-window-timeout nil))
 
+(use-package popper
+  :hook (after-init . popper-mode)
+  :bind (("C-'"   . popper-toggle-latest)
+         ("M-'"   . popper-cycle)
+         ("C-M-'" . popper-toggle-type))
+  :custom
+  (popper-reference-buffers
+   '(
+     "\\*Messages\\*"
+     "\\*Warnings\\*"
+     "Output\\*$"
+     "\\*eshell\\*"
+     "\\*undo-tree*\\*"
+     "^\\*eldoc"
+     "^\\*Backtrace\\*$"
+     "^\\*RuboCop "
+     "^\\*rspec-compilation\\*"
+     help-mode
+     compilation-mode
+     helpful-mode))
+  (popper-display-control nil))
+
 (defun mrwinton/split-window-below-and-switch ()
   "Split the window horizontally, then switch to the new pane."
   (interactive)
