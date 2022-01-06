@@ -64,15 +64,19 @@
     (sp-local-tag "#" "<%# " " %>")))
 
 (use-package undo-tree
-  :defer 1
-  :bind (:map undo-tree-map
-              ("M-/" . undo-tree-redo))
+  :hook (after-init . global-undo-tree-mode)
+  :init
+  (add-to-list 'display-buffer-alist
+               '("^ \\*undo-tree\\*" .
+                 ((display-buffer-in-side-window)
+                  (reusable-frames . visible)
+                  (side . right)
+                  (slot . 1)
+                  (window-height . 0.3))))
   :custom
   (undo-tree-auto-save-history t)
   (undo-tree-enable-undo-in-region nil)
-  (undo-tree-visualizer-diff t)
-  :config
-  (global-undo-tree-mode))
+  (undo-tree-visualizer-diff nil))
 
 (use-package ws-butler
   :hook
