@@ -29,14 +29,13 @@
 
 ;; Editor
 (require 'init-advice)
-(require 'init-company)
-(require 'init-completion)
 (require 'init-dired)
 (require 'init-eglot)
 (require 'init-flycheck)
 (require 'init-formatter)
 (require 'init-magit)
 (require 'init-projectile)
+(require 'init-selection)
 (require 'init-snippets)
 (require 'init-spelling)
 (require 'init-text)
