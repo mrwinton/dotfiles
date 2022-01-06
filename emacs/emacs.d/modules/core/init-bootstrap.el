@@ -71,8 +71,6 @@
 (use-package project
   :demand t)
 
-(use-package esup)
-
 ;; Allow access from emacsclient
 (add-hook 'after-init-hook
           (lambda ()
