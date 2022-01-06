@@ -144,7 +144,7 @@ current line with the next line."
   (interactive "r")
   (if mark-active
       (mrwinton/join-region beg end)
-      (mrwinton/top-join-line)))
+    (mrwinton/top-join-line)))
 
 (defun mrwinton/top-join-line ()
   "Join the current line with the next line."
