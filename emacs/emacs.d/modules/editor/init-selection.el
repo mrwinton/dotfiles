@@ -101,7 +101,7 @@
   ("M-g f" . consult-flycheck))
 
 (use-package embark-consult
-  :after (embark consult)
+  :after (embark)
   :demand t)
 
 (use-package corfu
