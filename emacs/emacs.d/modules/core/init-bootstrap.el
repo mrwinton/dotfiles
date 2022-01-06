@@ -88,6 +88,9 @@
                  (message "Loaded in %.2fs! Happy hacking ♥" elapsed)))
             t))
 
+(add-to-list 'native-comp-eln-load-path
+             (expand-file-name "eln-cache/" user-emacs-directory))
+
 (when (fboundp 'native-compile-async)
   (setq native-comp-async-report-warnings-errors nil)
   (setq comp-num-cpus 4)
