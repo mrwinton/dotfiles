@@ -71,6 +71,14 @@
 (use-package project
   :demand t)
 
+(use-package benchmark-init
+  :demand t
+  :straight (benchmark-init-el :type git :host github :repo "dholm/benchmark-init-el"
+                      :fork (:host github :repo "kekeimiku/benchmark-init-el"))
+  :config
+  ;; To disable collection of benchmark data after init is done.
+  (add-hook 'after-init-hook 'benchmark-init/deactivate))
+
 ;; Allow access from emacsclient
 (add-hook 'after-init-hook
           (lambda ()
