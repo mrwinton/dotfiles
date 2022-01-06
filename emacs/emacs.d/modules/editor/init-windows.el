@@ -18,17 +18,22 @@
   :custom
   (popper-reference-buffers
    '(
-     "\\*Messages\\*"
-     "\\*Warnings\\*"
      "Output\\*$"
      "\\*eshell\\*"
      "\\*undo-tree*\\*"
-     "^\\*eldoc"
-     "^\\*Backtrace\\*$"
-     "^\\*RuboCop "
+     "\\*xref\\*"
+     "\\*Messages\\*"
+     "\\*Warnings\\*"
+     "^\\*eldoc\\*"
      "^\\*rspec-compilation\\*"
-     help-mode
+     "^\\*Backtrace\\*"
+     "^\\*Embark Collect\\*"
+     "^\\*Embark Export.*\\*"
+     "^\\*RuboCop\\*"
+     "\\*Flycheck errors\\*"
+     "\\*Flycheck error messages\\*"
      compilation-mode
+     help-mode
      helpful-mode))
   (popper-display-control nil))
 
