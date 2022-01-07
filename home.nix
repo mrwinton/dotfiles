@@ -2,8 +2,6 @@
 
 let
   callPackage = pkgs.callPackage;
-
-  comma = callPackage ./comma/package.nix { };
   hammerspoon = callPackage ./hammerspoon/package.nix { };
 
   # https://github.com/nix-community/emacs-overlay
@@ -38,7 +36,6 @@ in
     pkgs_aarch64.bat
     pkgs.chromedriver
     pkgs.coreutils-full
-    comma
     pkgs_aarch64.emacsGcc
     pkgs_aarch64.fd
     pkgs_aarch64.fzf
