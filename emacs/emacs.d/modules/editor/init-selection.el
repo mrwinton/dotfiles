@@ -3,10 +3,64 @@
 ;;; Code:
 
 (use-package orderless
+  :config
+  (defun mrwinton/orderless-without-dispatcher (pattern _index _total)
+    "Literal style dispatcher using the equals sign as a prefix.
+It matches PATTERN _INDEX and _TOTAL according to how Orderless
+parses its input."
+    (cond
+     ((equal "!" pattern)
+      '(orderless-literal . ""))
+     ((string-prefix-p "!" pattern)
+      `(orderless-without-literal . ,(substring pattern 1)))))
+
+  (defun mrwinton/orderless-literal-dispatcher (pattern _index _total)
+    "Literal style dispatcher using the equals sign as a suffix.
+It matches PATTERN _INDEX and _TOTAL according to how Orderless
+parses its input."
+    (when (string-suffix-p "=" pattern)
+      `(orderless-literal . ,(substring pattern 0 -1))))
+
+  (defun mrwinton/orderless-initialism-dispatcher (pattern _index _total)
+    "Leading initialism  dispatcher using the comma suffix.
+It matches PATTERN _INDEX and _TOTAL according to how Orderless
+parses its input."
+    (when (string-suffix-p "," pattern)
+      `(orderless-strict-leading-initialism . ,(substring pattern 0 -1))))
+
+  (defun mrwinton/orderless-flex-dispatcher (pattern _index _total)
+    "Flex  dispatcher using the tilde suffix.
+It matches PATTERN _INDEX and _TOTAL according to how Orderless
+parses its input."
+    (when (string-suffix-p "~" pattern)
+      `(orderless-flex . ,(substring pattern 0 -1))))
+
+  (setq orderless-matching-styles '(orderless-flex
+                                    orderless-strict-leading-initialism
+                                    orderless-regexp
+                                    orderless-prefixes
+                                    orderless-literal))
+  (setq orderless-style-dispatchers '(mrwinton/orderless-without-dispatcher
+                                      mrwinton/orderless-literal-dispatcher
+                                      mrwinton/orderless-initialism-dispatcher
+                                      mrwinton/orderless-flex-dispatcher)))
+
+(use-package minibuffer
+  :straight (:type built-in)
   :custom
-  (completion-styles '(orderless))
+  (completion-styles
+   '(basic substring initials flex partial-completion orderless))
+  (completion-category-overrides
+   '((file (styles . (basic partial-completion orderless)))))
   (completion-category-defaults nil)
-  (completion-category-overrides '((file (styles partial-completion)))))
+  (completions-group t)
+  (completions-group-sort nil)
+  (completions-group-format
+   (concat
+    (propertize "    " 'face 'completions-group-separator)
+    (propertize " %s " 'face 'completions-group-title)
+    (propertize " " 'face 'completions-group-separator
+                'display '(space :align-to right)))))
 
 (use-package vertico
   :hook (after-init . vertico-mode))
@@ -37,38 +91,38 @@
 
 (use-package consult
   :bind
-   ("C-s" . consult-line)
-   ;; C-c bindings (mode-specific-map)
-   ("C-c h" . consult-history)
-   ("C-c m" . consult-mode-command)
-   ("C-c k" . consult-man)
-   ;; C-x bindings (ctl-x-map)
-   ("C-x M-:" . consult-complex-command)     ;; orig. repeat-complex-command
-   ("C-x b" . consult-buffer)                ;; orig. switch-to-buffer
-   ("C-x 4 b" . consult-buffer-other-window) ;; orig. switch-to-buffer-other-window
-   ("C-x 5 b" . consult-buffer-other-frame)  ;; orig. switch-to-buffer-other-frame
-   ("C-x r b" . consult-bookmark)            ;; orig. bookmark-jump
-   ;; Other custom bindings
-   ("M-y" . consult-yank-pop)                ;; orig. yank-pop
-   ("<help> a" . consult-apropos)            ;; orig. apropos-command
-   ;; M-g bindings (goto-map)
-   ("M-g e" . consult-compile-error)
-   ("M-g g" . consult-goto-line)             ;; orig. goto-line
-   ("M-g M-g" . consult-goto-line)           ;; orig. goto-line
-   ("M-g o" . consult-outline)               ;; Alternative: consult-org-heading
-   ("M-g m" . consult-mark)
-   ("M-g k" . consult-global-mark)
-   ;; M-s bindings (search-map)
-   ("M-s d" . consult-find)
-   ("M-s D" . consult-locate)
-   ("M-s g" . consult-grep)
-   ("M-s G" . consult-git-grep)
-   ("M-s r" . consult-ripgrep)
-   ("M-s l" . consult-line)
-   ("M-s L" . consult-line-multi)
-   ("M-s m" . consult-multi-occur)
-   ("M-s k" . consult-keep-lines)
-   ("M-s u" . consult-focus-lines)
+  ("C-s" . consult-line)
+  ;; C-c bindings (mode-specific-map)
+  ("C-c h" . consult-history)
+  ("C-c m" . consult-mode-command)
+  ("C-c k" . consult-man)
+  ;; C-x bindings (ctl-x-map)
+  ("C-x M-:" . consult-complex-command)     ;; orig. repeat-complex-command
+  ("C-x b" . consult-buffer)                ;; orig. switch-to-buffer
+  ("C-x 4 b" . consult-buffer-other-window) ;; orig. switch-to-buffer-other-window
+  ("C-x 5 b" . consult-buffer-other-frame)  ;; orig. switch-to-buffer-other-frame
+  ("C-x r b" . consult-bookmark)            ;; orig. bookmark-jump
+  ;; Other custom bindings
+  ("M-y" . consult-yank-pop)                ;; orig. yank-pop
+  ("<help> a" . consult-apropos)            ;; orig. apropos-command
+  ;; M-g bindings (goto-map)
+  ("M-g e" . consult-compile-error)
+  ("M-g g" . consult-goto-line)             ;; orig. goto-line
+  ("M-g M-g" . consult-goto-line)           ;; orig. goto-line
+  ("M-g o" . consult-outline)               ;; Alternative: consult-org-heading
+  ("M-g m" . consult-mark)
+  ("M-g k" . consult-global-mark)
+  ;; M-s bindings (search-map)
+  ("M-s d" . consult-find)
+  ("M-s D" . consult-locate)
+  ("M-s g" . consult-grep)
+  ("M-s G" . consult-git-grep)
+  ("M-s r" . consult-ripgrep)
+  ("M-s l" . consult-line)
+  ("M-s L" . consult-line-multi)
+  ("M-s m" . consult-multi-occur)
+  ("M-s k" . consult-keep-lines)
+  ("M-s u" . consult-focus-lines)
   ;; Enable automatic preview at point in the *Completions* buffer. This is
   ;; relevant when you use the default completion UI. You may want to also
   ;; enable `consult-preview-at-point-mode` in Embark Collect buffers.
