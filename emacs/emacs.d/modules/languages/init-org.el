@@ -28,6 +28,9 @@
   (org-support-shift-select t)
   ;; Have one empty line separator shown between collapsed trees
   (org-cycle-separator-lines 1)
+  ;; Clean-up and show diary entries in the agenda
+  (org-agenda-include-diary t)
+  (diary-display-function 'diary-fancy-display)
   ;; Targets include this file and any file contributing to the agenda - up to 5 levels deep
   (org-refile-targets '((nil :maxlevel . 5)
                         (org-agenda-files :maxlevel . 5)
@@ -37,7 +40,51 @@
                            ("f" "Todo (file)" entry (file+headline "~/src/github.com/mrwinton/org/todo.org" "Inbox")
                             "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)))
   :config
-  (advice-add 'org-refile :after 'org-save-all-org-buffers))
+  (advice-add 'org-refile :after 'org-save-all-org-buffers)
+  (add-hook 'diary-list-entries-hook 'diary-include-other-diary-files)
+  (add-hook 'diary-list-entries-hook 'diary-sort-entries t))
+
+;; Sync calendars to org diary
+(require 'auth-source)
+(setq mrwinton/calendars
+      '(("sync-work" . "work")
+        ("sync-personal" . "personal")))
+
+(defun mrwinton/calendar-sync (url diary-filename &optional non-marking)
+  "Download ics file and add it to file"
+  (with-current-buffer (find-file-noselect (url-file-local-copy url))
+    (unwind-protect
+        (progn
+          (when (find-buffer-visiting diary-filename)
+            (kill-buffer (find-buffer-visiting diary-filename)))
+          (delete-file diary-filename)
+          (save-current-buffer (icalendar-import-buffer diary-filename t non-marking)))
+      (delete-file (buffer-file-name)))))
+
+(defun mrwinton/calendar-sync-all ()
+  "Load a set of ICS calendars into Emacs diary files"
+  (interactive)
+  (with-current-buffer (find-file-noselect diary-file)
+    (mapcar #'(lambda (x)
+                (let* ((filename (format "diary.%s" (car x)))
+                       (file (format "%s%s" (file-name-directory diary-file) filename))
+                       (calendar-name (cdr x)))
+                  (message "%s" (concat "Loading " calendar-name " into " file))
+                  (mrwinton/calendar-sync (funcall
+                                            (plist-get
+                                             (nth 0 (auth-source-search :host "calendar-sync" :user calendar-name))
+                                             :secret)) file)
+                  (let ((include-line (format "#include \"%s\"" filename)))
+                    (unless (save-excursion
+                              (goto-char (point-min))
+                              (search-forward include-line nil t))
+                      (goto-char (point-min))
+                      (insert (concat include-line "\n"))))
+                  ))
+            mrwinton/calendars)
+    (save-buffer)
+    (when (find-buffer-visiting diary-file)
+      (kill-buffer (find-buffer-visiting diary-file)))))
 
 (provide 'init-org)
 ;;; init-org.el ends here
