@@ -58,9 +58,7 @@
 (require 'init-yaml)
 
 ;; Extensions
-(require 'init-local-core nil t)
-(require 'init-local-editor nil t)
-(require 'init-local-languages nil t)
+(require 'init-local nil t)
 
 (provide 'init)
 ;;; init.el ends here
