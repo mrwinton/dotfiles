@@ -86,8 +86,6 @@
 
   (advice-add 'undo-tree-save-history :around 'mrwinton/undo-tree-save-history-advice))
 
-(use-package)
-
 (use-package ws-butler
   :hook
   (prog-mode . ws-butler-mode))
