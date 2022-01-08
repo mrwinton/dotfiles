@@ -124,12 +124,6 @@
 (use-package vlf
   :hook (after-init . (lambda () (require 'vlf-setup))))
 
-(use-package dumb-jump
-  :custom
-  (xref-show-definitions-function #'xref-show-definitions-completing-read)
-  :config
-  (add-to-list 'xref-backend-functions #'dumb-jump-xref-activate t))
-
 (use-package rainbow-mode)
 
 (use-package super-save
