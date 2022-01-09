@@ -3,9 +3,8 @@
 with pkgs;
 
 let
-  emacsDir = ".config/emacs";
-  mrwintonPath = "${emacsDir}/mrwinton.emacs.d";
-  purcellPath = "${emacsDir}/purcell.emacs.d";
+  mrwintonPath = "~/src/github.com/mrwinton/dotfiles/emacs/emacs.d";
+  purcellPath = "~/.config/emacs/purcell.emacs.d";
 
   chemacsRepo = fetchFromGitHub {
     owner = "plexus";
@@ -29,12 +28,6 @@ in
       recursive = true;
     };
 
-    mrwinton = {
-      source = ./emacs.d;
-      target = mrwintonPath;
-      recursive = true;
-    };
-
     purcell = {
       source = purcellRepo;
       target = purcellPath;
@@ -42,8 +35,8 @@ in
     };
 
     ".emacs-profiles.el".text = ''
-      (("default" . ((user-emacs-directory . "~/${mrwintonPath}")))
-       ("purcell" . ((user-emacs-directory . "~/${purcellPath}"))))
+      (("default" . ((user-emacs-directory . "${mrwintonPath}")))
+       ("purcell" . ((user-emacs-directory . "${purcellPath}"))))
     '';
   };
 }
