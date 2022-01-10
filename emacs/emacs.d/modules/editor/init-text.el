@@ -88,7 +88,8 @@
 
 (use-package ws-butler
   :hook
-  (prog-mode . ws-butler-mode))
+  (prog-mode . ws-butler-mode)
+  (org-mode . ws-butler-mode))
 
 ;; Package `visual-regexp' provides an alternate version of
 ;; `query-replace' which highlights matches and replacements as you
