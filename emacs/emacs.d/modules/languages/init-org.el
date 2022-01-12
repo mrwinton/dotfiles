@@ -2,6 +2,10 @@
 ;;; Commentary:
 ;;; Code:
 
+(defvar mrwinton/org-directory "~/Documents/10-19 Notes/11 Personal/11.01 org")
+(defvar mrwinton/org-notes-file "~/Documents/10-19 Notes/11 Personal/11.01 org/notes.org")
+(defvar mrwinton/org-archive-file "~/Documents/10-19 Notes/11 Personal/11.01 org/archive.org")
+
 (use-package org
   :commands (org-mode org-capture org-agenda)
   :bind
@@ -10,8 +14,8 @@
   ("C-c l" . org-store-link)
   ("C-c C-r" . org-refile)
   :custom
-  (org-directory "~/src/github.com/mrwinton/org")
-  (org-agenda-files '("~/src/github.com/mrwinton/org/todo.org"))
+  (org-directory mrwinton/org-directory)
+  (org-agenda-files (list mrwinton/org-notes-file))
   ;; Visually indent sections. This looks better for smaller files.
   (org-startup-indented t)
   ;; Tab in source blocks should act like in major mode
@@ -34,10 +38,10 @@
   ;; Targets include this file and any file contributing to the agenda - up to 5 levels deep
   (org-refile-targets '((nil :maxlevel . 5)
                         (org-agenda-files :maxlevel . 5)
-                        ("~/src/github.com/mrwinton/org/archive.org" :maxlevel . 5)))
-  (org-capture-templates '(("t" "Todo" entry (file+headline "~/src/github.com/mrwinton/org/todo.org" "Inbox")
+                        (mrwinton/org-archive-file :maxlevel . 5)))
+  (org-capture-templates '(("c" "Todo" entry (file+headline mrwinton/org-notes-file "Inbox")
                             "* TODO %?\n  %i\n  %a" :empty-lines 1)
-                           ("f" "Todo (file)" entry (file+headline "~/src/github.com/mrwinton/org/todo.org" "Inbox")
+                           ("f" "Todo (file)" entry (file+headline mrwinton/org-notes-file "Inbox")
                             "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)))
   :config
   (advice-add 'org-refile :after 'org-save-all-org-buffers)
