@@ -74,11 +74,5 @@
       ("k" "kill"      smerge-kill-current)
       ("h" "highlight" smerge-refine)]]))
 
-(use-package git-auto-commit-mode
-  :custom
-  (gac-automatically-push-p t)
-  (gac-automatically-add-new-files-p t)
-  (gac-debounce-interval 300))
-
 (provide 'init-magit)
 ;;; init-magit.el ends here
