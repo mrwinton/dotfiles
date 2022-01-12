@@ -13,7 +13,9 @@
   (magit-stage-all-confirm nil)
   (magit-unstage-all-confirm nil)
   (git-commit-summary-max-length 50)
-  (git-commit-fill-column 72))
+  (git-commit-fill-column 72)
+  :config
+  (add-to-list 'magit-no-confirm 'stage-all-changes))
 
 (use-package forge
   :after magit
