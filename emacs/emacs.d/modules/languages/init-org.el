@@ -43,10 +43,63 @@
                             "* TODO %?\n  %i\n  %a" :empty-lines 1)
                            ("f" "Todo (file)" entry (file+headline mrwinton/org-notes-file "Inbox")
                             "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)))
+
+  (org-todo-keywords '((type "TODO(t)"
+                             "DOING(o)"
+                             "HOLD(h)"
+                             "|"
+                             "CANCELLED(c)"
+                             "DONE(d)")))
+  (org-todo-keyword-faces '(("TODO" . (:foreground "pink" :weight bold :underline t))
+                            ("DOING" . (:foreground "blue" :weight bold :underline t))
+                            ("HOLD" . (:foreground "yellow" :weight bold :underline t))
+                            ("CANCELLED" . (:foreground "red" :weight bold :underline t))
+                            ("DONE" . (:foreground "green" :weight bold :underline t))))
+
+  (org-agenda-skip-scheduled-if-done t)
+  (org-agenda-skip-deadline-if-done t)
+  (org-agenda-include-deadlines t)
   :config
   (advice-add 'org-refile :after 'org-save-all-org-buffers)
   (add-hook 'diary-list-entries-hook 'diary-include-other-diary-files)
   (add-hook 'diary-list-entries-hook 'diary-sort-entries t))
+
+(use-package org-super-agenda
+  :hook (org-agenda-mode . org-super-agenda-mode)
+  :custom
+  (org-agenda-custom-commands
+   '(
+     ("d" "Daily Agenda"
+      (
+       (agenda "" ((org-agenda-span 'day)
+                   (org-super-agenda-groups
+                    '((:name "Today"
+                             :time-grid t
+                             :date today
+                             :todo "TODAY"
+                             :scheduled today
+                             :order 1)))))
+       (alltodo
+        ""
+        ((org-agenda-overriding-header "Habits")
+         (org-super-agenda-groups
+          '((:name none
+                   :and (:habit t
+                                :scheduled nil))
+            (:discard (:anything t))))))
+       (todo
+        ""
+        ((org-agenda-overriding-header "Areas")
+         (org-agenda-prefix-format
+          '((todo . " %i %?t%?s")))
+         (org-agenda-todo-list-sublevels nil)
+         (org-super-agenda-groups
+          '((:discard
+             (:not (:todo ("TODO" "DOING" "HOLD"))
+                   :scheduled t
+                   :habit t))
+            (:auto-outline-path t)))))))
+     )))
 
 ;; Sync calendars to org diary
 (require 'auth-source)
@@ -75,9 +128,9 @@
                        (calendar-name (cdr x)))
                   (message "%s" (concat "Loading " calendar-name " into " file))
                   (mrwinton/calendar-sync (funcall
-                                            (plist-get
-                                             (nth 0 (auth-source-search :host "calendar-sync" :user calendar-name))
-                                             :secret)) file)
+                                           (plist-get
+                                            (nth 0 (auth-source-search :host "calendar-sync" :user calendar-name))
+                                            :secret)) file)
                   (let ((include-line (format "#include \"%s\"" filename)))
                     (unless (save-excursion
                               (goto-char (point-min))
