@@ -35,17 +35,11 @@
 
 (use-package diff-hl
   :after magit
-  :hook ((vc-dir-mode . turn-on-diff-hl-mode)
-         ;; Since diff-hl only updates highlights whenever the files
-         ;; has saved, flydiff-mode offers highlighting when the file
-         ;; has yet to be saved
-         ((dired-mode prog-mode vc-dir-mode) . diff-hl-flydiff-mode)
-
-         ;; Refresh diff-hl on Magit operations
-         (magit-pre-refresh  . diff-hl-magit-pre-refresh)
-         (magit-post-refresh . diff-hl-magit-post-refresh))
-  :init
-  (global-diff-hl-mode))
+  :hook (dired-mode . diff-hl-dired-mode-unless-remote)
+  :hook (magit-post-refresh . diff-hl-magit-post-refresh)
+  :config
+  ;; use margin instead of fringe
+  (diff-hl-margin-mode))
 
 (use-package smerge-mode
   :after magit
