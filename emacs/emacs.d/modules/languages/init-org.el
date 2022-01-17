@@ -62,7 +62,11 @@
   :config
   (advice-add 'org-refile :after 'org-save-all-org-buffers)
   (add-hook 'diary-list-entries-hook 'diary-include-other-diary-files)
-  (add-hook 'diary-list-entries-hook 'diary-sort-entries t))
+  (add-hook 'diary-list-entries-hook 'diary-sort-entries t)
+
+  (require 'org-habit)
+  (add-to-list 'org-modules 'org-habit)
+  (setq org-habit-graph-column 60))
 
 (use-package org-super-agenda
   :hook (org-agenda-mode . org-super-agenda-mode)
@@ -85,7 +89,7 @@
          (org-super-agenda-groups
           '((:name none
                    :and (:habit t
-                                :scheduled nil))
+                                :scheduled t))
             (:discard (:anything t))))))
        (todo
         ""
