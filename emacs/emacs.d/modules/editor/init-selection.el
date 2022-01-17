@@ -21,13 +21,6 @@ parses its input."
     (when (string-suffix-p "=" pattern)
       `(orderless-literal . ,(substring pattern 0 -1))))
 
-  (defun mrwinton/orderless-initialism-dispatcher (pattern _index _total)
-    "Leading initialism  dispatcher using the comma suffix.
-It matches PATTERN _INDEX and _TOTAL according to how Orderless
-parses its input."
-    (when (string-suffix-p "," pattern)
-      `(orderless-strict-leading-initialism . ,(substring pattern 0 -1))))
-
   (defun mrwinton/orderless-flex-dispatcher (pattern _index _total)
     "Flex  dispatcher using the tilde suffix.
 It matches PATTERN _INDEX and _TOTAL according to how Orderless
@@ -36,13 +29,11 @@ parses its input."
       `(orderless-flex . ,(substring pattern 0 -1))))
 
   (setq orderless-matching-styles '(orderless-flex
-                                    orderless-strict-leading-initialism
                                     orderless-regexp
                                     orderless-prefixes
                                     orderless-literal))
   (setq orderless-style-dispatchers '(mrwinton/orderless-without-dispatcher
                                       mrwinton/orderless-literal-dispatcher
-                                      mrwinton/orderless-initialism-dispatcher
                                       mrwinton/orderless-flex-dispatcher)))
 
 (use-package minibuffer
