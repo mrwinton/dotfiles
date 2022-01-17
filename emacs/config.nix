@@ -38,5 +38,10 @@ in
       (("default" . ((user-emacs-directory . "${mrwintonPath}")))
        ("purcell" . ((user-emacs-directory . "${purcellPath}"))))
     '';
+
+    proselint = {
+      source = ./proselint/config.json;
+      target = ".config/proselint/config.json";
+    };
   };
 }
