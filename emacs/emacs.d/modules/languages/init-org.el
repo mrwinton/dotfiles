@@ -44,17 +44,16 @@
                            ("f" "Todo (file)" entry (file+headline mrwinton/org-notes-file "Inbox")
                             "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)))
 
-  (org-todo-keywords '((type "TODO(t)"
-                             "DOING(o)"
-                             "HOLD(h)"
-                             "|"
-                             "CANCELLED(c)"
-                             "DONE(d)")))
-  (org-todo-keyword-faces '(("TODO" . (:foreground "pink" :weight bold :underline t))
-                            ("DOING" . (:foreground "blue" :weight bold :underline t))
-                            ("HOLD" . (:foreground "yellow" :weight bold :underline t))
-                            ("CANCELLED" . (:foreground "red" :weight bold :underline t))
-                            ("DONE" . (:foreground "green" :weight bold :underline t))))
+  (org-todo-keywords
+   '((sequence "TODO(t)" "MAYBE(m)" "WAIT(w@/!)" "|" "CANCEL(c@)" "DONE(d!)")))
+  (org-todo-keyword-faces
+   '(("WAIT" . '(bold org-todo))
+     ("MAYBE" . '(bold shadow))
+     ("CANCEL" . '(bold org-done))))
+  (org-priority-faces
+   '((?A . '(bold org-priority))
+     (?B . org-priority)
+     (?C . '(shadow org-priority))))
 
   (org-agenda-skip-scheduled-if-done t)
   (org-agenda-skip-deadline-if-done t)
@@ -93,7 +92,7 @@
          (org-agenda-todo-list-sublevels nil)
          (org-super-agenda-groups
           '((:discard
-             (:not (:todo ("TODO" "DOING" "HOLD"))
+             (:not (:todo ("TODO" "WAIT" "MAYBE"))
                    :scheduled t
                    :habit t))
             (:auto-outline-path t)))))))
