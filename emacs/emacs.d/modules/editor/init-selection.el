@@ -164,6 +164,9 @@ parses its input."
   (corfu-auto t)
   (corfu-auto-delay 0.1)
   (corfu-auto-prefix 3)
+  (corfu-quit-at-boundary t)     ;; Automatically quit at word boundary
+  (corfu-quit-no-match t)        ;; Automatically quit if there is no match
+  (corfu-echo-documentation nil) ;; Do not show documentation in the echo area
   (corfu-cycle t))
 
 (use-package cape
