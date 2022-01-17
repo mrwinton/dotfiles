@@ -153,7 +153,7 @@ parses its input."
   :hook (after-init . corfu-global-mode)
   :custom
   (corfu-auto t)
-  (corfu-auto-delay 0.1)
+  (corfu-auto-delay 0.3)
   (corfu-auto-prefix 3)
   (corfu-quit-at-boundary t)     ;; Automatically quit at word boundary
   (corfu-quit-no-match t)        ;; Automatically quit if there is no match
