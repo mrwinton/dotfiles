@@ -4,7 +4,7 @@ with pkgs;
 
 let
   mrwintonPath = "~/src/github.com/mrwinton/dotfiles/emacs/emacs.d";
-  purcellPath = "~/.config/emacs/purcell.emacs.d";
+  purcellPath = ".config/emacs/purcell.emacs.d";
 
   chemacsRepo = fetchFromGitHub {
     owner = "plexus";
