@@ -34,7 +34,7 @@ in
     pkgs_aarch64.autoconf
     pkgs_aarch64.automake
     pkgs_aarch64.bat
-    pkgs.chromedriver
+    pkgs_aarch64.chromedriver
     pkgs.coreutils-full
     pkgs_aarch64.emacsGcc
     pkgs_aarch64.fd
