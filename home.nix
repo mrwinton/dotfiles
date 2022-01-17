@@ -5,7 +5,7 @@ let
   hammerspoon = callPackage ./hammerspoon/package.nix { };
 
   # https://github.com/nix-community/emacs-overlay
-  emacs_sha = "4947b85a89f10799ef9b8bc1ee924c47f7919363";
+  emacs_sha = "5fcafb9229a347b2f5f5dc4ec9f0f5f977b42b85";
 
   pkgs_aarch64 = import <nixpkgs> {
     localSystem = "aarch64-darwin";
