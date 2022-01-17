@@ -66,7 +66,9 @@
 
   (require 'org-habit)
   (add-to-list 'org-modules 'org-habit)
-  (setq org-habit-graph-column 60))
+  (setq org-habit-show-habits-only-for-today nil)
+  (setq org-habit-graph-column 50)
+  (setq org-habit-preceding-days 7))
 
 (use-package org-super-agenda
   :hook (org-agenda-mode . org-super-agenda-mode)
@@ -83,14 +85,6 @@
                              :todo "TODAY"
                              :scheduled today
                              :order 1)))))
-       (alltodo
-        ""
-        ((org-agenda-overriding-header "Habits")
-         (org-super-agenda-groups
-          '((:name none
-                   :and (:habit t
-                                :scheduled t))
-            (:discard (:anything t))))))
        (todo
         ""
         ((org-agenda-overriding-header "Areas")
