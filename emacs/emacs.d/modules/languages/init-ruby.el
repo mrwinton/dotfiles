@@ -19,7 +19,18 @@
   (enh-ruby-deep-indent-paren nil)
   (enh-ruby-add-encoding-comment-on-save nil)
   (ruby-insert-encoding-magic-comment nil)
-  (ruby-align-to-stmt-keywords '(def if)))
+  (ruby-align-to-stmt-keywords '(def if))
+  :config
+  (setq mrwinton/ensured-gems '("reek" "solargraph"))
+  (defun mrwinton/ensure-gem-installed (gem)
+    "Check if given gem is installed."
+    (unless (executable-find gem)
+      (error "%s is not installed" gem)))
+  (defun mrwinton/ensure-gems-installed ()
+    "Check if mrwinton/ensured-gems are installed."
+    (interactive)
+    (mapcar 'mrwinton/ensure-gem-installed mrwinton/ensured-gems))
+  (add-hook 'enh-ruby-mode-hook #'mrwinton/ensure-gems-installed 5))
 
 (use-package rspec-mode
   :after enh-ruby-mode
