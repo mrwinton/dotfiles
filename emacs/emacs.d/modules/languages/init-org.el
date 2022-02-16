@@ -141,8 +141,7 @@
       (kill-buffer (find-buffer-visiting diary-file)))))
 
 (defun mrwinton/calendar-sync-all-while-idle ()
-  "Sync calendars after emacs has been idle for one minute.
-Usage from command line: `emacsclient -e "(mrwinton/calendar-sync-all-while-idle)" 2> /dev/null'"
+  "Sync calendars after emacs has been idle for one minute."
   (interactive)
   (run-with-idle-timer 60 nil #'mrwinton/calendar-sync-all))
 
