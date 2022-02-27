@@ -16,7 +16,15 @@
 (use-package mode-line-bell
   :hook (after-init . mode-line-bell-mode))
 
+(use-package doom-themes
+  :custom
+  doom-themes-enable-bold t
+	doom-themes-enable-italic t
+  :config
+  (doom-themes-org-config))
+
 (use-package modus-themes
+  :disabled
   :demand t
   :custom
   (modus-themes-mode-line '(accented borderless))
@@ -46,8 +54,8 @@
 (use-package circadian
   :demand t
   :custom
-  (circadian-themes '((:sunrise . modus-operandi)
-                      (:sunset  . modus-vivendi)))
+  (circadian-themes '((:sunrise . doom-one-light)
+                      (:sunset  . doom-one)))
   :config
   (circadian-setup))
 
