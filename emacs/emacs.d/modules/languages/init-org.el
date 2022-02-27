@@ -3,6 +3,7 @@
 ;;; Code:
 
 (defvar mrwinton/org-directory "~/Documents/10-19 Notes/11 Personal/11.01 org")
+(defvar mrwinton/org-tasks-file "~/Documents/10-19 Notes/11 Personal/11.01 org/tasks.org")
 (defvar mrwinton/org-notes-file "~/Documents/10-19 Notes/11 Personal/11.01 org/notes.org")
 (defvar mrwinton/org-archive-file "~/Documents/10-19 Notes/11 Personal/11.01 org/archive.org")
 
@@ -15,7 +16,7 @@
   ("C-c C-r" . org-refile)
   :custom
   (org-directory mrwinton/org-directory)
-  (org-agenda-files (list mrwinton/org-notes-file))
+  (org-agenda-files (list mrwinton/org-notes-file mrwinton/org-tasks-file))
   ;; Visually indent sections. This looks better for smaller files.
   (org-startup-indented t)
   ;; Tab in source blocks should act like in major mode
@@ -39,9 +40,9 @@
   (org-refile-targets '((nil :maxlevel . 5)
                         (org-agenda-files :maxlevel . 5)
                         (mrwinton/org-archive-file :maxlevel . 5)))
-  (org-capture-templates '(("c" "Todo" entry (file+headline mrwinton/org-notes-file "Inbox")
-                            "* TODO %?\n  %i\n  %a" :empty-lines 1)
-                           ("f" "Todo (file)" entry (file+headline mrwinton/org-notes-file "Inbox")
+  (org-capture-templates '(("c" "Todo" entry (file+headline mrwinton/org-tasks-file "1) Inbox")
+                            "* TODO %?\n  %i\n" :empty-lines 1)
+                           ("f" "Todo (file)" entry (file+headline mrwinton/org-tasks-file "1) Inbox")
                             "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)))
 
   (org-todo-keywords
