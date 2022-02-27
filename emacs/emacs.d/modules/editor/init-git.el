@@ -1,4 +1,4 @@
-;;; init-magit.el --- magit -*- lexical-binding: t; -*-
+;;; init-git.el --- git -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 
@@ -33,13 +33,29 @@
   :commands (git-link)
   :bind ("C-c g l" . 'git-link))
 
-(use-package diff-hl
-  :after magit
-  :hook (dired-mode . diff-hl-dired-mode-unless-remote)
-  :hook (magit-post-refresh . diff-hl-magit-post-refresh)
+(use-package git-gutter
+  :hook ((prog-mode org-mode) . git-gutter-mode)
+  :custom
+  (git-gutter:disabled-modes '(fundamental-mode image-mode pdf-view-mode))
   :config
-  ;; use margin instead of fringe
-  (diff-hl-margin-mode))
+  ;; update git gutters on focus in case we used git externally
+  (add-hook 'focus-in-hook #'git-gutter:update-all-windows)
+
+  ;; update git-gutter when using magit commands
+  (advice-add #'magit-stage-file   :after #'+vc-gutter-update-h)
+  (advice-add #'magit-unstage-file :after #'+vc-gutter-update-h))
+
+(use-package git-gutter-fringe
+  :commands git-gutter-mode
+  :init
+  (progn
+    (when (display-graphic-p)
+      (with-eval-after-load 'git-gutter
+        (require 'git-gutter-fringe))))
+  :config
+  (define-fringe-bitmap 'git-gutter-fr:added [224] nil nil '(center repeated))
+  (define-fringe-bitmap 'git-gutter-fr:modified [224] nil nil '(center repeated))
+  (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240] nil nil 'bottom))
 
 (use-package smerge-mode
   :after magit
@@ -70,5 +86,5 @@
       ("k" "kill"      smerge-kill-current)
       ("h" "highlight" smerge-refine)]]))
 
-(provide 'init-magit)
-;;; init-magit.el ends here
+(provide 'init-git)
+;;; init-git.el ends here

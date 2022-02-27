@@ -33,7 +33,7 @@
 (require 'init-eglot)
 (require 'init-flycheck)
 (require 'init-formatter)
-(require 'init-magit)
+(require 'init-git)
 (require 'init-projectile)
 (require 'init-selection)
 (require 'init-snippets)
