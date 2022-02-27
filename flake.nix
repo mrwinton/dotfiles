@@ -11,25 +11,25 @@
   };
 
   outputs = { self, darwin, nixpkgs, home-manager, ... }@inputs:
-   let 
-    nixpkgsConfig = {
-      config = { allowUnfree = true; };
-      overlays = [ inputs.emacs-overlay.overlay ];
-    }; 
-  in
-  {
-    darwinConfigurations."m-one" = darwin.lib.darwinSystem {
-      system = "aarch64-darwin";
-      modules = [ 
-          ./nix/darwin.nix 
+    let
+      nixpkgsConfig = {
+        config = { allowUnfree = true; };
+        overlays = [ inputs.emacs-overlay.overlay ];
+      };
+    in
+    {
+      darwinConfigurations."m-one" = darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        modules = [
+          ./nix/darwin.nix
           home-manager.darwinModules.home-manager
           {
             nixpkgs = nixpkgsConfig;
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.michaelwinton = import ./nix/home.nix;         
+            home-manager.users.michaelwinton = import ./nix/home.nix;
           }
-      ];
+        ];
+      };
     };
-  };
 }
