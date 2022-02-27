@@ -14,6 +14,7 @@
   home.packages = with pkgs; [
     bat
     coreutils-full
+    emacsGcc
     fd
     fzf
     ghq

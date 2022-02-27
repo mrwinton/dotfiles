@@ -38,19 +38,15 @@ with pkgs;
         lsof -i 4 -P -n | grep -i 'listen'
       }
 
-      function rebuild-darwin {
-        darwin-rebuild switch -I darwin-config=$HOME/src/github.com/mrwinton/dotfiles/darwin.nix
+      function flake-build {
+        cd ~/src/github.com/mrwinton/dotfiles; nix build .#darwinConfigurations.m-one.system
       }
 
-      function rebuild-home {
-        home-manager switch -f $HOME/src/github.com/mrwinton/dotfiles/home.nix
+      function flake-switch {
+        cd ~/src/github.com/mrwinton/dotfiles; ./result/sw/bin/darwin-rebuild switch --flake ./\#m-one
       }
 
-      function update {
-        nix-channel --update
-      }
-
-      function clean {
+      function flake-clean {
         nix-collect-garbage -d
       }
     '';
