@@ -54,7 +54,24 @@ parses its input."
                 'display '(space :align-to right)))))
 
 (use-package vertico
-  :hook (after-init . vertico-mode))
+  :straight (vertico :files (:defaults "extensions/*")
+                     :includes (vertico-buffer
+                                vertico-directory
+                                vertico-flat
+                                vertico-indexed
+                                vertico-mouse
+                                vertico-quick
+                                vertico-repeat
+                                vertico-reverse))
+  :hook ((rfn-eshadow-update-overlay-hook . vertico-directory-tidy)
+         (after-init . vertico-mode))
+  :bind
+  (:map vertico-map
+        ("RET" . vertico-directory-enter)
+        ("DEL" . vertico-directory-delete-char)
+        ("M-DEL" . vertico-directory-delete-word))
+  :init
+  (vertico-mode))
 
 (use-package marginalia
   :after vertico
