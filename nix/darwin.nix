@@ -21,7 +21,7 @@
       (nerdfonts.override { fonts = [ "Hack" ]; })
     ];
   };
-  
+
   services.nix-daemon.enable = true;
   nixpkgs.config.allowUnfree = true;
 
@@ -36,7 +36,11 @@
   };
 
   system.defaults = {
-    finder = { FXEnableExtensionChangeWarning = false; };
+    finder = {
+      AppleShowAllExtensions = true;
+      _FXShowPosixPathInTitle = true;
+      FXEnableExtensionChangeWarning = false;
+    };
     screencapture = { location = "~/Downloads"; };
     trackpad = {
       Clicking = true;
