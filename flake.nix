@@ -13,7 +13,15 @@
   {
     darwinConfigurations."m-one" = darwin.lib.darwinSystem {
       system = "aarch64-darwin";
-      modules = [ ./nix/darwin.nix ];
+      modules = [ 
+          ./nix/darwin.nix 
+          home-manager.darwinModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.michaelwinton = import ./nix/home.nix;            
+          }
+      ];
     };
   };
 }
