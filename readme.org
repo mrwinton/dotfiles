@@ -4,22 +4,20 @@
 ** Install
 
 #+BEGIN_SRC bash
-# Install nix
-# https://nixos.org/manual/nix/stable/#sect-macos-installation
+# Install Nix
+curl -L https://nixos.org/nix/install | sh
 
-# Install nix-darwin
-# https://github.com/LnL7/nix-darwin
+# Enable Flakes and Nix command
+mkdir -p ~/.config/nix
+cat <<EOF > ~/.config/nix/nix.conf
+experimental-features = nix-command flakes
+EOF
 
-# Install home-manager using the unstable channel
-# https://github.com/nix-community/home-manager
+# Clone the dotfiles
+mkdir ~/src/github.com/mrwinton/ && cd "$_"
+git clone git@github.com:mrwinton/dotfiles.git
 
-# Use dotfiles' home.nix configuration
-darwin-rebuild switch -I darwin-config=$HOME/src/github.com/mrwinton/dotfiles/darwin.nix
-home-manager switch -f $HOME/src/github.com/mrwinton/dotfiles/home.nix
-
-** Update
-
-#+BEGIN_SRC bash
-nix-channel --update
-darwin-rebuild switch -I darwin-config=$HOME/src/github.com/mrwinton/dotfiles/darwin.nix
+# Build and switch to the configuration
+nix build .#darwinConfigurations.m-one.system
+./result/sw/bin/darwin-rebuild switch --flake ./\#m-one
 #+END_SRC
