@@ -31,7 +31,6 @@
       pull.rebase = true;
       push.default = "current";
       fetch.prune = true;
-      http.sslcainfo = "~/.nix-profile/etc/ssl/certs/ca-bundle.crt";
     };
   };
 }
