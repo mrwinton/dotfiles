@@ -2,6 +2,8 @@
 ;;; Commentary:
 ;;; Code:
 
+(set-frame-font "MonoLisa")
+
 ;; Go fullscreen on startup
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 
