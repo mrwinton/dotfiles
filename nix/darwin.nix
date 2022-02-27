@@ -1,23 +1,8 @@
 { pkgs, ... }:
-
-let homeDir = builtins.getEnv ("HOME");
-in
 {
-  services.nix-daemon.enable = false;
-
   users.users.michaelwinton = {
-    home = homeDir;
     description = "Michael Winton";
-    shell = pkgs.zsh;
   };
-
-  environment = {
-    shells = with pkgs; [ zsh ];
-    loginShell = "/run/current-system/sw/bin/zsh";
-  };
-
-  environment.darwinConfig =
-    "${homeDir}/src/github.com/mrwinton/dotfiles/darwin.nix";
 
   environment.systemPackages = with pkgs; [
     (hunspellWithDicts [
@@ -36,7 +21,8 @@ in
       (nerdfonts.override { fonts = [ "Hack" ]; })
     ];
   };
-
+  
+  services.nix-daemon.enable = true;
   nixpkgs.config.allowUnfree = true;
 
   programs.zsh = {
@@ -51,27 +37,22 @@ in
 
   system.defaults = {
     finder = { FXEnableExtensionChangeWarning = false; };
-    screencapture = { location = "${homeDir}/Downloads"; };
+    screencapture = { location = "~/Downloads"; };
     trackpad = {
       Clicking = true;
       TrackpadThreeFingerDrag = true;
     };
   };
 
-  system.activationScripts.postActivation.text = ''
-    # Use list view in Finder by default
-    defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
-
-    # Restart Hammerspoon after the build to apply new configuration
-    osascript -e 'quit app "Hammerspoon"'
-    open -a Hammerspoon
-  '';
-
   system.stateVersion = 4;
 
   nix = {
     buildCores = 4;
     maxJobs = 8;
+    gc = {
+      automatic = true;
+      options = "--delete-older-than 3d";
+    };
     extraOptions = ''
       keep-outputs = true
       keep-derivations = true
