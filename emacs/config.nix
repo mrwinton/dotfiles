@@ -6,19 +6,8 @@ let
   mrwintonPath = "~/src/github.com/mrwinton/dotfiles/emacs/emacs.d";
   purcellPath = ".config/emacs/purcell.emacs.d";
 
-  chemacsRepo = fetchFromGitHub {
-    owner = "plexus";
-    repo = "chemacs2";
-    rev = "ef82118824fac2b2363d3171d26acbabe1738326";
-    sha256 = "1gg4aa6dxc4k9d78j8mrrhy0mvhqmly7jxby69518xs9njxh00dq";
-  };
-
-  purcellRepo = fetchFromGitHub {
-    owner = "purcell";
-    repo = "emacs.d";
-    rev = "a42311c994d9966e250cefd26d33ed1de59a3f7f";
-    sha256 = "1487lx4xrcl8jss913h39ny0dwj5j3bn38k53sjfqmzh9g6aikng";
-  };
+  chemacsRepo = pkgs.chemacs-repo;
+  purcellRepo = pkgs.purcell-repo;
 in
 {
   home.file = {

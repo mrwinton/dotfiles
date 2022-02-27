@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "chemacs-repo": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1645426666,
+        "narHash": "sha256-0bo7HWiI4rOEm/wQm3o3+xykEHoOHkbjqEI0vuwv+kA=",
+        "owner": "plexus",
+        "repo": "chemacs2",
+        "rev": "342b9095803f7fab45fe39e357cfd10f8a9fc237",
+        "type": "github"
+      },
+      "original": {
+        "owner": "plexus",
+        "repo": "chemacs2",
+        "type": "github"
+      }
+    },
     "darwin": {
       "inputs": {
         "nixpkgs": [
@@ -72,12 +88,30 @@
         "type": "github"
       }
     },
+    "purcell-repo": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1644653723,
+        "narHash": "sha256-aJUGJhdnFAdFY7DzkID5/DXC3Zj4e0TWymOTvw0KyWI=",
+        "owner": "purcell",
+        "repo": "emacs.d",
+        "rev": "dc8a9e3a0017f8df7ab5692909f4c75695bab5b2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "purcell",
+        "repo": "emacs.d",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
+        "chemacs-repo": "chemacs-repo",
         "darwin": "darwin",
         "emacs-overlay": "emacs-overlay",
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "purcell-repo": "purcell-repo"
       }
     }
   },

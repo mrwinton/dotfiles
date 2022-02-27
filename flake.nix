@@ -8,13 +8,25 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     emacs-overlay.url = "github:nix-community/emacs-overlay";
+    chemacs-repo = {
+      url = "github:plexus/chemacs2";
+      flake = false;
+    };
+    purcell-repo = {
+      url = "github:purcell/emacs.d";
+      flake = false;
+    };
   };
 
   outputs = { self, darwin, nixpkgs, home-manager, ... }@inputs:
     let
       nixpkgsConfig = {
         config = { allowUnfree = true; };
-        overlays = [ inputs.emacs-overlay.overlay ];
+        overlays = [
+          inputs.emacs-overlay.overlay
+          (final: prev: { chemacs-repo = inputs.chemacs-repo; })
+          (final: prev: { purcell-repo = inputs.purcell-repo; })
+        ];
       };
     in
     {
