@@ -8,7 +8,11 @@
   :custom
   (flycheck-display-errors-function #'flycheck-display-error-messages-unless-error-list)
   (flycheck-check-syntax-automatically '(save idle-change new-line mode-enabled))
+  (flycheck-indication-mode 'right-fringe)
+  (flycheck-highlighting-mode nil)
   :config
+  (define-fringe-bitmap 'flycheck-fringe-bitmap-double-arrow
+    [16 48 112 240 112 48 16] nil nil 'center)
   (global-flycheck-mode))
 
 (use-package flycheck-posframe
