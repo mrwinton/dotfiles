@@ -20,6 +20,7 @@
     ghq
     git
     heroku
+    imagemagick
     nixpkgs-fmt
     openssl.dev
     proselint
