@@ -17,6 +17,7 @@
   :hook (after-init . mode-line-bell-mode))
 
 (use-package doom-themes
+  :disabled
   :custom
   doom-themes-enable-bold t
 	doom-themes-enable-italic t
@@ -24,7 +25,6 @@
   (doom-themes-org-config))
 
 (use-package modus-themes
-  :disabled
   :demand t
   :custom
   (modus-themes-mode-line '(accented borderless))
@@ -38,11 +38,7 @@
   (modus-themes-org-blocks 'tinted-background)
   (modus-themes-headings '((1 . (no-bold overline)) (t . (no-bold))))
   (modus-themes-paren-match '(intense bold))
-  (modus-themes-links '(neutral-underline))
-  (modus-themes-completions 'moderate)
-  :config
-  (load-theme 'modus-operandi t)
-  (set-face-foreground 'vertical-border (modus-themes-color 'bg-inactive)))
+  (modus-themes-links '(neutral-underline)))
 
 (use-package solar
   :straight (:type built-in)
@@ -54,8 +50,8 @@
 (use-package circadian
   :demand t
   :custom
-  (circadian-themes '((:sunrise . doom-one-light)
-                      (:sunset  . doom-one)))
+  (circadian-themes '((:sunrise . modus-operandi)
+                      (:sunset  . modus-vivendi)))
   :config
   (circadian-setup))
 
