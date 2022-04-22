@@ -138,6 +138,16 @@
               ("C-s--" . default-text-scale-decrease)
               ("C-s-0" . default-text-scale-reset)))
 
+(use-package tree-sitter
+  :hook
+  (after-init . global-tree-sitter-mode)
+  (tree-sitter-after-on . tree-sitter-hl-mode)
+  :config
+  (add-to-list 'tree-sitter-major-mode-language-alist '(enh-ruby-mode . ruby)))
+
+(use-package tree-sitter-langs
+  :commands global-tree-sitter-mode)
+
 ;; Join lines whether you're in a region or not.
 (defun mrwinton/smart-join-line (beg end)
   "If in a region, join all the lines in it. If not, join the

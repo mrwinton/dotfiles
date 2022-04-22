@@ -18,6 +18,9 @@
   (enh-ruby-hanging-paren-deep-indent-level 2)
   (enh-ruby-deep-indent-paren nil)
   (enh-ruby-add-encoding-comment-on-save nil)
+  (enh-ruby-font-lock-keywords nil)
+  (enh-ruby-font-names nil)
+  (ruby-font-lock-keywords nil)
   (ruby-insert-encoding-magic-comment nil)
   (ruby-align-to-stmt-keywords '(def if))
   :config
