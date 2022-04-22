@@ -40,21 +40,6 @@
   (modus-themes-paren-match '(intense bold))
   (modus-themes-links '(neutral-underline)))
 
-(use-package solar
-  :straight (:type built-in)
-  :demand t
-  :custom
-  (calendar-latitude 59.3)
-  (calendar-longitude 18.1))
-
-(use-package circadian
-  :demand t
-  :custom
-  (circadian-themes '((:sunrise . modus-operandi)
-                      (:sunset  . modus-vivendi)))
-  :config
-  (circadian-setup))
-
 (use-package minions
   :hook (after-init . minions-mode))
 
@@ -70,6 +55,50 @@
 
 (when (display-graphic-p)
   (setq frame-title-format '((:eval (mrwinton/frame-title-format)))))
+
+(defcustom mrwinton/dark-theme 'modus-vivendi
+  "The theme to enable when dark-mode is active."
+  :type 'symbol)
+
+(defcustom mrwinton/light-theme 'modus-operandi
+  "The theme to enable when dark-mode is inactive."
+  :type 'symbol)
+
+(defcustom mrwinton/polling-interval-seconds 60
+  "The number of seconds between which to poll for dark mode state."
+  :type 'integer)
+
+(defvar mrwinton/last-dark-mode-state 'unknown)
+
+(defun mrwinton/is-dark-mode ()
+  "Invoke applescript using Emacs built-in AppleScript support to
+see if dark mode is enabled. Return true if it is."
+  (string-equal "true" (ns-do-applescript "tell application \"System Events\"
+	tell appearance preferences
+		if (dark mode) then
+			return \"true\"
+		else
+			return \"false\"
+		end if
+	end tell
+end tell")))
+
+(defun mrwinton/check-and-set-dark-mode ()
+  "Set the theme according to macOS's dark mode state. Only set the
+theme if current theme does not match, this prevents flickering."
+  (let ((is-dark-mode (mrwinton/is-dark-mode)))
+    (if (not (eq is-dark-mode mrwinton/last-dark-mode-state))
+        (progn
+          (setq mrwinton/last-dark-mode-state is-dark-mode)
+          (if is-dark-mode
+              (progn
+                (load-theme mrwinton/dark-theme t)
+                (disable-theme mrwinton/light-theme))
+            (progn
+              (load-theme mrwinton/light-theme t)
+              (disable-theme mrwinton/dark-theme)))))))
+
+(run-with-idle-timer 0 mrwinton/polling-interval-seconds 'mrwinton/check-and-set-dark-mode)
 
 (provide 'init-ui)
 ;;; init-ui.el ends here
