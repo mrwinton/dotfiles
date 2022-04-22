@@ -39,6 +39,9 @@ parses its input."
 (use-package minibuffer
   :straight (:type built-in)
   :custom
+  (read-buffer-completion-ignore-case t)
+  (read-file-name-completion-ignore-case t)
+  (completion-ignore-case t)
   (completion-styles
    '(basic substring initials flex partial-completion orderless))
   (completion-category-overrides
