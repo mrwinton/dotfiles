@@ -24,8 +24,8 @@
               ("C-c . d" . mrwinton/devdocs-lookup+))
   :init
   (defvar devdocs-major-mode-docs-alist
-    '((ruby-mode . ("ruby~3" "rails~6.1"))
-      (enh-ruby-mode . ("ruby~3" "rails~6.1"))
+    '((ruby-mode . ("ruby~3" "rails~7"))
+      (enh-ruby-mode . ("ruby~3" "rails~7"))
       (css-mode . ("css"))
       (html-mode . ("html"))
       (js-mode . ("javascript"))
