@@ -271,6 +271,13 @@
    (set-char-table-range auto-fill-chars c t))
  "!-=+]};:'\",.?")
 
+;; Prefer UTF-8
+(prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
+
 ;; If you have something on the system clipboard, and then kill
 ;; something in Emacs, then by default whatever you had on the system
 ;; clipboard is gone and there is no way to get it back. Setting the
