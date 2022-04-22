@@ -63,28 +63,22 @@
     (sp-local-tag "=" "<%= " " %>")
     (sp-local-tag "#" "<%# " " %>")))
 
-(use-package undo-tree
-  :hook (after-init . global-undo-tree-mode)
-  :init
-  (add-to-list 'display-buffer-alist
-               '("^ \\*undo-tree\\*" .
-                 ((display-buffer-in-side-window)
-                  (reusable-frames . visible)
-                  (side . right)
-                  (slot . 1)
-                  (window-height . 0.3))))
+(use-package vundo
+  :commands (vundo)
+  :bind (("C-x u" . vundo))
   :custom
-  (undo-tree-auto-save-history t)
-  (undo-tree-enable-undo-in-region nil)
-  (undo-tree-visualizer-diff nil)
-  :config
-  (defun mrwinton/undo-tree-save-history-advice (orig-fn &rest args)
-    "Advice for `undo-tree-save-history' to hide echo area messages."
-    (let ((message-log-max nil)
-          (inhibit-message t))
-      (apply orig-fn args)))
+  (vundo-glyph-alist vundo-unicode-symbols)
+  (vundo-compact-display nil))
 
-  (advice-add 'undo-tree-save-history :around 'mrwinton/undo-tree-save-history-advice))
+(use-package undo-hl
+  :straight (undo-hl :type git :host github :repo "casouri/undo-hl")
+  :hook
+  (prog-mode-hook . undo-hl-mode)
+  :custom
+  (undo-hl-mininum-edit-size 10)
+  :config
+  (add-to-list 'undo-hl-undo-commands 'vundo-forward)
+  (add-to-list 'undo-hl-undo-commands 'vundo-backward))
 
 (use-package ws-butler
   :hook
