@@ -184,8 +184,7 @@ parses its input."
   :after corfu
   :init
   (add-to-list 'completion-at-point-functions #'cape-file)
-  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
-  (add-to-list 'completion-at-point-functions #'cape-keyword))
+  (add-to-list 'completion-at-point-functions #'cape-dabbrev))
 
 (use-package dabbrev
   ;; Swap M-/ and C-M-/
