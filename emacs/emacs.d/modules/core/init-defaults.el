@@ -41,6 +41,10 @@
 ;; fonts that are larger than the system default (which would resize the frame).
 (setq frame-inhibit-implied-resize t)
 
+;; Improve resizing performance
+(setq window-resize-pixelwise t)
+(setq frame-resize-pixelwise t)
+
 ;; Emacs "updates" its ui more often than it needs to, so slow it down slightly
 (setq idle-update-delay 1.0)  ; default is 0.5
 
