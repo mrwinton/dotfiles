@@ -44,5 +44,8 @@
   (rspec-use-opts-file-when-available nil)
   (rspec-command-options "--color --format documentation"))
 
+(use-package ruby-tools
+  :hook (ruby-mode . ruby-tools-mode))
+
 (provide 'init-ruby)
 ;;; init-ruby.el ends here
