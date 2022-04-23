@@ -2,17 +2,16 @@
 ;;; Commentary:
 ;;; Code:
 
-(setenv "DICTIONARY" "en_GB")
 (use-package ispell
   :after exec-path-from-shell
   :config
-  (let ((executable (executable-find "hunspell")))
+  (let ((executable (executable-find "aspell")))
     (when executable
       (setq-default ispell-program-name executable)
-      (setq ispell-command-name "hunspell"
-            ispell-dictionary "en_GB"
-            ispell-really-hunspell t
-            ispell-extra-args '("-a" "-i" "utf-8")))))
+      (setq ispell-command-name "aspell"
+            ispell-dictionary "en_US"
+            ispell-really-aspell t
+            ispell-extra-args '("--sug-mode=ultra" "--run-together")))))
 
 (use-package flyspell
   :defer t

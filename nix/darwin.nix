@@ -5,12 +5,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    (hunspellWithDicts [
-      hunspellDicts.en-gb-ise
-      hunspellDicts.en-gb-ize
-      hunspellDicts.en-us
-      hunspellDicts.sv-se
-    ])
     redis
   ];
 

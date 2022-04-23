@@ -1,4 +1,7 @@
 { config, lib, pkgs, ... }:
+let
+  aspellEnv = pkgs.aspellWithDicts (d: [ d.en d.sv ]);
+in
 {
   programs.home-manager.enable = true;
 
@@ -12,6 +15,7 @@
 
   # https://search.nixos.org/packages?channel=unstable
   home.packages = with pkgs; [
+    aspellEnv
     bat
     coreutils-full
     emacsGcc
@@ -28,6 +32,8 @@
     youtube-dl
     universal-ctags
   ];
+
+  home.file.".aspell.conf".text = "data-dir ${aspellEnv}/lib/aspell";
 
   programs.direnv = {
     enable = true;
