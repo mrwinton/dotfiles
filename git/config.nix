@@ -23,14 +23,16 @@
     };
 
     extraConfig = {
+      branch.autosetuprebase = "always";
       color.ui = true;
+      fetch.prune = true;
       ghq.root = "~/src";
       github.user = "mrwinton";
       hub.protocol = "https";
       merge.summary = true;
       pull.rebase = true;
       push.default = "current";
-      fetch.prune = true;
+      rebase.autosquash = true;
     };
   };
 }
