@@ -42,8 +42,7 @@ parses its input."
   (read-buffer-completion-ignore-case t)
   (read-file-name-completion-ignore-case t)
   (completion-ignore-case t)
-  (completion-styles
-   '(basic substring initials flex partial-completion orderless))
+  (completion-styles '(orderless))
   (completion-category-overrides
    '((file (styles . (basic partial-completion orderless)))))
   (completion-category-defaults nil)
