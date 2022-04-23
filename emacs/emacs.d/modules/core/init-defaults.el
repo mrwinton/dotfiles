@@ -153,6 +153,9 @@
 ;; that data turns out to be large.
 (setq save-interprogram-paste-before-kill t)
 
+;; Include '\n' when point starts at the beginning-of-line.
+(setq kill-whole-line t)
+
 ;; Show all variables, functions, etc when invoking apropos.
 (setq apropos-do-all t)
 
