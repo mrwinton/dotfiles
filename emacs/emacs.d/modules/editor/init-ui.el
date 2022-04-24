@@ -92,11 +92,9 @@ theme if current theme does not match, this prevents flickering."
           (setq mrwinton/last-dark-mode-state is-dark-mode)
           (if is-dark-mode
               (progn
-                (load-theme mrwinton/dark-theme t)
-                (disable-theme mrwinton/light-theme))
+                (load-theme mrwinton/dark-theme t))
             (progn
-              (load-theme mrwinton/light-theme t)
-              (disable-theme mrwinton/dark-theme)))))))
+              (load-theme mrwinton/light-theme t)))))))
 
 (run-with-idle-timer 0 mrwinton/polling-interval-seconds 'mrwinton/check-and-set-dark-mode)
 
