@@ -55,7 +55,7 @@
 (setq inhibit-compacting-font-caches t)
 
 ;; Increase how much is read from processes in a single chunk (default is 4kb).
-(setq read-process-output-max (* 64 1024))  ; 64kb
+(setq read-process-output-max (* 1024 1024)) ; 1MB
 
 ;; Introduced in Emacs HEAD (b2f8c9f), this inhibits fontification while
 ;; receiving input, which should help a little with scrolling performance.
