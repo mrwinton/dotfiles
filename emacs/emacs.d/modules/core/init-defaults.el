@@ -227,7 +227,6 @@
 (setq use-dialog-box nil)
 
 ;; Cull duplicates in the kill ring to reduce bloat and make the kill ring.
-;; easier to peruse (with `counsel-yank-pop' or `helm-show-kill-ring'.
 (setq kill-do-not-save-duplicates t)
 
 ;; An archaic default in the age of widescreen 4k displays? I disagree. We still
