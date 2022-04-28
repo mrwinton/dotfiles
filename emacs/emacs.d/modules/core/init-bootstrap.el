@@ -67,6 +67,8 @@
                    file-name-handler-alist-backup
                    file-name-handler-alist))))
 
+(use-package compat
+  :demand t)
 
 (use-package project
   :demand t)
