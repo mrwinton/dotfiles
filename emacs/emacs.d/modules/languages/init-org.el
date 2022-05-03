@@ -8,6 +8,7 @@
 (defvar mrwinton/org-archive-file "~/Documents/10-19 Notes/11 Personal/11.01 org/archive.org")
 
 (use-package org
+  :load-path (lambda () (expand-file-name "straight/repos/org/lisp" user-emacs-directory))
   :commands (org-mode org-capture org-agenda)
   :bind
   ("C-c a" . org-agenda)
