@@ -9,7 +9,7 @@
   ];
 
   fonts = {
-    enableFontDir = true;
+    fontDir.enable = true;
     fonts = with pkgs; [
       emacs-all-the-icons-fonts
       (nerdfonts.override { fonts = [ "Hack" ]; })
