@@ -19,7 +19,7 @@ in
     bat
     comma
     coreutils-full
-    emacsGcc
+    emacsNativeComp
     fd
     fzf
     ghq
