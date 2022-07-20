@@ -37,6 +37,22 @@
         "type": "github"
       }
     },
+    "doom-repo": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1657393840,
+        "narHash": "sha256-ISaIbqCNKKz9DhrTVKvDS40CzZiqICb2eDepGUdwYQA=",
+        "owner": "doomemacs",
+        "repo": "doomemacs",
+        "rev": "33c5f3721a704c72e49efc5960be3785d1a80b81",
+        "type": "github"
+      },
+      "original": {
+        "owner": "doomemacs",
+        "repo": "doomemacs",
+        "type": "github"
+      }
+    },
     "emacs-overlay": {
       "inputs": {
         "flake-utils": "flake-utils",
@@ -142,6 +158,7 @@
       "inputs": {
         "chemacs-repo": "chemacs-repo",
         "darwin": "darwin",
+        "doom-repo": "doom-repo",
         "emacs-overlay": "emacs-overlay",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs_2",

@@ -16,6 +16,10 @@
       url = "github:purcell/emacs.d";
       flake = false;
     };
+    doom-repo = {
+      url = "github:doomemacs/doomemacs";
+      flake = false;
+    };
   };
 
   outputs = { self, darwin, nixpkgs, home-manager, ... }@inputs:
@@ -26,6 +30,7 @@
           inputs.emacs-overlay.overlay
           (final: prev: { chemacs-repo = inputs.chemacs-repo; })
           (final: prev: { purcell-repo = inputs.purcell-repo; })
+          (final: prev: { doom-repo = inputs.doom-repo; })
         ];
       };
     in
