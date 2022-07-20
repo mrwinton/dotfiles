@@ -18,7 +18,6 @@
 
   services.nix-daemon.enable = true;
   nixpkgs.config.allowUnfree = true;
-
   programs.zsh = {
     enable = true;
     enableCompletion = true;
