@@ -34,9 +34,9 @@ in
 
     ".emacs-profiles.el".text = ''
       (("default" . ((user-emacs-directory . "${mrwintonPath}")))
-       ("purcell" . ((user-emacs-directory . "${purcellPath}")))
-       ("doom" . ((user-emacs-directory . "${doomPath}")
-                  (env . (("DOOMDIR" . "${doomConfigPath}"))))))
+       ("purcell" . ((user-emacs-directory . "~/${purcellPath}")))
+       ("doom" . ((user-emacs-directory . "~/${doomPath}")
+                  (env . (("DOOMDIR" . "~/${doomConfigPath}"))))))
     '';
 
     proselint = {
