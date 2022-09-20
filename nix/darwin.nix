@@ -34,7 +34,6 @@
       _FXShowPosixPathInTitle = true;
       FXEnableExtensionChangeWarning = false;
       FXPreferredViewStyle = "Nlsv";
-      FXEnableExtensionChangeWarning = false;
     };
     screencapture = { location = "~/Downloads"; };
     trackpad = {
