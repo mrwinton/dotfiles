@@ -33,6 +33,7 @@
       AppleShowAllExtensions = true;
       _FXShowPosixPathInTitle = true;
       FXEnableExtensionChangeWarning = false;
+      FXPreferredViewStyle = "Nlsv";
     };
     screencapture = { location = "~/Downloads"; };
     trackpad = {
