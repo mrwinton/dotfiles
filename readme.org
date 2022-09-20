@@ -14,7 +14,7 @@ experimental-features = nix-command flakes
 EOF
 
 # Clone the dotfiles
-mkdir ~/src/github.com/mrwinton/ && cd "$_"
+mkdir -p ~/src/github.com/mrwinton/ && cd "$_"
 git clone git@github.com:mrwinton/dotfiles.git
 
 # Build and switch to the configuration
