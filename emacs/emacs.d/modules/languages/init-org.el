@@ -128,7 +128,7 @@
                   (message "%s" (concat "Loading " calendar-name " into " file))
                   (mrwinton/calendar-sync (funcall
                                            (plist-get
-                                            (nth 0 (auth-source-search :host (concat "calendar-sync-" calendar-name) :user calendar-name))
+                                            (nth 0 (auth-source-search :host (concat "calendar-sync-" calendar-name)))
                                             :secret)) file)
                   (let ((include-line (format "#include \"%s\"" filename)))
                     (unless (save-excursion
