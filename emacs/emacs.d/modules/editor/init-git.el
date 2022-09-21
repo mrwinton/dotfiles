@@ -26,6 +26,9 @@
   (forge-database-file "~/.config/forge/database.sqlite"))
 
 (use-package git-timemachine
+  :straight (:host github
+	                 :repo "emacsmirror/git-timemachine"
+	                 :branch "master")
   :commands (git-timemachine)
   :bind ("C-c g t" . 'git-timemachine))
 
