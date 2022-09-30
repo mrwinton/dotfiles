@@ -86,6 +86,7 @@ with pkgs;
       la = "ls -la";
       mkdir = "mkdir -p";
       vim = "emacsclient -nw";
+      rspec = "bundle exec rspec --color --format documentation";
     };
 
     oh-my-zsh = {
