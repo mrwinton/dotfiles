@@ -45,8 +45,6 @@
   system.stateVersion = 4;
 
   nix = {
-    buildCores = 4;
-    maxJobs = 8;
     gc = {
       automatic = true;
       options = "--delete-older-than 3d";
@@ -57,5 +55,9 @@
       system = aarch64-darwin
       extra-platforms = x86_64-darwin aarch64-darwin
     '';
+    settings = {
+      cores = 4;
+      max-jobs = 8;
+    };
   };
 }
