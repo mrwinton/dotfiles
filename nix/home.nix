@@ -17,6 +17,7 @@ in
   home.packages = with pkgs; [
     aspellEnv
     bat
+    clang
     comma
     coreutils-full
     emacsNativeComp

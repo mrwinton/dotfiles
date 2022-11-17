@@ -6,7 +6,7 @@ let
   mrwintonPath = "~/src/github.com/mrwinton/dotfiles/emacs/emacs.d";
   purcellPath = ".config/emacs/purcell.emacs.d";
   doomPath = ".config/emacs/doom.emacs.d";
-  doomConfigPath = ".config/emacs/doom-config";
+  doomConfigPath = "~/src/github.com/mrwinton/dotfiles/emacs/doom.d";
 
   chemacsRepo = pkgs.chemacs-repo;
   purcellRepo = pkgs.purcell-repo;
