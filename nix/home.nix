@@ -27,10 +27,12 @@ in
     fzf
     ghq
     git
+    helix
     heroku
     imagemagick
     nixpkgs-fmt
     openssl.dev
+    pgformatter
     proselint
     ripgrep
     youtube-dl
