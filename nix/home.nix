@@ -1,6 +1,8 @@
 { config, lib, pkgs, ... }:
 let
   aspellEnv = pkgs.aspellWithDicts (d: [ d.en d.sv ]);
+  my-emacs = (pkgs.emacsPackagesFor pkgs.emacsNativeComp).emacsWithPackages
+    (epkgs: [ epkgs.pdf-tools ]);
 in
 {
   programs.home-manager.enable = true;
@@ -20,7 +22,7 @@ in
     clang
     comma
     coreutils-full
-    emacsNativeComp
+    my-emacs
     fd
     fzf
     ghq
