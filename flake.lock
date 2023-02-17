@@ -108,6 +108,22 @@
         "type": "github"
       }
     },
+    "nano-repo": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1671605603,
+        "narHash": "sha256-GX9bRdYExcfKsoc6fTnihjz1eaulri7AIxDIQLNhaRI=",
+        "owner": "rougier",
+        "repo": "nano-emacs",
+        "rev": "c313957b5945e197c7d9cab1115190a339ee856c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rougier",
+        "repo": "nano-emacs",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1665296151,
@@ -161,6 +177,7 @@
         "doom-repo": "doom-repo",
         "emacs-overlay": "emacs-overlay",
         "home-manager": "home-manager",
+        "nano-repo": "nano-repo",
         "nixpkgs": "nixpkgs_2",
         "purcell-repo": "purcell-repo"
       }
