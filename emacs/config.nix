@@ -7,6 +7,7 @@ let
   purcellPath = ".config/emacs/purcell.emacs.d";
   doomPath = ".config/emacs/doom.emacs.d";
   doomConfigPath = "~/src/github.com/mrwinton/dotfiles/emacs/doom.d";
+  doomLocalPath = "~/src/github.com/mrwinton/dotfiles/emacs/doom.d/local";
 
   chemacsRepo = pkgs.chemacs-repo;
   purcellRepo = pkgs.purcell-repo;
@@ -36,7 +37,8 @@ in
       (("default" . ((user-emacs-directory . "${mrwintonPath}")))
        ("purcell" . ((user-emacs-directory . "~/${purcellPath}")))
        ("doom" . ((user-emacs-directory . "~/${doomPath}")
-                  (env . (("DOOMDIR" . "~/${doomConfigPath}"))))))
+                  (env . (("DOOMDIR" . "~/${doomConfigPath}")
+                          ("DOOMLOCALDIR" . "~/${doomLocalPath}"))))))
     '';
 
     proselint = {
