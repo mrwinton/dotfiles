@@ -48,6 +48,12 @@
 ;; Go fullscreen on startup
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 
+(whole-line-or-region-global-mode)
+(cond (IS-MAC
+       (setq mac-command-modifier      'meta
+             mac-option-modifier       'alt
+             mac-right-option-modifier 'alt)))
+
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
 ;;
