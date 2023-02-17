@@ -6,12 +6,14 @@ let
   mrwintonPath = "~/src/github.com/mrwinton/dotfiles/emacs/emacs.d";
   purcellPath = ".config/emacs/purcell.emacs.d";
   doomPath = ".config/emacs/doom.emacs.d";
+  nanoPath = ".config/emacs/nano.emacs.d";
   doomConfigPath = "~/src/github.com/mrwinton/dotfiles/emacs/doom.d";
   doomLocalPath = "~/src/github.com/mrwinton/dotfiles/emacs/doom.d/local";
 
   chemacsRepo = pkgs.chemacs-repo;
   purcellRepo = pkgs.purcell-repo;
   doomRepo = pkgs.doom-repo;
+  nanoRepo = pkgs.nano-repo;
 in
 {
   home.file = {
@@ -33,9 +35,16 @@ in
       recursive = true;
     };
 
+    nano = {
+      source = nanoRepo;
+      target = nanoPath;
+      recursive = true;
+    };
+
     ".emacs-profiles.el".text = ''
       (("default" . ((user-emacs-directory . "${mrwintonPath}")))
        ("purcell" . ((user-emacs-directory . "~/${purcellPath}")))
+       ("nano" . ((user-emacs-directory . "~/${nanoPath}")))
        ("doom" . ((user-emacs-directory . "~/${doomPath}")
                   (env . (("DOOMDIR" . "~/${doomConfigPath}")
                           ("DOOMLOCALDIR" . "~/${doomLocalPath}"))))))

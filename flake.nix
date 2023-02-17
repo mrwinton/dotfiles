@@ -20,6 +20,10 @@
       url = "github:doomemacs/doomemacs";
       flake = false;
     };
+    nano-repo = {
+      url = "github:rougier/nano-emacs";
+      flake = false;
+    };
   };
 
   outputs = { self, darwin, nixpkgs, home-manager, ... }@inputs:
@@ -31,6 +35,7 @@
           (final: prev: { chemacs-repo = inputs.chemacs-repo; })
           (final: prev: { purcell-repo = inputs.purcell-repo; })
           (final: prev: { doom-repo = inputs.doom-repo; })
+          (final: prev: { nano-repo = inputs.nano-repo; })
         ];
       };
     in
