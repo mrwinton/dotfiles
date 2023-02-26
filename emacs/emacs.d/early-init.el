@@ -2,22 +2,21 @@
 ;;; Commentary:
 ;;; Code:
 
-;; Disable UI elements ASAP to prevent the flash of elements.
-(unless (eq window-system 'ns)
-  (menu-bar-mode -1))
-(when (fboundp 'tool-bar-mode)
-  (tool-bar-mode -1))
-(when (fboundp 'scroll-bar-mode)
-  (scroll-bar-mode -1))
-(when (fboundp 'horizontal-scroll-bar-mode)
-  (horizontal-scroll-bar-mode -1))
-
-(setq inhibit-startup-screen t)
-
-;; Emacs 27+ loads this file before (normally) calling
-;; `package-initialize'.  We use this file to suppress that automatic
-;; behaviour so that startup is consistent across Emacs versions.
 (setq package-enable-at-startup nil)
+
+(setq gc-cons-percentage 0.6)
+(setq gc-cons-threshold most-positive-fixnum)
+
+(setq inhibit-startup-message t)
+
+;; no menu bar, toolbar, scroll bar
+(setq default-frame-alist
+      '((menu-bar-lines . 0)
+        (tool-bar-lines . 0)
+        (horizontal-scroll-bars)
+        (vertical-scroll-bars)))
+
+(setq native-comp-async-report-warnings-errors 'silent)
 
 (provide 'early-init)
 ;;; early-init.el ends here

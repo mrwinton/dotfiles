@@ -13,14 +13,12 @@
 ;; Set and forget UTF-8, no need to include in each file.
 (set-language-environment "UTF-8")
 
-;; Require the configuration files
 (add-to-list 'load-path (expand-file-name "modules/core" user-emacs-directory))
 (add-to-list 'load-path (expand-file-name "modules/editor" user-emacs-directory))
 (add-to-list 'load-path (expand-file-name "modules/languages" user-emacs-directory))
 
 ;; Core
 (require 'init-bootstrap)
-(require 'init-gcmh)
 (require 'init-no-littering)
 (require 'init-defaults)
 (require 'init-macos)
@@ -56,6 +54,14 @@
 (require 'init-sql)
 (require 'init-web)
 (require 'init-yaml)
+
+;; Run GC when idle
+(run-with-idle-timer 10 nil
+                     (lambda ()
+                       "Clean up gc."
+                       (setq gc-cons-threshold  67108864) ; 64M
+                       (setq gc-cons-percentage 0.1) ; original value
+                       (garbage-collect)))
 
 ;; Extensions
 (require 'init-local nil t)
