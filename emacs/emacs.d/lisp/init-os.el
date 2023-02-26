@@ -1,6 +1,11 @@
-;;; init-macos.el --- macos -*- lexical-binding: t; -*-
+;;; init-os.el --- os configuration -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
+
+;; Uses system trash rather than deleting forever
+(setq delete-by-moving-to-trash t)
+(if (eq system-type 'darwin)
+    (setq trash-directory "~/.Trash"))
 
 (setq mac-command-modifier 'meta)
 (setq mac-option-modifier 'none)
@@ -25,8 +30,5 @@
 (use-package reveal-in-osx-finder
   :commands (reveal-in-osx-finder))
 
-(use-package emacs-everywhere
-  :commands (emacs-everywhere))
-
-(provide 'init-macos)
-;;; init-macos.el ends here
+(provide 'init-os)
+;;; init-os.el ends here

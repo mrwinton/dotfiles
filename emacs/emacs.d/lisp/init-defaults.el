@@ -1,4 +1,4 @@
-;;; init-defaults.el --- Improve defaults -*- lexical-binding: t; -*-
+;;; init-defaults.el --- default configuration -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
@@ -261,11 +261,6 @@
 
 ;; Don't make lockfiles.
 (setq create-lockfiles nil)
-
-;; Uses system trash rather than deleting forever
-(setq delete-by-moving-to-trash t)
-(if (eq system-type 'darwin)
-    (setq trash-directory "~/.Trash"))
 
 ;; Trigger auto-fill after punctutation characters, not just white-space.
 (mapc

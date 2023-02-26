@@ -1,4 +1,4 @@
-;;; init-exec-path.el --- Set up exec-path to help Emacs find programs  -*- lexical-binding: t -*-
+;;; init-path.el --- path config
 ;;; Commentary:
 ;;; Code:
 
@@ -25,5 +25,9 @@
   :config
   (exec-path-from-shell-initialize))
 
-(provide 'init-exec-path)
-;;; init-exec-path.el ends here
+(use-package envrc
+  :hook (after-init . envrc-global-mode)
+  :bind (("C-c e" . envrc-command-map)))
+
+(provide 'init-path)
+;;; init-path.el ends here

@@ -6,24 +6,14 @@
 
 ;;; Code:
 
-;; Produce backtraces when errors occur: can be helpful to diagnose startup issues
-(setq debug-on-error t)
-(add-hook 'after-init-hook #'(lambda () (setq debug-on-error nil)))
-
-;; Set and forget UTF-8, no need to include in each file.
-(set-language-environment "UTF-8")
-
-(add-to-list 'load-path (expand-file-name "modules/core" user-emacs-directory))
+(add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 (add-to-list 'load-path (expand-file-name "modules/editor" user-emacs-directory))
 (add-to-list 'load-path (expand-file-name "modules/languages" user-emacs-directory))
 
-;; Core
-(require 'init-bootstrap)
-(require 'init-no-littering)
+(require 'init-startup)
 (require 'init-defaults)
-(require 'init-macos)
-(require 'init-exec-path)
-(require 'init-direnv)
+(require 'init-os)
+(require 'init-path)
 
 ;; Editor
 (require 'init-advice)

@@ -1,16 +1,30 @@
-;; init-bootstrap.el --- bootstrap `straight.el` and configuration -*- lexical-binding: t; -*-
-
+;;; init-startup.el --- startup config
 ;;; Commentary:
-;;
-;; Bootstrap the configuration and startup:
-;; - `straight.el` and integrate it with `use-package`
-;; - Increase GC threshold
-
 ;;; Code:
 
-(setq straight-fix-flycheck t)
-(setq straight-vc-git-default-clone-depth 1)
-(setq straight-check-for-modifications '(check-on-save find-when-checking))
+;; Produce backtraces when errors occur: can be helpful to diagnose startup issues
+(setq debug-on-error t)
+(add-hook 'after-init-hook #'(lambda () (setq debug-on-error nil)))
+
+;; Set and forget UTF-8, no need to include in each file.
+(set-language-environment "UTF-8")
+
+;; Configure straight.el and use-package as package manager
+(setq straight-fix-flycheck t
+      straight-vc-git-default-clone-depth 1
+      straight-check-for-modifications '(check-on-save find-when-checking)
+      ;; When configuring a feature with `use-package', also tell
+      ;; straight.el to install a package of the same name, unless otherwise
+      ;; specified using the `:straight' keyword.
+      straight-use-package-by-default t
+
+      ;; Tell `use-package' to always load features lazily unless told
+      ;; otherwise. It's nicer to have this kind of thing be deterministic:
+      ;; if `:demand' is present, the loading is eager; otherwise, the
+      ;; loading is lazy. See
+      ;; `https://github.com/jwiegley/use-package#notes-about-lazy-loading'.
+      use-package-always-defer t
+      use-package-verbose nil)
 
 (defvar bootstrap-version)
 (let ((bootstrap-file
@@ -38,19 +52,6 @@
 (straight-register-package 'org)
 (straight-register-package 'org-contrib)
 
-;; When configuring a feature with `use-package', also tell
-;; straight.el to install a package of the same name, unless otherwise
-;; specified using the `:straight' keyword.
-(setq straight-use-package-by-default t)
-
-;; Tell `use-package' to always load features lazily unless told
-;; otherwise. It's nicer to have this kind of thing be deterministic:
-;; if `:demand' is present, the loading is eager; otherwise, the
-;; loading is lazy. See
-;; https://github.com/jwiegley/use-package#notes-about-lazy-loading.
-(setq use-package-always-defer t)
-(setq use-package-verbose nil)
-
 ;; Temporarily increase GC's threshold during startup and use file-name handler
 ;; hack.
 (defvar file-name-handler-alist-backup
@@ -67,6 +68,15 @@
                    file-name-handler-alist-backup
                    file-name-handler-alist))))
 
+(add-to-list 'native-comp-eln-load-path
+             (expand-file-name "eln-cache/" user-emacs-directory))
+
+(when (fboundp 'native-compile-async)
+  (setq native-comp-async-report-warnings-errors nil)
+  (setq comp-num-cpus 4)
+  (setq comp-deferred-compilation t)
+  (setq comp-deferred-compilation-black-list '("/mu4e.*\\.el$")))
+
 (use-package compat
   :demand t)
 
@@ -81,12 +91,14 @@
   ;; To disable collection of benchmark data after init is done.
   (add-hook 'after-init-hook 'benchmark-init/deactivate))
 
-;; Allow access from emacsclient
-(add-hook 'after-init-hook
-          (lambda ()
-            (require 'server)
-            (unless (server-running-p)
-              (server-start))))
+;; Package `no-littering' changes the default paths for lots of
+;; different packages, with the net result that the ~/.emacs.d folder
+;; is much more clean and organized.
+(use-package no-littering
+  :demand t
+  :init (setq auto-save-file-name-transforms
+              `((".*" ,(no-littering-expand-var-file-name "auto-save/") t))
+              custom-file (no-littering-expand-etc-file-name "custom.el")))
 
 (when (display-graphic-p)
   (add-hook 'after-init-hook
@@ -96,14 +108,5 @@
                  (message "Loaded in %.2fs! Happy hacking ♥" elapsed)))
             t))
 
-(add-to-list 'native-comp-eln-load-path
-             (expand-file-name "eln-cache/" user-emacs-directory))
-
-(when (fboundp 'native-compile-async)
-  (setq native-comp-async-report-warnings-errors nil)
-  (setq comp-num-cpus 4)
-  (setq comp-deferred-compilation t)
-  (setq comp-deferred-compilation-black-list '("/mu4e.*\\.el$")))
-
-(provide 'init-bootstrap)
-;;; init-bootstrap.el ends here
+(provide 'init-startup)
+;;; init-startup.el ends here
