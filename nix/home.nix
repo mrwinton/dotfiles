@@ -22,8 +22,6 @@ in
     clang
     comma
     coreutils-full
-    docker
-    docker-compose
     my-emacs
     fd
     fzf
