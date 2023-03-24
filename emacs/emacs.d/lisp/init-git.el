@@ -1,4 +1,4 @@
-;;; init-git2.el --- git configuration -*- lexical-binding: t; -*-
+;;; init-git.el --- git configuration -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 
@@ -89,5 +89,5 @@
       ("k" "kill"      smerge-kill-current)
       ("h" "highlight" smerge-refine)]]))
 
-(provide 'init-git2)
-;;; init-git2.el ends here
+(provide 'init-git)
+;;; init-git.el ends here

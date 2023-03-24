@@ -1,4 +1,4 @@
-;;; init-ui2.el --- ui configuration -*- lexical-binding: t; -*-
+;;; init-ui.el --- ui configuration -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 
@@ -90,5 +90,5 @@ theme if current theme does not match, this prevents flickering."
 
 (run-with-idle-timer 0 mrw/polling-interval-seconds 'mrw/check-and-set-dark-mode)
 
-(provide 'init-ui2)
-;;; init-ui2.el ends here
+(provide 'init-ui)
+;;; init-ui.el ends here

@@ -1,4 +1,4 @@
-;;; init-org2.el --- org configuration -*- lexical-binding: t; -*-
+;;; init-org.el --- org configuration -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 
@@ -147,5 +147,5 @@
   (interactive)
   (run-with-idle-timer 60 nil #'mrw/calendar-sync-all))
 
-(provide 'init-org2)
-;;; init-org2.el ends here
+(provide 'init-org)
+;;; init-org.el ends here

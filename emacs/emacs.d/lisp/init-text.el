@@ -1,4 +1,4 @@
-;;; init-text2.el --- text configuration -*- lexical-binding: t; -*-
+;;; init-text.el --- text configuration -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 
@@ -270,5 +270,5 @@
   (wgrep-auto-save-buffer t)
   (wgrep-change-readonly-file t))
 
-(provide 'init-text2)
-;;; init-text2.el ends here
+(provide 'init-text)
+;;; init-text.el ends here
