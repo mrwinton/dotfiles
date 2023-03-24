@@ -26,6 +26,9 @@ with pkgs;
         eval "$(direnv hook zsh)"
       fi
 
+      source "$(fzf-share)/key-bindings.zsh"
+      source "$(fzf-share)/completion.zsh"
+
       function path() {
         echo $PATH | tr ':' '\n'
       }
