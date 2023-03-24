@@ -27,7 +27,8 @@
 
 (use-package envrc
   :hook (after-init . envrc-global-mode)
-  :bind (("C-c e" . envrc-command-map)))
+  :general
+  ("C-c e" '(envrc-command-map :which-key "envrc")))
 
 (provide 'init-path)
 ;;; init-path.el ends here
