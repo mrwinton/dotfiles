@@ -8,14 +8,6 @@
     redis
   ];
 
-  fonts = {
-    fontDir.enable = true;
-    fonts = with pkgs; [
-      emacs-all-the-icons-fonts
-      (nerdfonts.override { fonts = [ "Hack" ]; })
-    ];
-  };
-
   services.nix-daemon.enable = true;
   nixpkgs.config.allowUnfree = true;
   programs.zsh = {
