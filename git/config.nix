@@ -34,5 +34,20 @@
       push.default = "current";
       rebase.autosquash = true;
     };
+
+    includes =
+      [
+        {
+          condition = "gitdir:~/src/github.com/UniversalAvenue/";
+          contents = {
+            user = {
+              email = "michael.winton@velory.com";
+            };
+            branch = {
+              master = { pushRemote = "no_push"; };
+            };
+          };
+        }
+      ];
   };
 }
