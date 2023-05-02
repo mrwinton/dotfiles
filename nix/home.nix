@@ -27,6 +27,9 @@ in
     fzf
     ghq
     git
+    git-open
+    git-recent
+    git-trim
     helix
     heroku
     imagemagick
