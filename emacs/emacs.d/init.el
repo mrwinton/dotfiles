@@ -7,8 +7,6 @@
 ;;; Code:
 
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
-(add-to-list 'load-path (expand-file-name "modules/editor" user-emacs-directory))
-(add-to-list 'load-path (expand-file-name "modules/languages" user-emacs-directory))
 
 (require 'init-startup)
 (require 'init-defaults)
