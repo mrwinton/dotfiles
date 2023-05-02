@@ -206,17 +206,11 @@
   :config
   (yas-reload-all))
 
-(use-package ispell
+(use-package jinx
   :after exec-path-from-shell
-  :hook (after-init . ispell)
-  :config
-  (let ((executable (executable-find "aspell")))
-    (when executable
-      (setq-default ispell-program-name executable)
-      (setq ispell-command-name "aspell"
-            ispell-dictionary "en_US"
-            ispell-really-aspell t
-            ispell-extra-args '("--sug-mode=ultra" "--run-together")))))
+  :hook (after-init . global-jinx-mode)
+  :bind ([remap ispell-word] . jinx-correct)
+  :config (setq jinx-languages "en_US en_GB sv_SE"))
 
 (use-package flyspell
   :diminish flyspell-mode
