@@ -22,6 +22,7 @@ in
     clang
     comma
     coreutils-full
+    enchant
     my-emacs
     fd
     fzf
