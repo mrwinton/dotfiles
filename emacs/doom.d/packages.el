@@ -7,6 +7,8 @@
 
 (package! whole-line-or-region)
 
+(package! envrc :recipe (:host github :repo "purcell/envrc"))
+
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)
 
