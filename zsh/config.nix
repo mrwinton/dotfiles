@@ -60,6 +60,10 @@ with pkgs;
       function doom-sync {
         cd ~/.config/emacs/doom.emacs.d; bin/doom sync
       }
+
+      function doom-upgrade {
+        cd ~/.config/emacs/doom.emacs.d; bin/doom upgrade
+      }
     '';
 
     envExtra = ''
