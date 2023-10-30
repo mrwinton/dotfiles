@@ -40,11 +40,11 @@
     "doom-repo": {
       "flake": false,
       "locked": {
-        "lastModified": 1665164903,
-        "narHash": "sha256-02E4VHBFf9rG9NAwKrpK7Wb9mE8WKzGB9RG2lWxFr0E=",
+        "lastModified": 1696638825,
+        "narHash": "sha256-vrdwIu6F11OOSaS5SfgT/jx0Kvu7KaigthVGBENKR5k=",
         "owner": "doomemacs",
         "repo": "doomemacs",
-        "rev": "9f22a0a2a5191cf57184846281164f478df4b7ac",
+        "rev": "986398504d09e585c7d1a8d73a6394024fe6f164",
         "type": "github"
       },
       "original": {
