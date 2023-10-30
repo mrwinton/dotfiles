@@ -90,6 +90,7 @@ with pkgs;
       mkdir = "mkdir -p";
       vim = "emacsclient -nw";
       rspec = "bundle exec rspec --color --format documentation";
+      ripgrep = "rg";
     };
 
     oh-my-zsh = {

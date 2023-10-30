@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 let
   aspellEnv = pkgs.aspellWithDicts (d: [ d.en d.sv ]);
-  my-emacs = (pkgs.emacsPackagesFor pkgs.emacs-unstable).emacsWithPackages
+  my-emacs = (pkgs.emacsPackagesFor pkgs.emacs-git).emacsWithPackages
     (epkgs: [ epkgs.pdf-tools ]);
 in
 {
@@ -22,26 +22,37 @@ in
     clang
     comma
     coreutils-full
+    coreutils-prefixed
     docker
+    editorconfig-core-c
     enchant
-    my-emacs
     fd
+    fontconfig
     fzf
     ghq
     git
     git-open
     git-recent
     git-trim
+    gnugrep
     helix
     heroku
     imagemagick
+    jsbeautifier
+    my-emacs
+    nixfmt
     nixpkgs-fmt
     openssl.dev
+    pandoc
     pgformatter
     proselint
     ripgrep
-    youtube-dl
+    scalafmt
+    shellcheck
+    shfmt
+    stylelint
     universal-ctags
+    youtube-dl
   ];
 
   home.file.".aspell.conf".text = "data-dir ${aspellEnv}/lib/aspell";
