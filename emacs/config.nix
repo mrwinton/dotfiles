@@ -48,10 +48,12 @@ in {
     };
 
     ".emacs-profiles.el".text = ''
-      (("default" . ((user-emacs-directory . "~/${doomPath}")))
+      (("mrwinton" . ((user-emacs-directory . "${mrwintonPath}")))
        ("purcell" . ((user-emacs-directory . "~/${purcellPath}")))
        ("nano" . ((user-emacs-directory . "~/${nanoPath}")))
-       ("doom" . ((user-emacs-directory . "~/${doomPath}"))))
+       ("default" . ((user-emacs-directory . "~/${doomPath}")
+                  (env . (("DOOMDIR" . "~/${doomConfigPath}")
+                          ("DOOMLOCALDIR" . "~/${doomLocalPath}"))))))
     '';
 
     proselint = {
