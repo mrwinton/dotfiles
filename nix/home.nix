@@ -22,6 +22,7 @@ in
     clang
     comma
     coreutils-full
+    docker
     enchant
     my-emacs
     fd
