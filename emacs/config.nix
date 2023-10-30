@@ -14,13 +14,13 @@ let
   purcellRepo = pkgs.purcell-repo;
   doomRepo = pkgs.doom-repo;
   nanoRepo = pkgs.nano-repo;
-in
-{
+in {
   home = {
     sessionVariables = {
       DOOMDIR = "${doomConfigPath}";
       DOOMLOCALDIR = "${doomLocalPath}";
     };
+    sessionPath = [ "${config.home.homeDirectory}/${doomPath}/bin" ];
   };
   home.file = {
     chemacs = {

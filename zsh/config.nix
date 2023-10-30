@@ -52,18 +52,6 @@ with pkgs;
       function flake-clean {
         nix-collect-garbage -d
       }
-
-      function doom-install {
-        cd ~/.config/emacs/doom.emacs.d; bin/doom install
-      }
-
-      function doom-sync {
-        cd ~/.config/emacs/doom.emacs.d; bin/doom sync
-      }
-
-      function doom-upgrade {
-        cd ~/.config/emacs/doom.emacs.d; bin/doom upgrade
-      }
     '';
 
     envExtra = ''
