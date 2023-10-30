@@ -52,8 +52,8 @@ in {
        ("purcell" . ((user-emacs-directory . "~/${purcellPath}")))
        ("nano" . ((user-emacs-directory . "~/${nanoPath}")))
        ("default" . ((user-emacs-directory . "~/${doomPath}")
-                  (env . (("DOOMDIR" . "~/${doomConfigPath}")
-                          ("DOOMLOCALDIR" . "~/${doomLocalPath}"))))))
+                  (env . (("DOOMDIR" . "${doomConfigPath}")
+                          ("DOOMLOCALDIR" . "${doomLocalPath}"))))))
     '';
 
     proselint = {
