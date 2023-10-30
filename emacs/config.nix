@@ -16,6 +16,12 @@ let
   nanoRepo = pkgs.nano-repo;
 in
 {
+  home = {
+    sessionVariables = {
+      DOOMDIR = "${doomConfigPath}";
+      DOOMLOCALDIR = "${doomLocalPath}";
+    };
+  };
   home.file = {
     chemacs = {
       source = chemacsRepo;
@@ -42,12 +48,10 @@ in
     };
 
     ".emacs-profiles.el".text = ''
-      (("default" . ((user-emacs-directory . "${mrwintonPath}")))
+      (("default" . ((user-emacs-directory . "~/${doomPath}")))
        ("purcell" . ((user-emacs-directory . "~/${purcellPath}")))
        ("nano" . ((user-emacs-directory . "~/${nanoPath}")))
-       ("doom" . ((user-emacs-directory . "~/${doomPath}")
-                  (env . (("DOOMDIR" . "~/${doomConfigPath}")
-                          ("DOOMLOCALDIR" . "~/${doomLocalPath}"))))))
+       ("doom" . ((user-emacs-directory . "~/${doomPath}"))))
     '';
 
     proselint = {
