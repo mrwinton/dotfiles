@@ -2,6 +2,7 @@
 {
   users.users.michaelwinton = {
     description = "Michael Winton";
+    home = "/Users/michaelwinton";
   };
 
   environment.systemPackages = with pkgs; [
