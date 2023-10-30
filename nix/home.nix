@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 let
   aspellEnv = pkgs.aspellWithDicts (d: [ d.en d.sv ]);
-  my-emacs = (pkgs.emacsPackagesFor pkgs.emacsNativeComp).emacsWithPackages
+  my-emacs = (pkgs.emacsPackagesFor pkgs.emacs-unstable).emacsWithPackages
     (epkgs: [ epkgs.pdf-tools ]);
 in
 {
