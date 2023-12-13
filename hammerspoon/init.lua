@@ -19,14 +19,14 @@ hs.hotkey.bind(leader, "c", utils.moveBottomRight)
 hs.hotkey.bind(leader, "/", utils.moveWindow)
 
 hs.hotkey.bind(leader, "1", utils.toggleApplication("org.gnu.Emacs"))
-hs.hotkey.bind(leader, "2", utils.toggleApplication("net.kovidgoyal.Kitty"))
+hs.hotkey.bind(leader, "2", utils.toggleApplication("net.apple.terminal"))
 hs.hotkey.bind(leader, "3", utils.toggleApplication("com.spotify.client"))
 hs.hotkey.bind(leader, "m", utils.toggleApplication("com.apple.mail"))
 hs.hotkey.bind(leader, ",", utils.toggleApplication("com.tinyspeck.slackmacgap"))
-hs.hotkey.bind(leader, ".", utils.toggleApplication("com.brave.Browser"))
+hs.hotkey.bind(leader, ".", utils.toggleApplication("company.thebrowser.Browser"))
 
 hs.hotkey.bindSpec({leader, "\\"}, function ()
-    hs.task.new("/bin/sh", nil, {
+    hs.task.new("/bin/zsh", nil, {
                   "-l",
                   "-c",
                   "emacsclient --eval '(emacs-everywhere)'"
