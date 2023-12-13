@@ -48,10 +48,10 @@ in {
     };
 
     ".emacs-profiles.el".text = ''
-      (("mrwinton" . ((user-emacs-directory . "${mrwintonPath}")))
+      (("default" . ((user-emacs-directory . "${mrwintonPath}")))
        ("purcell" . ((user-emacs-directory . "~/${purcellPath}")))
        ("nano" . ((user-emacs-directory . "~/${nanoPath}")))
-       ("default" . ((user-emacs-directory . "~/${doomPath}")
+       ("doom" . ((user-emacs-directory . "~/${doomPath}")
                   (env . (("DOOMDIR" . "${doomConfigPath}")
                           ("DOOMLOCALDIR" . "${doomLocalPath}"))))))
     '';
