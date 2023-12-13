@@ -27,8 +27,8 @@
 
 (use-package git-timemachine
   :straight (:host github
-	                 :repo "emacsmirror/git-timemachine"
-	                 :branch "master")
+	     :repo "emacsmirror/git-timemachine"
+	     :branch "master")
   :commands (git-timemachine)
   :bind ("C-c g t" . 'git-timemachine))
 
