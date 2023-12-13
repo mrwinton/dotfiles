@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: Reference link
+# key: ll
+# --
+[${1:id}]
+
+[$1]: $0
