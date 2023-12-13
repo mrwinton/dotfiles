@@ -40,7 +40,8 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
+(setq org-directory "~/Documents/10-19 Org")
+(setq org-agenda-files "~/Documents/10-19 Org")
 
 ;; Discover projects according to ghq
 (setq projectile-project-search-path '(("~/src" . 3)))
