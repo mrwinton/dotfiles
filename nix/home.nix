@@ -23,7 +23,6 @@ in
     comma
     coreutils-full
     coreutils-prefixed
-    docker
     editorconfig-core-c
     enchant
     fd
