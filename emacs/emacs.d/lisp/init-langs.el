@@ -87,7 +87,7 @@ Eglot doesn't heed to `eldoc-echo-area-use-multiline-p'."
   :hook (nix-mode . nixpkgs-fmt-on-save-mode))
 
 (use-package rspec-mode
-  :after enh-ruby-mode
+  :after ruby-mode
   :custom
   (rspec-spec-command "bundle exec rspec")
   (rspec-use-bundler-when-possible nil)
