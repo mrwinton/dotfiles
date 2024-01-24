@@ -121,6 +121,10 @@ Eglot doesn't heed to `eldoc-echo-area-use-multiline-p'."
   ;; surrounding code when you paste anything.
   (web-mode-enable-auto-indentation nil))
 
+(use-package scala-mode
+  :interpreter
+  ("scala" . scala-mode))
+
 (use-package yaml-mode
   :mode ("\\.yml\\'" "\\.yaml\\'" "\\.yaml.erb\\'"))
 
