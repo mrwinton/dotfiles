@@ -4,7 +4,7 @@
 
 (use-package eglot
   :hook (((ruby-mode enh-ruby-mode) . eglot-ensure)
-         (js2-mode . eglot-ensure))
+         ((js2-mode typescript-ts-mode) . eglot-ensure))
   :custom
   (eglot-autoshutdown t)
   (eglot-sync-connect nil)
@@ -131,6 +131,17 @@ Eglot doesn't heed to `eldoc-echo-area-use-multiline-p'."
 (use-package yaml-tomato
   :commands
   (yaml-tomato-show-current-path yaml-tomato-copy))
+
+(use-package typescript-ts-mode
+  :mode (("\\.ts\\'" . typescript-ts-mode)
+         ("\\.tsx\\'" . tsx-ts-mode)))
+
+(use-package treesit-auto
+  :custom
+  (treesit-auto-install 'prompt)
+  :config
+  (treesit-auto-add-to-auto-mode-alist 'all)
+  (global-treesit-auto-mode))
 
 (provide 'init-langs)
 ;;; init-langs.el ends here

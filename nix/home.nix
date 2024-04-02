@@ -2,7 +2,7 @@
 let
   aspellEnv = pkgs.aspellWithDicts (d: [ d.en d.sv ]);
   my-emacs = (pkgs.emacsPackagesFor pkgs.emacs-git).emacsWithPackages
-    (epkgs: [ epkgs.pdf-tools ]);
+    (epkgs: [ epkgs.pdf-tools epkgs.treesit-grammars.with-all-grammars ]);
 in
 {
   programs.home-manager.enable = true;
