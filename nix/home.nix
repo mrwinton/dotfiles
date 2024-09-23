@@ -39,7 +39,7 @@ in
     imagemagick
     jsbeautifier
     my-emacs
-    nixfmt
+    nixfmt-rfc-style
     nixpkgs-fmt
     openssl.dev
     pandoc
@@ -51,7 +51,7 @@ in
     shfmt
     stylelint
     universal-ctags
-    youtube-dl
+    yt-dlp
   ];
 
   home.file.".aspell.conf".text = "data-dir ${aspellEnv}/lib/aspell";
