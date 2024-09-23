@@ -22,7 +22,6 @@ in
     clang
     comma
     coreutils-full
-    coreutils-prefixed
     editorconfig-core-c
     enchant
     fd
