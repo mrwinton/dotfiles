@@ -1,0 +1,67 @@
+[alias]
+  co = checkout
+  cp = cherry-pick
+  hreset = !git reset --hard $(git rev-parse --abbrev-ref --symbolic-full-name @{u})
+  pushf = push --force-with-lease
+  uncommit = reset --soft HEAD^
+[branch]
+  sort = -committerdate
+[browser "gitscm"]
+  cmd = /bin/sh -c 'open http://git-scm.com/docs/$(basename $1 .html)' --
+[color "status"]
+  added = green
+  changed = yellow
+  untracked = red
+[column]
+  ui = auto
+[commit]
+  verbose = true
+[core]
+  excludesfile = "~/.config/git/excludes"
+[credential]
+  helper = osxkeychain
+[diff]
+  algorithm = histogram
+  colorMoved = plain
+  mnemonicPrefix = true
+  renames = true
+[fetch]
+  prune = true
+  pruneTags = true
+  all = true
+[filter "lfs"]
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
+[ghq]
+  root = "~/src"
+[github]
+  user = mrwinton
+[help]
+  browser = gitscm
+  autocorrect = prompt
+[hub]
+  protocol = ssh
+[include]
+  # A local gitconfig, outside of version control.
+  # If the file doesn't exist it is silently ignored
+  path = ~/.config/git/config-local
+[merge]
+  conflictstyle = zdiff3
+[pull]
+  ff = true
+[push]
+  default = simple
+  autoSetupRemote = true
+[rebase]
+  autoSquash = true
+  autoStash = true
+  updateRefs = true
+[rerere]
+  enabled = true
+  autoupdate = true
+[tag]
+  sort = version:refname
+[url "git@github.com:"]
+  insteadOf = "https://github.com"

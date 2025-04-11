@@ -1,5 +1,5 @@
-emacs/emacs.d/eln-cache/
-emacs/emacs.d/straight/
-emacs/emacs.d/var/
-emacs/doom.d/local/
+home-manager/emacs/emacs.d/eln-cache/
+home-manager/emacs/emacs.d/straight/
+home-manager/emacs/emacs.d/var/
+home-manager/emacs/doom.d/local/
 result

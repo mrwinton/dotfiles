@@ -1,0 +1,10 @@
+[user]
+  email = EMAIL
+  name = NAME
+[github]
+  user = USERNAME
+[branch "main"] 
+  pushRemote = "no_push" 
+[remote "no_push"] 
+  push = "do_not_push" 
+  url = "do_not_push"`

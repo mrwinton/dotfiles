@@ -68,8 +68,9 @@
                    file-name-handler-alist-backup
                    file-name-handler-alist))))
 
-(add-to-list 'native-comp-eln-load-path
-             (expand-file-name "eln-cache/" user-emacs-directory))
+(when (boundp 'native-comp-eln-load-path)
+  (add-to-list 'native-comp-eln-load-path
+               (expand-file-name "eln-cache/" user-emacs-directory)))
 
 (when (fboundp 'native-compile-async)
   (setq native-comp-async-report-warnings-errors nil)

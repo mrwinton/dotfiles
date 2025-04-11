@@ -3,11 +3,14 @@
 
   inputs = {
     nixpkgs.url = github:NixOS/nixpkgs/nixpkgs-unstable;
-    darwin.url = "github:lnl7/nix-darwin/master";
-    darwin.inputs.nixpkgs.follows = "nixpkgs";
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    emacs-overlay.url = "github:nix-community/emacs-overlay";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    darwin = {
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     chemacs-repo = {
       url = "github:plexus/chemacs2";
       flake = false;
@@ -26,12 +29,15 @@
     };
   };
 
-  outputs = { self, darwin, nixpkgs, home-manager, ... }@inputs:
-    let
+  outputs = { 
+    self, 
+    darwin, 
+    nixpkgs, 
+    home-manager, 
+    ... 
+    } @ inputs: let
       nixpkgsConfig = {
-        config = { allowUnfree = true; };
         overlays = [
-          inputs.emacs-overlay.overlay
           (final: prev: { chemacs-repo = inputs.chemacs-repo; })
           (final: prev: { purcell-repo = inputs.purcell-repo; })
           (final: prev: { doom-repo = inputs.doom-repo; })
@@ -40,16 +46,21 @@
       };
     in
     {
-      darwinConfigurations."m-one" = darwin.lib.darwinSystem {
+      darwinConfigurations."Michaels-MacBook-Pro" = darwin.lib.darwinSystem {
         system = "aarch64-darwin";
         modules = [
-          ./nix/darwin.nix
+          ./darwin/darwin.nix
           home-manager.darwinModules.home-manager
           {
+            _module.args = { inherit inputs; };
             nixpkgs = nixpkgsConfig;
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.michaelwinton = import ./nix/home.nix;
+            home-manager = {
+              users.michaelwinton = import ./home-manager;
+              extraSpecialArgs = {};
+              useGlobalPkgs = true;
+            };
+            users.users.michaelwinton.home = "/Users/michaelwinton";
+            nix.settings.trusted-users = [ "michaelwinton" ];
           }
         ];
       };

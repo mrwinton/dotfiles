@@ -1,23 +1,36 @@
-
 * Dotfiles
 
 ** Install
 
+- Install Nix from [Determinate Systems](https://determinate.systems/posts/determinate-nix-installer/)
+
 #+BEGIN_SRC bash
-# Install Nix
-curl -L https://nixos.org/nix/install | sh
-
-# Enable Flakes and Nix command
-mkdir -p ~/.config/nix
-cat <<EOF > ~/.config/nix/nix.conf
-experimental-features = nix-command flakes
-EOF
-
 # Clone the dotfiles
 mkdir -p ~/src/github.com/mrwinton/ && cd "$_"
 git clone git@github.com:mrwinton/dotfiles.git
 
-# Build and switch to the configuration
-nix build .#darwinConfigurations.m-one.system
-./result/sw/bin/darwin-rebuild switch --flake ./\#m-one
+nix run nix-darwin -- switch --flake ~/src/github.com/mrwinton/dotfiles
+#+END_SRC
+
+** Update
+
+#+BEGIN_SRC bash
+darwin-rebuild switch --flake ~/src/github.com/mrwinton/dotfiles
+#+END_SRC
+
+** Update Packages
+
+#+BEGIN_SRC bash
+# Update all
+nix flake update
+
+# Update <package>
+nix flake update <package>
+#+END_SRC
+
+** Configure Local Git
+
+#+BEGIN_SRC bash
+cp ~/.config/git/config-local.sample ~/.config/git/config-local
+sudo $EDITOR ~/.config/git/config-local
 #+END_SRC

@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(set-frame-font "MonoLisa")
+(set-frame-font "JetBrains Mono")
 
 ;; Go fullscreen on startup
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
@@ -56,39 +56,8 @@
   "The theme to enable when dark-mode is inactive."
   :type 'symbol)
 
-(defcustom mrw/polling-interval-seconds 60
-  "The number of seconds between which to poll for dark mode state."
-  :type 'integer)
-
-(defvar mrw/last-dark-mode-state 'unknown)
-
-(defun mrw/is-dark-mode ()
-  "Invoke applescript using Emacs built-in AppleScript support to
-see if dark mode is enabled. Return true if it is."
-  (string-equal "true" (ns-do-applescript "tell application \"System Events\"
-	tell appearance preferences
-		if (dark mode) then
-			return \"true\"
-		else
-			return \"false\"
-		end if
-	end tell
-end tell")))
-
-(defun mrw/check-and-set-dark-mode ()
-  "Set the theme according to macOS's dark mode state. Only set the
-theme if current theme does not match, this prevents flickering."
-  (let ((is-dark-mode (mrw/is-dark-mode)))
-    (if (not (eq is-dark-mode mrw/last-dark-mode-state))
-        (progn
-          (setq mrw/last-dark-mode-state is-dark-mode)
-          (if is-dark-mode
-              (progn
-                (load-theme mrw/dark-theme t))
-            (progn
-              (load-theme mrw/light-theme t)))))))
-
-(run-with-idle-timer 0 mrw/polling-interval-seconds 'mrw/check-and-set-dark-mode)
+;; Just load the light theme
+(load-theme mrw/light-theme t)
 
 (provide 'init-ui)
 ;;; init-ui.el ends here
