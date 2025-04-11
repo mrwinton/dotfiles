@@ -6,9 +6,9 @@
     [
       pkgs.home-manager
     ];
-  
+
   nixpkgs.config.allowUnfree = true;
-  
+
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -21,11 +21,12 @@
   homebrew = {
     enable = true;
 
-    onActivation.autoUpdate  = true;
+    onActivation.autoUpdate = true;
     onActivation.upgrade = true;
 
     casks = [
       "1password"
+      "1password-cli"
       "emacs"
       "firefox"
       "ghostty"
