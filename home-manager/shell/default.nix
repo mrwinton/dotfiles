@@ -20,6 +20,10 @@
       function ports {
         lsof -i 4 -P -n | grep -i 'listen'
       }
+
+      function dotfiles-update {
+        darwin-rebuild switch --flake ~/src/github.com/mrwinton/dotfiles
+      }
     '';
 
     history = {

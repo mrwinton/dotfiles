@@ -1,6 +1,6 @@
 theme = light:zenbones,dark:zenbones_dark
 
-window-decoration = false
+window-decoration = true
 window-padding-x  = 16
 window-padding-y  = 16
 
@@ -11,15 +11,16 @@ clipboard-read = "allow"
 
 macos-option-as-alt = true
 macos-non-native-fullscreen = true
-macos-icon = retro
 macos-icon-frame = beige
+macos-titlebar-style = tabs
+macos-titlebar-proxy-icon = hidden
 
 confirm-close-surface = false
 mouse-hide-while-typing = true
 
 window-colorspace = display-p3
 
-shell-integration = fish
+shell-integration = zsh
 
 adjust-cell-height = 10%
 
@@ -38,4 +39,3 @@ font-feature = calt
 font-feature = liga
 
 keybind = cmd+enter=toggle_fullscreen
-# keybind = global:cmd+`=toggle_quick_terminal

@@ -15,7 +15,7 @@ nix run nix-darwin -- switch --flake ~/src/github.com/mrwinton/dotfiles
 ** Update
 
 #+BEGIN_SRC bash
-darwin-rebuild switch --flake ~/src/github.com/mrwinton/dotfiles
+dotfiles-update
 #+END_SRC
 
 ** Update Packages
