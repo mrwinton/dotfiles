@@ -6,6 +6,11 @@
     autosuggestion.enable = true;
 
     initExtra = ''
+      # Add Homebrew to PATH for M-series Macs
+      if [[ $(uname -m) == 'arm64' ]]; then
+        export PATH="/opt/homebrew/bin:$PATH"
+      fi
+
       PATH=".git/safe/../../bin:$PATH"
       [[ ! -f ~/.zshrc.local ]] || source ~/.zshrc.local
 
