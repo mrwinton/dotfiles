@@ -1,36 +1,35 @@
-* Dotfiles
+# Dotfiles
 
-** Install
+## Install
 
 - Install Nix from [Determinate Systems](https://determinate.systems/posts/determinate-nix-installer/)
 
-#+BEGIN_SRC bash
+```bash
 # Clone the dotfiles
 mkdir -p ~/src/github.com/mrwinton/ && cd "$_"
 git clone git@github.com:mrwinton/dotfiles.git
-
 nix run nix-darwin -- switch --flake ~/src/github.com/mrwinton/dotfiles
-#+END_SRC
+```
 
-** Update
+## Update
 
-#+BEGIN_SRC bash
+```bash
 dotfiles-update
-#+END_SRC
+```
 
-** Update Packages
+## Update Packages
 
-#+BEGIN_SRC bash
+```bash
 # Update all
 nix flake update
 
 # Update <package>
 nix flake update <package>
-#+END_SRC
+```
 
-** Configure Local Git
+## Configure Local Git
 
-#+BEGIN_SRC bash
+```bash
 cp ~/.config/git/config-local.sample ~/.config/git/config-local
 sudo $EDITOR ~/.config/git/config-local
-#+END_SRC
+``` 
