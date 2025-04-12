@@ -66,8 +66,8 @@
         ShowPathbar = true;
       };
       NSGlobalDomain = {
+        # Enable shifting focus in UI elements (e.g. prompts) with TAB
         AppleKeyboardUIMode = 3;
-        "com.apple.keyboard.fnState" = true;
         NSAutomaticWindowAnimationsEnabled = false;
         NSWindowShouldDragOnGesture = true;
       };
