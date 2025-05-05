@@ -129,6 +129,13 @@ local function toggleApplication(bundleID)
   end
 end
 
+-- Returns the bundle ID of an application, given its path.
+local function appID(app)
+  if hs.application.infoForBundlePath(app) then
+    return hs.application.infoForBundlePath(app)['CFBundleIdentifier']
+  end
+end
+
 return {
   maximize = maximize,
   moveLeft = moveLeft,
@@ -141,4 +148,5 @@ return {
   moveBottomRight = moveBottomRight,
   moveWindow = moveWindow,
   toggleApplication = toggleApplication,
+  appID = appID,
 }
