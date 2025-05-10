@@ -35,6 +35,7 @@
       "google-chrome"
       "hammerspoon"
       "obsidian"
+      "whatsapp"
     ];
   };
 
