@@ -34,6 +34,7 @@
       "ghostty"
       "google-chrome"
       "hammerspoon"
+      "netnewswire"
       "obsidian"
       "whatsapp"
     ];
