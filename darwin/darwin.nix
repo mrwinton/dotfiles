@@ -24,6 +24,10 @@
     onActivation.autoUpdate = true;
     onActivation.upgrade = true;
 
+    brews = [
+      "node"
+    ];
+
     casks = [
       "1password"
       "1password-cli"
