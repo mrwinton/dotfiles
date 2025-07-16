@@ -26,7 +26,6 @@ in
       aspellEnv
       bat
       clang
-      claude-code
       comma
       coreutils-full
       editorconfig-core-c
