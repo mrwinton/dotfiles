@@ -21,11 +21,12 @@ in
 
   home = {
     stateVersion = "22.05";
-    
+
     packages = with pkgs; [
       aspellEnv
       bat
       clang
+      claude-code
       comma
       coreutils-full
       editorconfig-core-c

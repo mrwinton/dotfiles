@@ -21,6 +21,7 @@
 (require 'init-completion)
 (require 'init-langs)
 (require 'init-org)
+(require 'init-ai)
 
 ;; Run GC when idle
 (run-with-idle-timer 10 nil

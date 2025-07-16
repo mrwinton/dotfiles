@@ -16,6 +16,7 @@
 
   fonts.packages = [
     pkgs.jetbrains-mono
+    pkgs.julia-mono
   ];
 
   homebrew = {
