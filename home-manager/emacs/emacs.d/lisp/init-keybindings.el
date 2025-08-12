@@ -241,7 +241,7 @@
 (when (eq system-type 'darwin)
   ;; Disable ns-popup-font-panel
   (global-unset-key (kbd "s-t"))
-  
+
   ;; Disable horizontal scrolling with mouse wheel
   (global-set-key (kbd "<wheel-right>") 'ignore)
   (global-set-key (kbd "<wheel-left>") 'ignore)
