@@ -122,15 +122,6 @@
   (super-save-remote-files nil)
   (super-save-auto-save-when-idle t))
 
-(use-package tree-sitter
-  :hook
-  (after-init . global-tree-sitter-mode)
-  (tree-sitter-after-on . tree-sitter-hl-mode)
-  :config
-  (add-to-list 'tree-sitter-major-mode-language-alist '(enh-ruby-mode . ruby)))
-
-(use-package tree-sitter-langs
-  :commands global-tree-sitter-mode)
 
 (use-package flycheck
   :commands (flycheck-mode flycheck-list-errors flycheck-buffer flycheck-add-next-checker)
