@@ -165,8 +165,9 @@
  "" '(:keymap projectile-command-map :package projectile :which-key "projectile"))
 
 ;; Claude Code AI keybindings
-(general-define-key
- "C-c C-'" 'claude-code-ide-menu)
+(when (fboundp 'claude-code-ide-menu)
+  (general-define-key
+   "C-c C-'" 'claude-code-ide-menu))
 
 ;; Dabbrev keybindings (from init-completion.el)
 (general-define-key
