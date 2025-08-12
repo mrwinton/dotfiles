@@ -148,7 +148,7 @@ Eglot doesn't heed to `eldoc-echo-area-use-multiline-p'."
 
 ;; Nix support
 (use-package nix-mode
-  :interpreter ("\\(?:cached-\\)?nix-shell" . +nix-shell-init-mode)
+  :interpreter ("\\(?:cached-\\)?nix-shell" . nix-mode)
   :mode "\\.nix\\'")
 
 (use-package nixpkgs-fmt
