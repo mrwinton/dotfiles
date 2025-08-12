@@ -1,4 +1,4 @@
-;;; init-startup.el --- startup config
+;;; init-startup.el --- startup config -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 
@@ -33,7 +33,7 @@
   (unless (file-exists-p bootstrap-file)
     (with-current-buffer
         (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
          'silent 'inhibit-cookies)
       (goto-char (point-max))
       (eval-print-last-sexp)))
@@ -61,8 +61,7 @@
 (add-hook 'after-init-hook
           (lambda ()
             (garbage-collect)
-            (setq gc-cons-threshold
-                  (car (get 'gc-cons-threshold 'standard-value))
+            (setq gc-cons-threshold 67108864
                   file-name-handler-alist
                   (append
                    file-name-handler-alist-backup
@@ -74,9 +73,8 @@
 
 (when (fboundp 'native-compile-async)
   (setq native-comp-async-report-warnings-errors nil)
-  (setq comp-num-cpus 4)
-  (setq comp-deferred-compilation t)
-  (setq comp-deferred-compilation-black-list '("/mu4e.*\\.el$")))
+  (setq native-comp-jit-compilation t)
+  (setq native-comp-deferred-compilation-deny-list '("/mu4e.*\\.el$")))
 
 (use-package compat
   :demand t)
@@ -101,13 +99,6 @@
               `((".*" ,(no-littering-expand-var-file-name "auto-save/") t))
               custom-file (no-littering-expand-etc-file-name "custom.el")))
 
-(when (display-graphic-p)
-  (add-hook 'after-init-hook
-            `(lambda ()
-               (let ((elapsed (float-time
-                               (time-subtract after-init-time before-init-time))))
-                 (message "Loaded in %.2fs! Happy hacking ♥" elapsed)))
-            t))
 
 (provide 'init-startup)
 ;;; init-startup.el ends here
