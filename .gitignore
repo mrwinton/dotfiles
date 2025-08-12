@@ -4,3 +4,4 @@ home-manager/emacs/emacs.d/elpa/claude-code-ide/
 home-manager/emacs/emacs.d/var/
 home-manager/emacs/doom.d/local/
 result
+.claude/
