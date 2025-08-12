@@ -21,45 +21,23 @@
 ;; Disabling the BPA makes redisplay faster, but might produce incorrect display
 ;; reordering of bidirectional text with embedded parentheses and other bracket
 ;; characters whose 'paired-bracket' Unicode property is non-nil.
-(setq bidi-inhibit-bpa t)  ; Emacs 27 only
+(when (version< emacs-version "28")
+  (setq bidi-inhibit-bpa t))  ; Emacs 27 only
 
 ;; Reduce rendering/line scan work for Emacs by not rendering cursors or regions
 ;; in non-focused windows.
 (setq-default cursor-in-non-selected-windows nil)
 (setq highlight-nonselected-windows nil)
 
-;; More performant rapid scrolling over unfontified regions. May cause brief
-;; spells of inaccurate syntax highlighting right after scrolling, which should
-;; quickly self-correct.
-(setq fast-but-imprecise-scrolling t)
 
 ;; Don't ping things that look like domain names.
 (setq ffap-machine-p-known 'reject)
 
-;; Resizing the Emacs frame can be a terribly expensive part of changing the
-;; font. By inhibiting this, we halve startup times, particularly when we use
-;; fonts that are larger than the system default (which would resize the frame).
-(setq frame-inhibit-implied-resize t)
 
-;; Improve resizing performance
-(setq window-resize-pixelwise t)
-(setq frame-resize-pixelwise t)
 
-;; Emacs "updates" its ui more often than it needs to, so slow it down slightly
-(setq idle-update-delay 1.0)  ; default is 0.5
 
-;; Font compacting can be terribly expensive, especially for rendering icon
-;; fonts on Windows. Whether disabling it has a notable affect on Linux and Mac
-;; hasn't been determined, but do it there anyway, just in case. This increases
-;; memory usage, however!
-(setq inhibit-compacting-font-caches t)
 
-;; Increase how much is read from processes in a single chunk (default is 4kb).
-(setq read-process-output-max (* 1024 1024)) ; 1MB
 
-;; Introduced in Emacs HEAD (b2f8c9f), this inhibits fontification while
-;; receiving input, which should help a little with scrolling performance.
-(setq redisplay-skip-fontification-on-input t)
 
 ;; Remove command line options that aren't relevant to macOS.
 (setq command-line-ns-option-alist nil)
@@ -101,8 +79,7 @@
 
 ;; Reduce *Message* noise at startup. An empty scratch buffer (or the dashboard)
 ;; is more than enough.
-(setq inhibit-startup-message t
-      inhibit-startup-echo-area-message user-login-name
+(setq inhibit-startup-echo-area-message user-login-name
       inhibit-default-init t
       initial-major-mode 'fundamental-mode
       initial-scratch-message nil)
@@ -169,9 +146,6 @@
 ;; Avoid loading old byte-compiled files.
 (setq load-prefer-newer t)
 
-;; Emacs will save customizations into your init.el file by default. So instead
-;; we save them in an explicit file for customisation.
-(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 
 ;; Start Emacs at the user root directory.
 (setq default-directory "~/")
@@ -275,13 +249,6 @@
 (set-keyboard-coding-system 'utf-8)
 (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
 
-;; If you have something on the system clipboard, and then kill
-;; something in Emacs, then by default whatever you had on the system
-;; clipboard is gone and there is no way to get it back. Setting the
-;; following option makes it so that when you kill something in Emacs,
-;; whatever was previously on the system clipboard is pushed into the
-;; kill ring. This way, you can paste it with `yank-pop'.
-(setq save-interprogram-paste-before-kill t)
 
 ;; Unset the mouse-wheel scale bindings.
 (global-unset-key (kbd "C-<wheel-down>"))
