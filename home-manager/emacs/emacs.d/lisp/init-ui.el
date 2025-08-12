@@ -2,13 +2,14 @@
 ;;; Commentary:
 ;;; Code:
 
-(set-frame-font "JetBrains Mono")
+(set-frame-font "JetBrains Mono-12")
 
 ;; Go fullscreen on startup
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 
 ;; Focus the emacs window in the foreground
-(x-focus-frame nil)
+(when (display-graphic-p)
+  (select-frame-set-input-focus (selected-frame)))
 
 ;; Highlight the active line, everywhere.
 (global-hl-line-mode 1)
@@ -40,7 +41,8 @@
   (let ((file buffer-file-name))
     (if file
         (concat (abbreviate-file-name file)
-                (when (and (bound-and-true-p projectile-mode)
+                (when (and (featurep 'projectile)
+                           (bound-and-true-p projectile-mode)
                            (projectile-project-p))
                   (format " [%s]" (projectile-project-name))))
       "%b")))
@@ -56,8 +58,9 @@
   "The theme to enable when dark-mode is inactive."
   :type 'symbol)
 
-;; Just load the light theme
-(load-theme mrw/light-theme t)
+;; Load the light theme using modus-themes
+(modus-themes-load-theme mrw/light-theme)
+
 
 (provide 'init-ui)
 ;;; init-ui.el ends here
