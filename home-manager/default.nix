@@ -44,11 +44,13 @@ in
       jsbeautifier
       nixfmt-rfc-style
       nixpkgs-fmt
+      nodePackages.typescript-language-server
       openssl.dev
       pandoc
       pgformatter
       proselint
       ripgrep
+      rubyPackages.solargraph
       shellcheck
       shfmt
       stylelint
