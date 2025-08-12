@@ -5,13 +5,11 @@
     enableCompletion = true;
     autosuggestion.enable = true;
 
-    initExtra = ''
-      # Add Homebrew to PATH for M-series Macs
-      if [[ $(uname -m) == 'arm64' ]]; then
-        export PATH="/opt/homebrew/bin:$PATH"
-      fi
+    sessionVariables = {
+      PATH = ".git/safe/../../bin:/opt/homebrew/bin:$HOME/.local/bin:$PATH";
+    };
 
-      PATH=".git/safe/../../bin:$PATH"
+    initExtra = ''
       [[ ! -f ~/.zshrc.local ]] || source ~/.zshrc.local
 
       if command -v direnv >/dev/null; then
