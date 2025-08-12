@@ -6,15 +6,18 @@
   "Allows you to select a folder to ripgrep."
   (interactive)
   (let ((current-prefix-arg 4)) ;; emulate C-u
-    (call-interactively 'counsel-rg)))
+    (call-interactively 'consult-ripgrep)))
 
 (defun mrw/deft ()
   "Helper to call deft and then fix things so that it is nice and works"
   (interactive)
-  (deft)
-  ;; Hungry delete wrecks deft's DEL override
-  (when (fboundp 'hungry-delete-mode)
-    (hungry-delete-mode -1)))
+  (if (fboundp 'deft)
+      (progn
+        (deft)
+        ;; Hungry delete wrecks deft's DEL override
+        (when (fboundp 'hungry-delete-mode)
+          (hungry-delete-mode -1)))
+    (error "Deft is not available")))
 
 (defun mrw/switch-to-scratch-buffer ()
   (interactive)
@@ -75,7 +78,9 @@ If the universal prefix argument is used then will the windows too."
 (defun mrw/yank-buffer-path-relative-to-project ()
   "Copy the current buffer's path to the kill ring."
   (interactive)
-  (mrwinton/yank-buffer-path (projectile-project-root)))
+  (if (and (featurep 'projectile) (projectile-project-root))
+      (mrw/yank-buffer-path (projectile-project-root))
+    (error "Not in a projectile project")))
 
 (defun mrw/open-buffer-file-mac ()
   "Open current buffer file using Mac `open' command."
@@ -83,7 +88,7 @@ If the universal prefix argument is used then will the windows too."
   (shell-command (concat "open " (buffer-file-name))))
 
 (defun mrw/completion-in-region (&rest args)
-    (apply (if vertico-mode
+    (apply (if (and (boundp 'vertico-mode) vertico-mode)
                    #'consult-completion-in-region
                #'completion--in-region)
            args))
@@ -95,6 +100,13 @@ If the universal prefix argument is used then will the windows too."
                    crm-separator)
                   (car args))
           (cdr args)))
+
+(defun mrw/toggle-theme ()
+  "Toggle between light and dark themes."
+  (interactive)
+  (if (eq (car custom-enabled-themes) mrw/dark-theme)
+      (modus-themes-load-theme mrw/light-theme)
+    (modus-themes-load-theme mrw/dark-theme)))
 
 (provide 'init-utils)
 ;;; init-utils.el ends here
