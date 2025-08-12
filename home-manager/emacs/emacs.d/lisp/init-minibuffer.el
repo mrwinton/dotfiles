@@ -67,11 +67,6 @@ parses its input."
                                 vertico-reverse))
   :hook ((rfn-eshadow-update-overlay-hook . vertico-directory-tidy)
          (after-init . vertico-mode))
-  :bind
-  (:map vertico-map
-        ("RET" . vertico-directory-enter)
-        ("DEL" . vertico-directory-delete-char)
-        ("M-DEL" . vertico-directory-delete-word)))
 
 (use-package marginalia
   :after vertico
@@ -79,14 +74,6 @@ parses its input."
   (marginalia-mode))
 
 (use-package embark
-  :bind
-  ("C-." . embark-act)
-  ("M-." . embark-dwim)
-  ("C-h B" . embark-bindings)
-  (:map minibuffer-local-map
-        ("C-c C-o" . embark-export)
-        ("C-c C-a" . embark-act)
-        ("C-c C-c" . embark-collect-snapshot))
   :init
   ;; Optionally replace the key help with a completing-read interface
   (setq prefix-help-command #'embark-prefix-help-command)
@@ -98,39 +85,7 @@ parses its input."
                  (window-parameters (mode-line-format . none)))))
 
 (use-package consult
-  :bind
-  ("C-s" . consult-line)
-  ;; C-c bindings (mode-specific-map)
-  ("C-c h" . consult-history)
-  ("C-c m" . consult-mode-command)
-  ("C-c k" . consult-man)
-  ;; C-x bindings (ctl-x-map)
-  ("C-x M-:" . consult-complex-command)     ;; orig. repeat-complex-command
-  ("C-x b" . consult-buffer)                ;; orig. switch-to-buffer
-  ("C-x 4 b" . consult-buffer-other-window) ;; orig. switch-to-buffer-other-window
-  ("C-x 5 b" . consult-buffer-other-frame)  ;; orig. switch-to-buffer-other-frame
-  ("C-x r b" . consult-bookmark)            ;; orig. bookmark-jump
-  ;; Other custom bindings
-  ("M-y" . consult-yank-pop)                ;; orig. yank-pop
-  ("<help> a" . consult-apropos)            ;; orig. apropos-command
-  ;; M-g bindings (goto-map)
-  ("M-g e" . consult-compile-error)
-  ("M-g g" . consult-goto-line)             ;; orig. goto-line
-  ("M-g M-g" . consult-goto-line)           ;; orig. goto-line
-  ("M-g o" . consult-outline)               ;; Alternative: consult-org-heading
-  ("M-g m" . consult-mark)
-  ("M-g k" . consult-global-mark)
-  ;; M-s bindings (search-map)
-  ("M-s d" . consult-find)
-  ("M-s D" . consult-locate)
-  ("M-s g" . consult-grep)
-  ("M-s G" . consult-git-grep)
-  ("M-s r" . consult-ripgrep)
-  ("M-s l" . consult-line)
-  ("M-s L" . consult-line-multi)
-  ("M-s m" . consult-multi-occur)
-  ("M-s k" . consult-keep-lines)
-  ("M-s u" . consult-focus-lines)
+  ;; Keybindings moved to init-keybindings.el
   ;; Enable automatic preview at point in the *Completions* buffer. This is
   ;; relevant when you use the default completion UI. You may want to also
   ;; enable `consult-preview-at-point-mode` in Embark Collect buffers.
@@ -158,9 +113,7 @@ parses its input."
   ;; (setq consult-project-root-function (lambda () (locate-dominating-file "." ".git")))
   )
 
-(use-package consult-flycheck
-  :bind
-  ("M-g f" . consult-flycheck))
+(use-package consult-flycheck)
 
 (use-package embark-consult
   :after (embark)

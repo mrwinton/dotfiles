@@ -250,9 +250,6 @@
 (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
 
 
-;; Unset the mouse-wheel scale bindings.
-(global-unset-key (kbd "C-<wheel-down>"))
-(global-unset-key (kbd "C-<wheel-up>"))
 
 (provide 'init-defaults)
 ;;; init-defaults.el ends here

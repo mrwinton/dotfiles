@@ -30,10 +30,7 @@
   (add-hook 'org-mode-hook
             (lambda () (add-to-list 'completion-at-point-functions #'cape-tex t))))
 
-(use-package dabbrev
-  ;; Swap M-/ and C-M-/
-  :bind (("M-/" . dabbrev-completion)
-         ("C-M-/" . dabbrev-expand)))
+(use-package dabbrev)
 
 ;; Add orderless for fuzzy completion matching
 (use-package orderless

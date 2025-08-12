@@ -4,8 +4,6 @@
 
 (use-package magit
   :commands magit-status
-  :bind (("C-x g" . magit-status)
-         ("C-c g b" . magit-blame))
   :custom
   (magit-no-message '("Turning on magit-auto-revert-mode..."))
   (magit-diff-refine-hunk t)
@@ -29,12 +27,10 @@
   :straight (:host github
 	     :repo "emacsmirror/git-timemachine"
 	     :branch "master")
-  :commands (git-timemachine)
-  :bind ("C-c g t" . 'git-timemachine))
+  :commands (git-timemachine))
 
 (use-package git-link
-  :commands (git-link)
-  :bind ("C-c g l" . 'git-link))
+  :commands (git-link))
 
 (use-package git-gutter
   :hook ((prog-mode org-mode) . git-gutter-mode)
@@ -45,16 +41,15 @@
   (add-hook 'focus-in-hook #'git-gutter:update-all-windows)
 
   ;; update git-gutter when using magit commands
-  (advice-add #'magit-stage-file   :after #'+vc-gutter-update-h)
-  (advice-add #'magit-unstage-file :after #'+vc-gutter-update-h))
+  (advice-add #'magit-stage-file   :after #'git-gutter)
+  (advice-add #'magit-unstage-file :after #'git-gutter))
 
 (use-package git-gutter-fringe
   :commands git-gutter-mode
   :init
-  (progn
-    (when (display-graphic-p)
-      (with-eval-after-load 'git-gutter
-        (require 'git-gutter-fringe))))
+  (when (display-graphic-p)
+    (with-eval-after-load 'git-gutter
+      (require 'git-gutter-fringe)))
   :config
   (define-fringe-bitmap 'git-gutter-fr:added [224] nil nil '(center repeated))
   (define-fringe-bitmap 'git-gutter-fr:modified [224] nil nil '(center repeated))
@@ -62,9 +57,7 @@
 
 (use-package smerge-mode
   :after magit
-  :requires transient
-  :bind (:map smerge-mode-map
-              ("C-c m" . mrwinton/smerge-menu)))
+  :requires transient)
 
 (provide 'init-git)
 ;;; init-git.el ends here

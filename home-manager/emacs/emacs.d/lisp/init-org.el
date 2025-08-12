@@ -9,11 +9,6 @@
 
 (use-package org
   :commands (org-mode org-capture org-agenda)
-  :bind
-  ("C-c a" . org-agenda)
-  ("C-c c" . org-capture)
-  ("C-c l" . org-store-link)
-  ("C-c C-r" . org-refile)
   :custom
   (org-directory mrw/org-directory)
   (org-agenda-files (list mrw/org-notes-file mrw/org-tasks-file))

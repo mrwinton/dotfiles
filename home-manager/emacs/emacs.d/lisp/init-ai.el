@@ -13,7 +13,6 @@
 ;; Install and configure claude-code-ide.el
 (use-package claude-code-ide
   :straight (:type git :host github :repo "manzaltu/claude-code-ide.el")
-  :bind ("C-c C-'" . claude-code-ide-menu)
   :config
   (claude-code-ide-emacs-tools-setup)
   ;; Configure vterm as terminal backend

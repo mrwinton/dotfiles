@@ -108,6 +108,13 @@
 
    ;; Environment
    "e" '(:keymap envrc-command-map :package envrc :which-key "envrc")
+
+   ;; Git
+   "g" '(nil :which-key "git")
+   "gb" '(magit-blame :which-key "magit blame")
+   "gg" '(magit-status :which-key "magit status")
+   "gl" '(git-link :which-key "git link")
+   "gt" '(git-timemachine :which-key "git timemachine")
    ))
 
 ;; Additional keybindings from text editing packages
@@ -156,6 +163,95 @@
 (general-define-key
  :prefix "C-c p"
  "" '(:keymap projectile-command-map :package projectile :which-key "projectile"))
+
+;; Claude Code AI keybindings
+(general-define-key
+ "C-c C-'" 'claude-code-ide-menu)
+
+;; Dabbrev keybindings (from init-completion.el)
+(general-define-key
+ "M-/" 'dabbrev-completion
+ "C-M-/" 'dabbrev-expand)
+
+;; Git keybindings
+(general-define-key
+ "C-x g" 'magit-status
+ "C-c g b" 'magit-blame
+ "C-c g t" 'git-timemachine
+ "C-c g l" 'git-link)
+
+;; Minibuffer and Consult keybindings
+(general-define-key
+ ;; Vertico keybindings
+ :keymaps 'vertico-map
+ "RET" 'vertico-directory-enter
+ "DEL" 'vertico-directory-delete-char
+ "M-DEL" 'vertico-directory-delete-word)
+
+(general-define-key
+ ;; Embark keybindings
+ "C-." 'embark-act
+ "M-." 'embark-dwim
+ "C-h B" 'embark-bindings
+ :keymaps 'minibuffer-local-map
+ "C-c C-o" 'embark-export
+ "C-c C-a" 'embark-act
+ "C-c C-c" 'embark-collect-snapshot)
+
+(general-define-key
+ ;; Consult keybindings
+ "C-s" 'consult-line
+ "C-c h" 'consult-history
+ "C-c m" 'consult-mode-command
+ "C-c k" 'consult-man
+ "C-x M-:" 'consult-complex-command
+ "C-x b" 'consult-buffer
+ "C-x 4 b" 'consult-buffer-other-window
+ "C-x 5 b" 'consult-buffer-other-frame
+ "C-x r b" 'consult-bookmark
+ "M-y" 'consult-yank-pop
+ "<help> a" 'consult-apropos
+ "M-g e" 'consult-compile-error
+ "M-g g" 'consult-goto-line
+ "M-g M-g" 'consult-goto-line
+ "M-g o" 'consult-outline
+ "M-g m" 'consult-mark
+ "M-g k" 'consult-global-mark
+ "M-s d" 'consult-find
+ "M-s D" 'consult-locate
+ "M-s g" 'consult-grep
+ "M-s G" 'consult-git-grep
+ "M-s r" 'consult-ripgrep
+ "M-s l" 'consult-line
+ "M-s L" 'consult-line-multi
+ "M-s m" 'consult-multi-occur
+ "M-s k" 'consult-keep-lines
+ "M-s u" 'consult-focus-lines
+ "M-g f" 'consult-flycheck)
+
+;; Org mode keybindings
+(general-define-key
+ "C-c a" 'org-agenda
+ "C-c c" 'org-capture
+ "C-c l" 'org-store-link
+ "C-c C-r" 'org-refile)
+
+;; macOS-specific keybindings
+(when (eq system-type 'darwin)
+  ;; Disable ns-popup-font-panel
+  (global-unset-key (kbd "s-t"))
+  
+  ;; Disable horizontal scrolling with mouse wheel
+  (global-set-key (kbd "<wheel-right>") 'ignore)
+  (global-set-key (kbd "<wheel-left>") 'ignore)
+  (global-set-key (kbd "<double-wheel-right>") 'ignore)
+  (global-set-key (kbd "<double-wheel-left>") 'ignore)
+  (global-set-key (kbd "<triple-wheel-right>") 'ignore)
+  (global-set-key (kbd "<triple-wheel-left>") 'ignore))
+
+;; Global unset keys
+(global-unset-key (kbd "C-<wheel-down>"))
+(global-unset-key (kbd "C-<wheel-up>"))
 
 (provide 'init-keybindings)
 ;;; init-keybindings.el ends here
