@@ -26,9 +26,7 @@
   (exec-path-from-shell-initialize))
 
 (use-package envrc
-  :hook (after-init . envrc-global-mode)
-  :general
-  ("C-c e" '(envrc-command-map :which-key "envrc")))
+  :hook (after-init . envrc-global-mode))
 
 (provide 'init-path)
 ;;; init-path.el ends here
