@@ -1,5 +1,6 @@
 home-manager/emacs/emacs.d/eln-cache/
 home-manager/emacs/emacs.d/straight/
+home-manager/emacs/emacs.d/elpa/claude-code-ide/
 home-manager/emacs/emacs.d/var/
 home-manager/emacs/doom.d/local/
 result
