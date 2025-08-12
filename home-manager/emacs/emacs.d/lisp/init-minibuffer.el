@@ -66,7 +66,7 @@ parses its input."
                                 vertico-repeat
                                 vertico-reverse))
   :hook ((rfn-eshadow-update-overlay-hook . vertico-directory-tidy)
-         (after-init . vertico-mode))
+         (after-init . vertico-mode)))
 
 (use-package marginalia
   :after vertico
