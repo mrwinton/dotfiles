@@ -8,28 +8,48 @@
 
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
-(require 'init-startup)
-(require 'init-defaults)
-(require 'init-os)
-(require 'init-keybindings)
-(require 'init-path)
-(require 'init-utils)
-(require 'init-ui)
-(require 'init-git)
-(require 'init-text)
-(require 'init-minibuffer)
-(require 'init-completion)
-(require 'init-langs)
-(require 'init-org)
-(require 'init-ai)
+;; Helper function to safely load modules
+(defun mrw/safe-require (feature)
+  "Safely require FEATURE with error handling."
+  (condition-case err
+      (require feature)
+    (error
+     (message "Failed to load %s: %s" feature (error-message-string err)))))
 
-;; Run GC when idle
-(run-with-idle-timer 10 nil
+;; Core modules (order matters)
+(mrw/safe-require 'init-startup)
+(mrw/safe-require 'init-defaults)
+(mrw/safe-require 'init-os)
+(mrw/safe-require 'init-path)
+(mrw/safe-require 'init-utils)  ; Load early - other modules use these functions
+(mrw/safe-require 'init-ui)     ; Load early for visual feedback
+
+;; Feature modules
+(mrw/safe-require 'init-minibuffer)
+(mrw/safe-require 'init-completion)
+(mrw/safe-require 'init-text)
+(mrw/safe-require 'init-git)
+(mrw/safe-require 'init-langs)
+(mrw/safe-require 'init-org)
+(mrw/safe-require 'init-ai)
+
+;; Keybindings last (after all functions are defined)
+(mrw/safe-require 'init-keybindings)
+
+;; Periodic GC cleanup
+(run-with-idle-timer 10 t  ; Repeat every 10 seconds of idle time
                      (lambda ()
-                       "Clean up gc."
                        (setq gc-cons-threshold  67108864) ; 64M
                        (setq gc-cons-percentage 0.1) ; original value
                        (garbage-collect)))
+
+;; Show startup time
+(add-hook 'after-init-hook
+          (lambda ()
+            (let ((elapsed (float-time
+                            (time-subtract after-init-time before-init-time))))
+              (message "Emacs loaded in %.2fs! Happy hacking ♥" elapsed)))
+          t)
 
 ;; Extensions
 (require 'init-local nil t)
