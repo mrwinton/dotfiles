@@ -8,7 +8,6 @@
 (defvar mrw/org-archive-file "~/Documents/10-19 Notes/11 Personal/11.01 org/archive.org")
 
 (use-package org
-  :load-path (lambda () (expand-file-name "straight/repos/org/lisp" user-emacs-directory))
   :commands (org-mode org-capture org-agenda)
   :bind
   ("C-c a" . org-agenda)
@@ -93,59 +92,11 @@
           '((todo . " %i %?t%?s")))
          (org-agenda-todo-list-sublevels nil)
          (org-super-agenda-groups
-          '((:discard
-             (:not (:todo ("TODO" "WAIT" "MAYBE"))
-                   :scheduled t
-                   :habit t))
+          '((:discard (:scheduled t :habit t))
+            (:name "TODO Items" :todo ("TODO" "WAIT" "MAYBE"))
             (:auto-outline-path t)))))))
      )))
 
-;; Sync calendars to org diary
-(require 'auth-source)
-(setq mrw/calendars
-      '(("sync-work" . "work")
-        ("sync-personal" . "personal")))
-
-(defun mrw/calendar-sync (url diary-filename &optional non-marking)
-  "Download ics file and add it to file"
-  (with-current-buffer (find-file-noselect (url-file-local-copy url))
-    (unwind-protect
-        (progn
-          (when (find-buffer-visiting diary-filename)
-            (kill-buffer (find-buffer-visiting diary-filename)))
-          (delete-file diary-filename)
-          (save-current-buffer (icalendar-import-buffer diary-filename t non-marking)))
-      (delete-file (buffer-file-name)))))
-
-(defun mrw/calendar-sync-all ()
-  "Load a set of ICS calendars into Emacs diary files"
-  (interactive)
-  (with-current-buffer (find-file-noselect diary-file)
-    (mapcar #'(lambda (x)
-                (let* ((filename (format "diary.%s" (car x)))
-                       (file (format "%s%s" (file-name-directory diary-file) filename))
-                       (calendar-name (cdr x)))
-                  (message "%s" (concat "Loading " calendar-name " into " file))
-                  (mrw/calendar-sync (funcall
-                                           (plist-get
-                                            (nth 0 (auth-source-search :host (concat "calendar-sync-" calendar-name)))
-                                            :secret)) file)
-                  (let ((include-line (format "#include \"%s\"" filename)))
-                    (unless (save-excursion
-                              (goto-char (point-min))
-                              (search-forward include-line nil t))
-                      (goto-char (point-min))
-                      (insert (concat include-line "\n"))))
-                  ))
-            mrw/calendars)
-    (save-buffer)
-    (when (find-buffer-visiting diary-file)
-      (kill-buffer (find-buffer-visiting diary-file)))))
-
-(defun mrw/calendar-sync-all-while-idle ()
-  "Sync calendars after emacs has been idle for one minute."
-  (interactive)
-  (run-with-idle-timer 60 nil #'mrw/calendar-sync-all))
 
 (provide 'init-org)
 ;;; init-org.el ends here
