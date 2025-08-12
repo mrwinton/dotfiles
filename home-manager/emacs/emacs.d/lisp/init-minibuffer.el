@@ -71,9 +71,7 @@ parses its input."
   (:map vertico-map
         ("RET" . vertico-directory-enter)
         ("DEL" . vertico-directory-delete-char)
-        ("M-DEL" . vertico-directory-delete-word))
-  :init
-  (vertico-mode))
+        ("M-DEL" . vertico-directory-delete-word)))
 
 (use-package marginalia
   :after vertico
@@ -100,7 +98,6 @@ parses its input."
                  (window-parameters (mode-line-format . none)))))
 
 (use-package consult
-  :after projectile
   :bind
   ("C-s" . consult-line)
   ;; C-c bindings (mode-specific-map)
