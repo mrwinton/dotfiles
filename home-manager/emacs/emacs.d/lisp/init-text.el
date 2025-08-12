@@ -17,30 +17,6 @@
 (use-package crux
   :init
   (define-prefix-command 'mrw-crux-map nil "crux-")
-  :general
-  ("M-m" 'mrw-crux-map)
-  ("C-a" 'crux-move-beginning-of-line)
-  ("C-o" 'crux-smart-open-line-above)
-  ("M-o" 'crux-smart-open-line)
-  ("C-x 4 t" 'crux-transpose-windows)
-  ("C-x K" 'crux-kill-other-buffers)
-  ("C-k" 'crux-smart-kill-line)
-  (:keymaps 'mrw-crux-map
-            "w" '(crux-view-url :which-key "Open a new buffer containing the contents of URL.")
-            "o" '(crux-open-with :which-key "Open visited file in default external program.")
-            "e" '(crux-sudo-edit :which-key "Edit currently visited file as root.")
-            "i" '(crux-insert-date :which-key "Insert a timestamp according to locale's date and time format.")
-            "t" '(crux-transpose-windows :which-key "Transpose the buffers shown in two windows.")
-            "j" '(crux-top-join-line :which-key "Join the current line with the line beneath it.")
-            "u" '(upcase-dwim :which-key "upcase region if a region is active or word at point.")
-            "d" '(downcase-dwim :which-key "downcase region if a region is active or word at point.")
-            "c" '(capitalize-dwim :which-key "capitalize region if a region is active or word at point.")
-            "r" '(crux-recompile-init :which-key "Byte-compile all your dotfiles again.")
-            "k" '(crux-smart-kill-line :which-key "Kill to the end of the line and kill whole line on the next call.")
-            "M-k" '(crux-kill-line-backwards :which-key "Kill line backwards and adjust the indentation.")
-            "a" '(crux-move-beginning-of-line :which-key "Move point back to indentation/beginning (toggle) of line.")
-            "s" '(crux-ispell-word-then-abbrev :which-key "Call `ispell-word', then create an abbrev for it.")
-            )
   :config
   (crux-with-region-or-buffer indent-region)
   (crux-with-region-or-buffer untabify)
@@ -94,8 +70,6 @@
 
 (use-package vundo
   :commands (vundo)
-  :general
-  ("C-x u" 'vundo)
   :custom
   (vundo-glyph-alist vundo-unicode-symbols)
   (vundo-compact-display nil))
@@ -103,9 +77,9 @@
 (use-package undo-hl
   :straight (undo-hl :type git :host github :repo "casouri/undo-hl")
   :hook
-  (prog-mode-hook . undo-hl-mode)
+  (prog-mode . undo-hl-mode)
   :custom
-  (undo-hl-mininum-edit-size 10)
+  (undo-hl-minimum-edit-size 10)
   :config
   (add-to-list 'undo-hl-undo-commands 'vundo-forward)
   (add-to-list 'undo-hl-undo-commands 'vundo-backward))
@@ -119,14 +93,10 @@
 ;; `query-replace' which highlights matches and replacements as you
 ;; type.
 (use-package visual-regexp
-  :commands (vr/query-replace)
-  :general
-  ("M-r" 'vr/query-replace))
+  :commands (vr/query-replace))
 
 (use-package expand-region
-  :commands (er/expand-region)
-  :general
-  ("C-=" 'er/expand-region))
+  :commands (er/expand-region))
 
 (use-package multiple-cursors
   :commands (mc/mark-next-like-this mc/mark-previous-like-this mc/mark-all-like-this))
@@ -137,10 +107,7 @@
   (whole-line-or-region-global-mode))
 
 (use-package move-dup
-  :hook (after-init . move-dup-mode)
   :commands (md/move-lines-up md/move-lines-down)
-  :bind (([M-up] . md/move-lines-up)
-         ([M-down] . md/move-lines-down))
   :config
   (global-move-dup-mode))
 
@@ -164,11 +131,6 @@
 
 (use-package tree-sitter-langs
   :commands global-tree-sitter-mode)
-
-(use-package wgrep
-    :commands (wgrep-change-to-wgrep-mode wgrep-setup)
-    :config
-    (setq wgrep-auto-save-buffer t))
 
 (use-package flycheck
   :commands (flycheck-mode flycheck-list-errors flycheck-buffer flycheck-add-next-checker)
@@ -209,7 +171,6 @@
 (use-package jinx
   :after exec-path-from-shell
   :hook (after-init . global-jinx-mode)
-  :bind ([remap ispell-word] . jinx-correct)
   :config (setq jinx-languages "en_US en_GB sv_SE"))
 
 (use-package flyspell
@@ -228,17 +189,13 @@
   (flyspell-lazy-mode +1))
 
 (use-package flyspell-correct
-  :after flyspell
-  :general
-  ("C-;" 'flyspell-correct-wrapper))
+  :after flyspell)
 
 (use-package flyspell-correct-popup
   :after flyspell-correct)
 
 (use-package projectile
   :commands (projectile-mode projectile-switch-project)
-  :bind-keymap
-  ("C-c p" . projectile-command-map)
   :custom
   (projectile-project-search-path '(("~/src" . 3)))
   (projectile-indexing-method 'alien)
@@ -257,9 +214,6 @@
 ;; Writable grep buffer
 (use-package wgrep
   :commands wgrep-change-to-wgrep-mode
-  :bind (:map grep-mode-map
-              ("C-c C-q" . wgrep-change-to-wgrep-mode)
-              ("w" . wgrep-change-to-wgrep-mode))
   :custom
   (wgrep-auto-save-buffer t)
   (wgrep-change-readonly-file t))
