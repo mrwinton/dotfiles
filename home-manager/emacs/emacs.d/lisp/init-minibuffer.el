@@ -85,7 +85,6 @@ parses its input."
                  (window-parameters (mode-line-format . none)))))
 
 (use-package consult
-  ;; Keybindings moved to init-keybindings.el
   ;; Enable automatic preview at point in the *Completions* buffer. This is
   ;; relevant when you use the default completion UI. You may want to also
   ;; enable `consult-preview-at-point-mode` in Embark Collect buffers.

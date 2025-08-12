@@ -30,13 +30,8 @@
   (add-hook 'org-mode-hook
             (lambda () (add-to-list 'completion-at-point-functions #'cape-tex t))))
 
-(use-package dabbrev)
-
-;; Add orderless for fuzzy completion matching
-(use-package orderless
-  :custom
-  (completion-styles '(orderless basic))
-  (completion-category-overrides '((file (styles basic partial-completion)))))
+(use-package dabbrev
+  :straight (:type built-in))
 
 (use-package emacs
   :straight (:type built-in)
