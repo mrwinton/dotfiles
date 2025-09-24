@@ -32,6 +32,7 @@
 
   ;; Herb language server for ERB templates
   ;; Install with: npm install -g @herb-tools/language-server
+  ;; or npm install @herb-tools/language-server --save-dev
   (add-to-list 'eglot-server-programs
                '(web-mode "herb-language-server" "--stdio"))
 
@@ -183,7 +184,7 @@ Eglot doesn't heed to `eldoc-echo-area-use-multiline-p'."
 ;; Tree-sitter support for better syntax highlighting
 (use-package treesit-auto
   :custom
-  (treesit-auto-install 'prompt)
+  (treesit-auto-install t)
   :config
   ;; Set up language sources
   (setq treesit-language-source-alist
