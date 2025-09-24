@@ -1,4 +1,4 @@
-theme = light:zenbones,dark:zenbones_dark
+theme = light:Zenbones,dark:Zenbones Dark
 
 window-decoration = true
 window-padding-x  = 16
