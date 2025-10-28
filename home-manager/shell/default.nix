@@ -25,7 +25,7 @@
       }
 
       function dotfiles-update {
-        darwin-rebuild switch --flake ~/src/github.com/mrwinton/dotfiles
+        sudo darwin-rebuild switch --flake ~/src/github.com/mrwinton/dotfiles
       }
     '';
 
