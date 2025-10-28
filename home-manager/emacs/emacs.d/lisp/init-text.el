@@ -25,7 +25,9 @@
   )
 
 (use-package editorconfig
-  :hook ((prog-mode . editorconfig-mode)))
+  :demand t
+  :config
+  (editorconfig-mode 1))
 
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))

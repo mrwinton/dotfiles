@@ -1,0 +1,68 @@
+# EditorConfig helps maintain consistent coding styles across different editors and IDEs
+# See https://editorconfig.org/
+
+# top-most EditorConfig file
+root = true
+
+# Unix-style newlines with a newline ending every file
+[*]
+end_of_line = lf
+insert_final_newline = true
+charset = utf-8
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 2
+
+# Emacs Lisp files
+[*.el]
+indent_style = space
+indent_size = 2
+
+# Nix files
+[*.nix]
+indent_style = space
+indent_size = 2
+
+# Shell scripts
+[*.{sh,bash,zsh}]
+indent_style = space
+indent_size = 2
+
+# YAML files
+[*.{yml,yaml}]
+indent_style = space
+indent_size = 2
+
+# JSON files
+[*.json]
+indent_style = space
+indent_size = 2
+
+# Markdown files
+[*.md]
+trim_trailing_whitespace = false
+max_line_length = off
+
+# Makefile requires tabs
+[Makefile]
+indent_style = tab
+
+# Configuration files
+[*.{ini,toml}]
+indent_style = space
+indent_size = 2
+
+# HTML, CSS, JS, and related files
+[*.{html,css,scss,less,js,jsx,ts,tsx}]
+indent_style = space
+indent_size = 2
+
+# Ruby files
+[*.{rb,rake}]
+indent_style = space
+indent_size = 2
+
+# Lua files
+[*.lua]
+indent_style = space
+indent_size = 2
