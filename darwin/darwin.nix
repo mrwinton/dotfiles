@@ -46,6 +46,8 @@
   };
 
   system = {
+    primaryUser = "michaelwinton";
+
     defaults = {
       finder = {
         AppleShowAllExtensions = true;
