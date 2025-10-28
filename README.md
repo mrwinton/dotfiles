@@ -32,4 +32,16 @@ nix flake update <package>
 ```bash
 cp ~/.config/git/config-local.sample ~/.config/git/config-local
 sudo $EDITOR ~/.config/git/config-local
-``` 
+```
+
+## Update Emacs Packages (straight)[https://github.com/radian-software/straight.el/issues/975]
+
+``` bash
+M-x straight-pull-recipe-repositories
+
+# then reload init
+
+M-x straight-normalize-all
+
+M-x straight-pull-al
+```
