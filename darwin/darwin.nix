@@ -34,7 +34,7 @@
       "1password-cli"
       "arc"
       "beekeeper-studio"
-      "emacs"
+      "emacs-app"
       "firefox"
       "ghostty"
       "google-chrome"
@@ -53,14 +53,14 @@
         AppleShowAllExtensions = true;
         # Search scope options
         # "This Mac"
-        # "currentFolder" 
+        # "currentFolder"
         # "previousSearch"
         FXDefaultSearchScope = "currentFolder";
         # Preferred view style options
-        # "icon"   
-        # "list"    
-        # "column" 
-        # "gallery" 
+        # "icon"
+        # "list"
+        # "column"
+        # "gallery"
         FXPreferredViewStyle = "list";
         # Default path for new windows options
         # "Computer"

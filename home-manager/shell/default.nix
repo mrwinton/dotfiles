@@ -1,4 +1,4 @@
-{...}:
+{ ... }:
 {
   programs.zsh = {
     enable = true;
@@ -9,7 +9,7 @@
       PATH = ".git/safe/../../bin:/opt/homebrew/bin:$HOME/.local/bin:$PATH";
     };
 
-    initExtra = ''
+    initContent = ''
       [[ ! -f ~/.zshrc.local ]] || source ~/.zshrc.local
 
       if command -v direnv >/dev/null; then
@@ -60,18 +60,18 @@
       git_branch.ignore_branches = [ "master" "main" ];
 
       git_status = {
-        style  = "bold yellow";
+        style = "bold yellow";
         format = "([$all_status$ahead_behind]($style) )";
       };
 
-      elixir.symbol    = " ";
-      lua.symbol       = "󰢱 ";
+      elixir.symbol = " ";
+      lua.symbol = "󰢱 ";
       nix_shell.symbol = " ";
-      ruby.symbol      = " ";
+      ruby.symbol = " ";
 
       character = {
         success_symbol = "[❯](dimmed green)";
-        error_symbol   = "[❯](dimmed red)";
+        error_symbol = "[❯](dimmed red)";
       };
 
       jobs.disabled = true;
