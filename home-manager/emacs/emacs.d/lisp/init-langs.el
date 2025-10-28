@@ -55,7 +55,8 @@ Eglot doesn't heed to `eldoc-echo-area-use-multiline-p'."
 
 ;; Enhanced CSS support
 (use-package css-mode
-  :mode (("\\.css\\'" . css-mode)))
+  :mode (("\\.css\\'" . css-mode))
+  :hook (css-mode . (lambda () (flycheck-mode -1))))
 
 (use-package scss-mode
   :mode (("\\.scss\\'" . scss-mode))
