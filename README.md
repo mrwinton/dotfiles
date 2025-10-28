@@ -43,5 +43,5 @@ M-x straight-pull-recipe-repositories
 
 M-x straight-normalize-all
 
-M-x straight-pull-al
+M-x straight-pull-all
 ```
