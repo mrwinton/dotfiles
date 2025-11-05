@@ -51,7 +51,6 @@ in
       pgformatter
       proselint
       ripgrep
-      rubyPackages.solargraph
       shellcheck
       shfmt
       stylelint
