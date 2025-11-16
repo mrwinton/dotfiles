@@ -127,7 +127,6 @@
  "C-x K" 'crux-kill-other-buffers
  "C-k" 'crux-smart-kill-line
  "C-x u" 'vundo
- "M-r" 'vr/query-replace
  "C-=" 'er/expand-region
  "C-;" 'flyspell-correct-wrapper
  [remap ispell-word] 'jinx-correct
