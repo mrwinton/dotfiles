@@ -36,13 +36,6 @@
 ;; Keybindings last (after all functions are defined)
 (mrw/safe-require 'init-keybindings)
 
-;; Periodic GC cleanup
-(run-with-idle-timer 10 t  ; Repeat every 10 seconds of idle time
-                     (lambda ()
-                       (setq gc-cons-threshold  67108864) ; 64M
-                       (setq gc-cons-percentage 0.1) ; original value
-                       (garbage-collect)))
-
 ;; Show startup time
 (add-hook 'after-init-hook
           (lambda ()
