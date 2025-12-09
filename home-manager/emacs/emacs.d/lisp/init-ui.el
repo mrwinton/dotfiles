@@ -4,6 +4,20 @@
 
 (set-frame-font "JetBrains Mono-12")
 
+;; Enable ligatures and symbol prettification
+(when (>= emacs-major-version 28)
+  (setq-default prettify-symbols-alist
+                '(("lambda" . "λ")
+                  ("->" . "→")
+                  ("=>" . "⇒")
+                  (">=" . "≥")
+                  ("<=" . "≤")
+                  ("!=" . "≠")
+                  ("==" . "═")
+                  ("===" . "≡")
+                  ("/=" . "≠")))
+  (global-prettify-symbols-mode 1))
+
 ;; Go fullscreen on startup
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 
