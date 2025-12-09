@@ -102,6 +102,15 @@
           (lambda ()
             (savehist-mode 1)))
 
+;; Track recently opened files
+(add-hook 'after-init-hook
+          (lambda ()
+            (recentf-mode 1)))
+(setq recentf-max-saved-items 500
+      recentf-max-menu-items 15
+      ;; Exclude some paths from recentf
+      recentf-exclude '("/tmp/" "/ssh:" "\\.?eln-cache/" "straight/.*" "\\.cache"))
+
 ;; Show column numbers in the modeline.
 (add-hook 'after-init-hook
           (lambda ()
