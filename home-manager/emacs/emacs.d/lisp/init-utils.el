@@ -1,4 +1,4 @@
-;;; init-utils.el --- utils configuration -*- lexical-binding: t; -*-
+;;; init-utils.el --- utils configuration  -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

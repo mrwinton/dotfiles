@@ -1,4 +1,4 @@
-;;; init-langs.el --- langs configuration -*- lexical-binding: t; -*-
+;;; init-langs.el --- langs configuration  -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

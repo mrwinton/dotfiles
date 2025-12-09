@@ -1,4 +1,4 @@
-;;; init-text.el --- text configuration -*- lexical-binding: t; -*-
+;;; init-text.el --- text configuration  -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

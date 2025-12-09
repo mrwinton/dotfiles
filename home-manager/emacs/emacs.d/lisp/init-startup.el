@@ -1,4 +1,4 @@
-;;; init-startup.el --- startup config -*- lexical-binding: t; -*-
+;;; init-startup.el --- startup config  -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 

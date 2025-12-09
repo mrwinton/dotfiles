@@ -1,4 +1,4 @@
-;;; init-defaults.el --- default configuration -*- lexical-binding: t; -*-
+;;; init-defaults.el --- default configuration  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;
