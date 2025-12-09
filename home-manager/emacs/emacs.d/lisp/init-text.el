@@ -100,6 +100,13 @@
 (use-package expand-region
   :commands (er/expand-region))
 
+(use-package avy
+  :commands (avy-goto-char-timer avy-goto-line)
+  :custom
+  (avy-timeout-seconds 0.3)
+  (avy-all-windows t)
+  (avy-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
+
 (use-package multiple-cursors
   :commands (mc/mark-next-like-this mc/mark-previous-like-this mc/mark-all-like-this))
 

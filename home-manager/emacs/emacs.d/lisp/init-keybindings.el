@@ -130,6 +130,8 @@
  "C-;" 'flyspell-correct-wrapper
  [remap ispell-word] 'jinx-correct
  "M-m" 'mrw-crux-map
+ "C-'" 'avy-goto-char-timer
+ "M-g M-l" 'avy-goto-line
  [M-up] 'md/move-lines-up
  [M-down] 'md/move-lines-down)
 
