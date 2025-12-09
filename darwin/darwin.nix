@@ -25,8 +25,13 @@
     onActivation.autoUpdate = true;
     onActivation.upgrade = true;
 
+    taps = [
+      "d12frosted/emacs-plus"
+    ];
+
     brews = [
       "node"
+      "emacs-plus@31"
     ];
 
     casks = [
@@ -35,7 +40,6 @@
       "arc"
       "beekeeper-studio"
       "discord"
-      "emacs-app"
       "firefox"
       "ghostty"
       "google-chrome"
