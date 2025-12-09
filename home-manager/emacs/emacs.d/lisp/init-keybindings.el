@@ -45,10 +45,11 @@
    ;; Buffers
    "b" '(nil :which-key "buffer")
    "bb" '(consult-buffer :which-key "switch buffers")
+   "bi" '(ibuffer :which-key "ibuffer")
    "bd" '(kill-buffer :which-key "delete buffer")
    "bs" '(mrw/switch-to-scratch-buffer :which-key "scratch buffer")
    "bm" '(mrw/kill-other-buffers :which-key "kill other buffers")
-   "bi" '(clone-indirect-buffer  :which-key "indirect buffer")
+   "bc" '(clone-indirect-buffer  :which-key "clone indirect buffer")
    "br" '(revert-buffer :which-key "revert buffer")
    "by" '(mrw/yank-buffer-path :which-key "yank buffer path")
    "bY" '(mrw/yank-buffer-path-relative-to-project :which-key "yank relative buffer path")
@@ -205,6 +206,7 @@
 (general-define-key
  ;; Consult keybindings
  "C-x C-d" 'consult-dir
+ "C-x C-b" 'ibuffer
  "C-s" 'consult-line
  "C-c h" 'consult-history
  "C-c m" 'consult-mode-command

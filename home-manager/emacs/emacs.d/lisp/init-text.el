@@ -14,6 +14,35 @@
   (dired-clean-up-buffers-too t)
   (insert-directory-program (executable-find "ls")))
 
+(use-package ibuffer
+  :straight (:type built-in)
+  :commands ibuffer
+  :custom
+  (ibuffer-show-empty-filter-groups nil)
+  (ibuffer-saved-filter-groups
+   '(("default"
+      ("Org" (mode . org-mode))
+      ("Programming" (or
+                      (mode . ruby-mode)
+                      (mode . enh-ruby-mode)
+                      (mode . js2-mode)
+                      (mode . js-mode)
+                      (mode . typescript-ts-mode)
+                      (mode . tsx-ts-mode)
+                      (mode . web-mode)
+                      (mode . css-mode)
+                      (mode . scss-mode)))
+      ("Magit" (name . "^magit"))
+      ("Emacs" (or
+                (name . "^\\*scratch\\*$")
+                (name . "^\\*Messages\\*$")
+                (name . "^\\*straight-process\\*$")))
+      ("Help" (or (mode . help-mode)
+                  (mode . helpful-mode)
+                  (mode . Info-mode))))))
+  :hook (ibuffer-mode . (lambda ()
+                          (ibuffer-switch-to-saved-filter-groups "default"))))
+
 (use-package crux
   :init
   (define-prefix-command 'mrw-crux-map nil "crux-")
