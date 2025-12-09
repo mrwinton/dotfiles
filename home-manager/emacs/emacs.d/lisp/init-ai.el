@@ -4,7 +4,6 @@
 
 ;; Install and configure vterm terminal backend
 (use-package vterm
-  :ensure t
   :config
   ;; Better performance for Claude Code IDE
   (setq vterm-max-scrollback 5000)
