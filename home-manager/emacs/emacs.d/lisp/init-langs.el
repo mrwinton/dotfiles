@@ -11,6 +11,9 @@
   (eglot-autoreconnect nil)
   (eglot-send-changes-idle-time 0.5)
   :config
+  ;; Disable flycheck when eglot is active (prefer LSP diagnostics)
+  (add-hook 'eglot-managed-mode-hook (lambda () (flycheck-mode -1)))
+
   ;; Tab completion integration
   (setopt tab-always-indent 'complete)
   (setopt completion-styles '(basic initials substring))
