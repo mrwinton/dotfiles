@@ -239,8 +239,14 @@
 ;; Don't make backup files.
 (setq make-backup-files nil)
 
-;; Don't make autosave files.
+;; Don't make autosave files for local files (super-save handles it)
 (setq auto-save-default nil)
+
+;; But enable auto-save for remote files (TRAMP) for safety
+(add-hook 'find-file-hook
+          (lambda ()
+            (when (file-remote-p buffer-file-name)
+              (auto-save-mode 1))))
 
 ;; Don't make lockfiles.
 (setq create-lockfiles nil)
