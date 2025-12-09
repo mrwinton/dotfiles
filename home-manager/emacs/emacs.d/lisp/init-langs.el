@@ -185,6 +185,16 @@ Eglot doesn't heed to `eldoc-echo-area-use-multiline-p'."
 (use-package ruby-tools
   :hook ((ruby-mode ruby-ts-mode) . ruby-tools-mode))
 
+(use-package projectile-rails
+  :after projectile
+  :hook (projectile-mode . projectile-rails-on)
+  :custom
+  (projectile-rails-expand-snippet nil)
+  (projectile-rails-add-keywords t)
+  :config
+  ;; Enable projectile-rails keybindings
+  (projectile-rails-global-mode))
+
 ;; Scala support
 (use-package scala-mode
   :interpreter

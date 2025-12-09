@@ -167,6 +167,12 @@
  :prefix "C-c p"
  "" '(:keymap projectile-command-map :package projectile :which-key "projectile"))
 
+;; Projectile Rails keymap
+(general-define-key
+ :prefix "C-c r"
+ :keymaps 'projectile-rails-mode-map
+ "" '(:keymap projectile-rails-command-map :package projectile-rails :which-key "rails"))
+
 ;; Claude Code AI keybindings
 (when (fboundp 'claude-code-ide-menu)
   (general-define-key
