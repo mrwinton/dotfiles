@@ -4,37 +4,24 @@
 
 (use-package orderless
   :config
-  (defun mrw/orderless-without-dispatcher (pattern _index _total)
-    "Literal style dispatcher using the equals sign as a prefix.
-It matches PATTERN _INDEX and _TOTAL according to how Orderless
-parses its input."
-    (cond
-     ((equal "!" pattern)
-      '(orderless-literal . ""))
-     ((string-prefix-p "!" pattern)
-      `(orderless-without-literal . ,(substring pattern 1)))))
-
-  (defun mrw/orderless-literal-dispatcher (pattern _index _total)
-    "Literal style dispatcher using the equals sign as a suffix.
-It matches PATTERN _INDEX and _TOTAL according to how Orderless
-parses its input."
-    (when (string-suffix-p "=" pattern)
-      `(orderless-literal . ,(substring pattern 0 -1))))
-
-  (defun mrw/orderless-flex-dispatcher (pattern _index _total)
-    "Flex  dispatcher using the tilde suffix.
-It matches PATTERN _INDEX and _TOTAL according to how Orderless
-parses its input."
-    (when (string-suffix-p "~" pattern)
-      `(orderless-flex . ,(substring pattern 0 -1))))
-
+  ;; orderless-initialism: 'abc' matches 'a<ny>b<any>c' at word boundaries
+  ;; orderless-flex: 'abc' matches 'a.*b.*c' (more flexible)
+  ;; orderless-prefixes: 're-re' matches 'query-replace-regexp'
   (setq orderless-matching-styles '(orderless-flex
+                                    orderless-initialism
                                     orderless-regexp
                                     orderless-prefixes
                                     orderless-literal))
-  (setq orderless-style-dispatchers '(mrw/orderless-without-dispatcher
-                                      mrw/orderless-literal-dispatcher
-                                      mrw/orderless-flex-dispatcher)))
+
+  ;; Built-in affix dispatcher for query syntax (prefix or suffix):
+  ;;   ! or suffix !  = negate pattern (orderless-not)
+  ;;   ,              = initialism
+  ;;   =              = literal match
+  ;;   ~              = flex match
+  ;;   ^              = literal prefix
+  ;;   %              = char-fold (ignore diacritics)
+  ;;   &              = match against annotation
+  (setq orderless-style-dispatchers '(orderless-affix-dispatch)))
 
 (use-package minibuffer
   :straight (:type built-in)
