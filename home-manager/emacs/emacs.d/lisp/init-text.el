@@ -107,6 +107,12 @@
   (avy-all-windows t)
   (avy-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
 
+(use-package ace-window
+  :commands ace-window
+  :custom
+  (aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+  (aw-scope 'frame))
+
 (use-package multiple-cursors
   :commands (mc/mark-next-like-this mc/mark-previous-like-this mc/mark-all-like-this))
 

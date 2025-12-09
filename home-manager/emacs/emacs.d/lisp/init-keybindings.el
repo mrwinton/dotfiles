@@ -100,6 +100,7 @@
 
    ;; Windows
    "w" '(nil :which-key "window")
+   "ww" '(ace-window :which-key "ace window")
    "wm" '(mrw/toggle-maximize-buffer :which-key "maximize buffer")
    "w2" '(mrw/split-window-below-and-switch :which-key "split below")
    "w3" '(mrw/split-window-right-and-switch :which-key "split right")
