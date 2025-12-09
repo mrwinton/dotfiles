@@ -187,7 +187,9 @@
  :keymaps 'vertico-map
  "RET" 'vertico-directory-enter
  "DEL" 'vertico-directory-delete-char
- "M-DEL" 'vertico-directory-delete-word)
+ "M-DEL" 'vertico-directory-delete-word
+ "C-x C-d" 'consult-dir
+ "C-x C-j" 'consult-dir-jump-file)
 
 (general-define-key
  ;; Embark keybindings
@@ -201,6 +203,7 @@
 
 (general-define-key
  ;; Consult keybindings
+ "C-x C-d" 'consult-dir
  "C-s" 'consult-line
  "C-c h" 'consult-history
  "C-c m" 'consult-mode-command

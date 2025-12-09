@@ -101,6 +101,9 @@
 
 (use-package consult-flycheck)
 
+(use-package consult-dir
+  :commands (consult-dir consult-dir-jump-file))
+
 (use-package embark-consult
   :after (embark)
   :demand t)
