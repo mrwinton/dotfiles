@@ -1,4 +1,4 @@
-;;; init-path.el --- path config
+;;; init-path.el --- path config  -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; Code:
 
