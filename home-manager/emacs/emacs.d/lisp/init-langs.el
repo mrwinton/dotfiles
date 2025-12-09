@@ -169,6 +169,19 @@ Eglot doesn't heed to `eldoc-echo-area-use-multiline-p'."
   (rspec-use-opts-file-when-available nil)
   (rspec-command-options "--color --format documentation"))
 
+(use-package minitest
+  :hook ((ruby-mode enh-ruby-mode ruby-ts-mode) . minitest-mode)
+  :custom
+  (minitest-use-bundler t)
+  (minitest-use-spring nil)
+  (minitest-default-command '("bundle" "exec" "ruby" "-Ilib:test"))
+  :config
+  ;; Make minitest output more readable
+  (add-hook 'minitest-compilation-mode-hook
+            (lambda ()
+              (visual-line-mode 1)
+              (setq-local compilation-scroll-output t))))
+
 (use-package ruby-tools
   :hook ((ruby-mode ruby-ts-mode) . ruby-tools-mode))
 
