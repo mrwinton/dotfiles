@@ -51,7 +51,9 @@
   :hook (after-init . minions-mode))
 
 (defun mrw/frame-title-format ()
-  "Return frame title with current project name, where applicable."
+  "Return formatted frame title showing file path and project name.
+Displays the abbreviated file path and, if in a projectile project,
+appends the project name in brackets."
   (let ((file buffer-file-name))
     (if file
         (concat (abbreviate-file-name file)

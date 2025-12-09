@@ -9,6 +9,7 @@
     (call-interactively 'consult-ripgrep)))
 
 (defun mrw/switch-to-scratch-buffer ()
+  "Switch to the *scratch* buffer."
   (interactive)
   (switch-to-buffer "*scratch*"))
 
@@ -23,27 +24,27 @@ If the universal prefix argument is used then will the windows too."
     (message "Buffers deleted!")))
 
 (defun mrw/new-empty-buffer ()
-  "Create a new buffer called untitled(<n>)"
+  "Create a new empty buffer with a unique scratch name."
   (interactive)
   (let ((newbuf (generate-new-buffer-name "*scratch*")))
     (switch-to-buffer newbuf)))
 
 (defun mrw/split-window-below-and-switch ()
-  "Split the window horizontally, then switch to the new pane."
+  "Split the window horizontally, balance windows, and switch to the new pane."
   (interactive)
   (split-window-below)
   (balance-windows)
   (other-window 1))
 
 (defun mrw/split-window-right-and-switch ()
-  "Split the window vertically, then switch to the new pane."
+  "Split the window vertically, balance windows, and switch to the new pane."
   (interactive)
   (split-window-right)
   (balance-windows)
   (other-window 1))
 
 (defun mrw/toggle-maximize-buffer ()
-  "Maximize buffer"
+  "Toggle between maximized buffer and previous window configuration."
   (interactive)
   (if (and (= 1 (length (window-list)))
            (assoc ?_ register-alist))
@@ -77,18 +78,22 @@ If the universal prefix argument is used then will the windows too."
   (shell-command (concat "open " (buffer-file-name))))
 
 (defun mrw/completion-in-region (&rest args)
-    (apply (if (and (boundp 'vertico-mode) vertico-mode)
-                   #'consult-completion-in-region
-               #'completion--in-region)
-           args))
+  "Use consult completion when vertico is active, otherwise use default.
+ARGS are passed to the completion function."
+  (apply (if (and (boundp 'vertico-mode) vertico-mode)
+             #'consult-completion-in-region
+           #'completion--in-region)
+         args))
 
 (defun mrw/crm-indicator (args)
-    (cons (format "[CRM%s] %s"
-                  (replace-regexp-in-string
-                   "\\`\\[.*?]\\*\\|\\[.*?]\\*\\'" ""
-                   crm-separator)
-                  (car args))
-          (cdr args)))
+  "Add indicator to `completing-read-multiple' prompt.
+ARGS is the argument list passed to `completing-read-multiple'."
+  (cons (format "[CRM%s] %s"
+                (replace-regexp-in-string
+                 "\\`\\[.*?]\\*\\|\\[.*?]\\*\\'" ""
+                 crm-separator)
+                (car args))
+        (cdr args)))
 
 (provide 'init-utils)
 ;;; init-utils.el ends here
