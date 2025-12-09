@@ -101,12 +101,5 @@ If the universal prefix argument is used then will the windows too."
                   (car args))
           (cdr args)))
 
-(defun mrw/toggle-theme ()
-  "Toggle between light and dark themes."
-  (interactive)
-  (if (eq (car custom-enabled-themes) mrw/dark-theme)
-      (modus-themes-load-theme mrw/light-theme)
-    (modus-themes-load-theme mrw/dark-theme)))
-
 (provide 'init-utils)
 ;;; init-utils.el ends here

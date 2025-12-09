@@ -58,6 +58,13 @@
   "The theme to enable when dark-mode is inactive."
   :type 'symbol)
 
+(defun mrw/toggle-theme ()
+  "Toggle between light and dark themes."
+  (interactive)
+  (if (eq (car custom-enabled-themes) mrw/dark-theme)
+      (modus-themes-load-theme mrw/light-theme)
+    (modus-themes-load-theme mrw/dark-theme)))
+
 ;; Load the light theme using modus-themes
 (modus-themes-load-theme mrw/light-theme)
 
