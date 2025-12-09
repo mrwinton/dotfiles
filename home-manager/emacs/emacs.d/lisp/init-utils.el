@@ -8,17 +8,6 @@
   (let ((current-prefix-arg 4)) ;; emulate C-u
     (call-interactively 'consult-ripgrep)))
 
-(defun mrw/deft ()
-  "Helper to call deft and then fix things so that it is nice and works"
-  (interactive)
-  (if (fboundp 'deft)
-      (progn
-        (deft)
-        ;; Hungry delete wrecks deft's DEL override
-        (when (fboundp 'hungry-delete-mode)
-          (hungry-delete-mode -1)))
-    (error "Deft is not available")))
-
 (defun mrw/switch-to-scratch-buffer ()
   (interactive)
   (switch-to-buffer "*scratch*"))

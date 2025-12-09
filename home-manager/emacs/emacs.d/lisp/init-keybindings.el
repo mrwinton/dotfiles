@@ -24,7 +24,6 @@
 
    ;; Top level functions
    "/" '(mrw/rg :which-key "ripgrep")
-   ";" '(mrw/deft :which-key "deft")
    ":" '(project-find-file :which-key "p-find file")
    "." '(find-file :which-key "find file")
    "," '(consult-recent-file :which-key "recent files")
