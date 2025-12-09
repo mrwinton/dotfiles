@@ -188,7 +188,7 @@ Eglot doesn't heed to `eldoc-echo-area-use-multiline-p'."
 ;; Tree-sitter support for better syntax highlighting
 (use-package treesit-auto
   :custom
-  (treesit-auto-install t)
+  (treesit-auto-install 'prompt)
   :config
   ;; Set up language sources
   (setq treesit-language-source-alist
