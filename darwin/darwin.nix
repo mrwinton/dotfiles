@@ -34,6 +34,7 @@
       "1password-cli"
       "arc"
       "beekeeper-studio"
+      "discord"
       "emacs-app"
       "firefox"
       "ghostty"
