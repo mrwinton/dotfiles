@@ -159,54 +159,13 @@ Eglot doesn't heed to `eldoc-echo-area-use-multiline-p'."
 (use-package nixpkgs-fmt
   :hook (nix-mode . nixpkgs-fmt-on-save-mode))
 
-;; Ruby support
-(use-package rspec-mode
-  :after ruby-mode
-  :custom
-  (rspec-spec-command "bundle exec rspec")
-  (rspec-use-bundler-when-possible nil)
-  (rspec-use-spring-when-possible nil)
-  (rspec-use-opts-file-when-available nil)
-  (rspec-command-options "--color --format documentation")
-  :config
-  (defun mrw/project-uses-rspec-p ()
-    "Check if the current project uses RSpec."
-    (when-let* ((root (projectile-project-root)))
-      (file-directory-p (expand-file-name "spec" root))))
-
-  (defun mrw/enable-rspec-mode ()
-    "Enable rspec-mode for spec files, rspec-verifiable-mode for implementation files."
-    (when (and buffer-file-name (mrw/project-uses-rspec-p))
-      (if (string-match-p "_spec\\.rb\\'" buffer-file-name)
-          (rspec-mode)
-        (rspec-verifiable-mode))))
-
-  ;; Enable rspec modes on Ruby files
-  (add-hook 'ruby-mode-hook 'mrw/enable-rspec-mode)
-  (add-hook 'enh-ruby-mode-hook 'mrw/enable-rspec-mode)
-  (add-hook 'ruby-ts-mode-hook 'mrw/enable-rspec-mode))
-
 (use-package minitest
+  :hook ((ruby-mode enh-ruby-mode ruby-ts-mode) . minitest-mode)
   :custom
   (minitest-use-bundler t)
   (minitest-use-spring nil)
   (minitest-default-command '("bundle" "exec" "ruby" "-Ilib:test"))
   :config
-  (defun mrw/project-uses-minitest-p ()
-    "Check if the current project uses Minitest."
-    (when-let* ((root (projectile-project-root)))
-      (file-directory-p (expand-file-name "test" root))))
-
-  (defun mrw/enable-minitest-mode ()
-    "Enable minitest-mode for test files and implementation files in minitest projects."
-    (when (and buffer-file-name (mrw/project-uses-minitest-p))
-      (minitest-mode)))
-
-  ;; Enable minitest-mode on Ruby files in minitest projects
-  (add-hook 'ruby-mode-hook 'mrw/enable-minitest-mode)
-  (add-hook 'enh-ruby-mode-hook 'mrw/enable-minitest-mode)
-  (add-hook 'ruby-ts-mode-hook 'mrw/enable-minitest-mode)
-
   ;; Make minitest output more readable
   (add-hook 'minitest-compilation-mode-hook
             (lambda ()
@@ -215,16 +174,6 @@ Eglot doesn't heed to `eldoc-echo-area-use-multiline-p'."
 
 (use-package ruby-tools
   :hook ((ruby-mode ruby-ts-mode) . ruby-tools-mode))
-
-(use-package projectile-rails
-  :after projectile
-  :hook (projectile-mode . projectile-rails-on)
-  :custom
-  (projectile-rails-expand-snippet nil)
-  (projectile-rails-add-keywords t)
-  :config
-  ;; Enable projectile-rails keybindings
-  (projectile-rails-global-mode))
 
 ;; Scala support
 (use-package scala-mode
