@@ -44,7 +44,6 @@ in
       imagemagick
       jsbeautifier
       nixfmt-rfc-style
-      nixpkgs-fmt
       nodePackages.typescript-language-server
       openssl.dev
       pandoc
