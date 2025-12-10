@@ -1,15 +1,18 @@
-{ ... }:
+{ config, ... }:
 {
+  home.sessionPath = [
+    "${config.home.homeDirectory}/.local/bin"
+  ];
+
   programs.zsh = {
     enable = true;
     enableCompletion = true;
     autosuggestion.enable = true;
 
-    sessionVariables = {
-      PATH = ".git/safe/../../bin:/opt/homebrew/bin:$HOME/.local/bin:$PATH";
-    };
-
     initExtra = ''
+      # Add git safe directory support for project-local binaries
+      export PATH=".git/safe/../../bin:$PATH"
+
       [[ ! -f ~/.zshrc.local ]] || source ~/.zshrc.local
 
       if command -v direnv >/dev/null; then
