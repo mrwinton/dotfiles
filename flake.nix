@@ -44,6 +44,7 @@
           home-manager.darwinModules.home-manager
           {
             _module.args = { inherit inputs; };
+            nixpkgs.config.allowUnfree = true;
             home-manager = {
               users.michaelwinton = import ./home-manager;
               extraSpecialArgs = { inherit inputs; };
