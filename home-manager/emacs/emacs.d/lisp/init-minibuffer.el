@@ -104,6 +104,9 @@
 (use-package consult-dir
   :commands (consult-dir consult-dir-jump-file))
 
+(use-package consult-projectile
+  :after (consult projectile))
+
 (use-package embark-consult
   :after (embark)
   :demand t)
