@@ -9,7 +9,7 @@
       PATH = ".git/safe/../../bin:/opt/homebrew/bin:$HOME/.local/bin:$PATH";
     };
 
-    initContent = ''
+    initExtra = ''
       [[ ! -f ~/.zshrc.local ]] || source ~/.zshrc.local
 
       if command -v direnv >/dev/null; then
