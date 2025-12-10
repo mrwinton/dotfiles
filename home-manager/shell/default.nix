@@ -9,7 +9,7 @@
     enableCompletion = true;
     autosuggestion.enable = true;
 
-    initExtra = ''
+    initContent = ''
       # Add git safe directory support for project-local binaries
       export PATH=".git/safe/../../bin:$PATH"
 
