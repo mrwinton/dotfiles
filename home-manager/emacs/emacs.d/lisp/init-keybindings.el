@@ -243,14 +243,6 @@
  "M-s u" 'consult-focus-lines
  "M-g f" 'consult-flycheck)
 
-;; Ruby/Minitest keybindings
-(general-define-key
- :keymaps 'minitest-mode-map
- "C-c C-t C-a" 'minitest-verify-all
- "C-c C-t C-s" 'minitest-verify-single
- "C-c C-t C-f" 'minitest-verify
- "C-c C-t C-r" 'minitest-rerun)
-
 ;; Org mode keybindings
 (general-define-key
  "C-c a" 'org-agenda
