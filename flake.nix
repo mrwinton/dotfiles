@@ -29,22 +29,13 @@
     };
   };
 
-  outputs = { 
-    self, 
-    darwin, 
-    nixpkgs, 
-    home-manager, 
-    ... 
-    } @ inputs: let
-      nixpkgsConfig = {
-        overlays = [
-          (final: prev: { chemacs-repo = inputs.chemacs-repo; })
-          (final: prev: { purcell-repo = inputs.purcell-repo; })
-          (final: prev: { doom-repo = inputs.doom-repo; })
-          (final: prev: { nano-repo = inputs.nano-repo; })
-        ];
-      };
-    in
+  outputs = {
+    self,
+    darwin,
+    nixpkgs,
+    home-manager,
+    ...
+    } @ inputs:
     {
       darwinConfigurations."Michaels-MacBook-Pro" = darwin.lib.darwinSystem {
         system = "aarch64-darwin";
@@ -53,10 +44,9 @@
           home-manager.darwinModules.home-manager
           {
             _module.args = { inherit inputs; };
-            nixpkgs = nixpkgsConfig;
             home-manager = {
               users.michaelwinton = import ./home-manager;
-              extraSpecialArgs = {};
+              extraSpecialArgs = { inherit inputs; };
               useGlobalPkgs = true;
             };
             users.users.michaelwinton.home = "/Users/michaelwinton";

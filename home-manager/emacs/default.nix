@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 with pkgs;
 
@@ -11,10 +11,10 @@ let
   doomConfigPath = "${dotfilesPath}/home-manager/emacs/doom.d";
   doomLocalPath = "${dotfilesPath}/home-manager/emacs/doom.d/local";
 
-  chemacsRepo = pkgs.chemacs-repo;
-  purcellRepo = pkgs.purcell-repo;
-  doomRepo = pkgs.doom-repo;
-  nanoRepo = pkgs.nano-repo;
+  chemacsRepo = inputs.chemacs-repo;
+  purcellRepo = inputs.purcell-repo;
+  doomRepo = inputs.doom-repo;
+  nanoRepo = inputs.nano-repo;
 in {
   home = {
     sessionVariables = {
