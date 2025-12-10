@@ -1,7 +1,5 @@
 { config, lib, pkgs, inputs, ... }:
 
-with pkgs;
-
 let
   dotfilesPath = "~/src/github.com/mrwinton/dotfiles";
   mrwintonPath = "${dotfilesPath}/home-manager/emacs/emacs.d";
