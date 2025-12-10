@@ -1,7 +1,7 @@
 { config, lib, pkgs, inputs, ... }:
 
 let
-  dotfilesPath = toString ./../..;
+  dotfilesPath = "${config.home.homeDirectory}/src/github.com/mrwinton/dotfiles";
   mrwintonPath = "${dotfilesPath}/home-manager/emacs/emacs.d";
   purcellPath = ".config/emacs/purcell.emacs.d";
   doomPath = ".config/emacs/doom.emacs.d";

@@ -171,7 +171,7 @@ Eglot doesn't heed to `eldoc-echo-area-use-multiline-p'."
   :config
   (defun mrw/project-uses-rspec-p ()
     "Check if the current project uses RSpec."
-    (when-let ((root (projectile-project-root)))
+    (when-let* ((root (projectile-project-root)))
       (file-directory-p (expand-file-name "spec" root))))
 
   (defun mrw/enable-rspec-mode ()
@@ -194,7 +194,7 @@ Eglot doesn't heed to `eldoc-echo-area-use-multiline-p'."
   :config
   (defun mrw/project-uses-minitest-p ()
     "Check if the current project uses Minitest."
-    (when-let ((root (projectile-project-root)))
+    (when-let* ((root (projectile-project-root)))
       (file-directory-p (expand-file-name "test" root))))
 
   (defun mrw/enable-minitest-mode ()
