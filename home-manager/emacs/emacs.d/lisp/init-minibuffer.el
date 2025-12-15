@@ -13,6 +13,10 @@
                                     orderless-prefixes
                                     orderless-literal))
 
+  ;; Treat /, _, and - as component separators for fuzzy matching
+  ;; This allows "foobar" to match "foo/bar", "foo_bar", "foo-bar", etc.
+  (setq orderless-component-separator "[ /._-]+")
+
   ;; Built-in affix dispatcher for query syntax (prefix or suffix):
   ;;   ! or suffix !  = negate pattern (orderless-not)
   ;;   ,              = initialism
