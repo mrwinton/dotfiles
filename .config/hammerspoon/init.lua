@@ -21,9 +21,9 @@ hs.hotkey.bind(leader, "/", utils.moveWindow)
 password = utils.appID('/Applications/1Password.app')
 dia = utils.appID('/Applications/Dia.app')
 beekeeper = utils.appID('/Applications/Beekeeper Studio.app')
-emacs = utils.appID('/Applications/Emacs.app')
+emacs = 'org.gnu.Emacs' -- Use bundle ID, emacs-plus installed via homebrew
 ghostty = utils.appID('/Applications/Ghostty.app')
-mail = 'com.apple.mail' -- Use bundle ID, given app is not located in `/Applications/`
+mail = 'com.apple.mail' -- Use bundle ID, mail app is not located in `/Applications/`
 safari = utils.appID('/Applications/Safari.app')
 spotify = utils.appID('/Applications/Spotify.app')
 
