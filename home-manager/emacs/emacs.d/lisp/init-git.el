@@ -5,6 +5,7 @@
 (use-package magit
   :commands magit-status
   :custom
+  (magit-git-executable "/Users/michaelwinton/.nix-profile/bin/git")
   (magit-no-message '("Turning on magit-auto-revert-mode..."))
   (magit-diff-refine-hunk t)
   (magit-set-upstream-on-push t)
