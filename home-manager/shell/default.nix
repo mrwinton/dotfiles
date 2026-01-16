@@ -2,6 +2,7 @@
 {
   home.sessionPath = [
     "/opt/homebrew/bin"
+    "${config.home.homeDirectory}/.cache/.bun/bin"
     "${config.home.homeDirectory}/.local/bin"
   ];
 
