@@ -25,7 +25,6 @@ in
     packages = with pkgs; [
       aspellEnv
       bat
-      bun
       clang
       cmake
       comma
