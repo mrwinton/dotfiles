@@ -40,7 +40,6 @@ tramp
 ##############################
 # Ruby
 ##############################
-.ruby-version
 .rbenv-version
 .rvmrc
 test-unit.yml
