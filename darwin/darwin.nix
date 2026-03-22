@@ -44,6 +44,7 @@
       "hammerspoon"
       "netnewswire"
       "obsidian"
+      "tailscale"
       "whatsapp"
     ];
   };
