@@ -68,6 +68,11 @@ in
       nix-direnv.enable = true;
     };
 
+    mise = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
     git = {
       enable = true;
       lfs.enable = true;

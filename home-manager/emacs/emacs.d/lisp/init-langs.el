@@ -151,6 +151,20 @@ Eglot doesn't heed to `eldoc-echo-area-use-multiline-p'."
   (markdown-gfm-additional-languages '("sh" "javascript" "typescript" "css" "scss"))
   (markdown-make-gfm-checkboxes-buttons t))
 
+;; Beancount support uses the upstream mode repo; diagnostics require bean-check.
+(defun mrw/beancount-setup ()
+  "Enable Beancount helpers for the current buffer."
+  (outline-minor-mode 1)
+  (when (and (require 'flymake-bean-check nil t)
+             (executable-find "bean-check"))
+    (flymake-bean-check-enable)))
+
+(use-package beancount
+  :straight (beancount :type git :host github :repo "beancount/beancount-mode")
+  :mode (("\\.beancount\\'" . beancount-mode)
+         ("\\.bean\\'" . beancount-mode))
+  :hook (beancount-mode . mrw/beancount-setup))
+
 ;; Nix support
 (use-package nix-mode
   :interpreter ("\\(?:cached-\\)?nix-shell" . nix-mode)
