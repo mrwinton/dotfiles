@@ -42,9 +42,9 @@
   (defun mrw/eglot-eldoc-message-function (fmt &rest args)
     "Limit `eldoc-mode' strings to one line.
 Eglot doesn't heed to `eldoc-echo-area-use-multiline-p'."
-    (if-let ((str (and (stringp fmt) (apply #'format fmt args)))
-             (line (car (split-string str "\n" t)))
-             (limit (min (length line) (1- (frame-width)))))
+    (if-let* ((str (and (stringp fmt) (apply #'format fmt args)))
+              (line (car (split-string str "\n" t)))
+              (limit (min (length line) (1- (frame-width)))))
         (eldoc-minibuffer-message (substring line 0 limit))
       (eldoc-minibuffer-message fmt args)))
 

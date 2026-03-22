@@ -9,6 +9,26 @@
 ;; Set and forget UTF-8, no need to include in each file.
 (set-language-environment "UTF-8")
 
+;; Ensure package bootstrap can find core tools before shell PATH import runs.
+(let* ((mrw/early-bin-dirs
+        (delq nil
+              (mapcar (lambda (dir)
+                        (let ((expanded (expand-file-name dir)))
+                          (when (file-directory-p expanded)
+                            expanded)))
+                      '("/opt/homebrew/bin"
+                        "~/.nix-profile/bin"
+                        "/run/current-system/sw/bin"
+                        "/nix/var/nix/profiles/default/bin"
+                        "/usr/local/bin"
+                        "/usr/bin"
+                        "~/.local/bin"))))
+       (path-dirs (split-string (or (getenv "PATH") "") path-separator t)))
+  (setq exec-path (delete-dups (append mrw/early-bin-dirs exec-path)))
+  (setenv "PATH" (mapconcat #'identity
+                            (delete-dups (append mrw/early-bin-dirs path-dirs))
+                            path-separator)))
+
 ;; Configure straight.el and use-package as package manager
 (setq straight-fix-flycheck t
       straight-vc-git-default-clone-depth 1
