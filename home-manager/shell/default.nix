@@ -15,6 +15,8 @@
       # Add git safe directory support for project-local binaries
       export PATH=".git/safe/../../bin:$PATH"
 
+      eval "$(mise activate zsh)"
+
       [[ ! -f ~/.zshrc.local ]] || source ~/.zshrc.local
 
       if command -v direnv >/dev/null; then
