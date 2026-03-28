@@ -28,6 +28,7 @@
     ];
 
     brews = [
+      "mise"
       "node"
       "emacs-plus@31"
     ];
