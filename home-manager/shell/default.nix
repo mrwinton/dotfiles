@@ -4,6 +4,7 @@
     "/opt/homebrew/bin"
     "${config.home.homeDirectory}/.cache/.bun/bin"
     "${config.home.homeDirectory}/.local/bin"
+    "${config.home.homeDirectory}/.local/share/mise/shims"
   ];
 
   programs.zsh = {
